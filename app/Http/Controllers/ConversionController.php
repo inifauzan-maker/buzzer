@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conversion;
+use App\Models\Notification;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\PointCalculator;
@@ -130,6 +131,13 @@ class ConversionController extends Controller
         $conversion->computed_points = PointCalculator::conversion($conversion);
         $conversion->save();
 
+        Notification::create([
+            'user_id' => $conversion->user_id,
+            'title' => 'Konversi disetujui',
+            'message' => 'Konversi '.$conversion->type.' sejumlah '.$conversion->amount.' disetujui. Poin: '.number_format((float) $conversion->computed_points, 2),
+            'type' => 'conversion_approved',
+        ]);
+
         return redirect()
             ->route('conversions.index')
             ->with('status', 'Konversi berhasil diverifikasi admin.');
@@ -146,6 +154,13 @@ class ConversionController extends Controller
         $conversion->status = 'Rejected';
         $conversion->computed_points = null;
         $conversion->save();
+
+        Notification::create([
+            'user_id' => $conversion->user_id,
+            'title' => 'Konversi ditolak',
+            'message' => 'Konversi '.$conversion->type.' sejumlah '.$conversion->amount.' ditolak. Silakan cek kembali data/bukti.',
+            'type' => 'conversion_rejected',
+        ]);
 
         return redirect()
             ->route('conversions.index')

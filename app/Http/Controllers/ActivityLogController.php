@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\Notification;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\PointCalculator;
@@ -175,6 +176,13 @@ class ActivityLogController extends Controller
         $activity->computed_points = PointCalculator::activity($activity);
         $activity->save();
 
+        Notification::create([
+            'user_id' => $activity->user_id,
+            'title' => 'Aktivitas disetujui',
+            'message' => 'Aktivitas '.$activity->platform.' pada '.$activity->post_date?->format('d M Y').' telah disetujui. Poin: '.number_format((float) $activity->computed_points, 2),
+            'type' => 'activity_approved',
+        ]);
+
         return redirect()
             ->route('activities.index')
             ->with('status', 'Aktivitas berhasil diverifikasi admin.');
@@ -191,6 +199,13 @@ class ActivityLogController extends Controller
         $activity->status = 'Rejected';
         $activity->computed_points = null;
         $activity->save();
+
+        Notification::create([
+            'user_id' => $activity->user_id,
+            'title' => 'Aktivitas ditolak',
+            'message' => 'Aktivitas '.$activity->platform.' pada '.$activity->post_date?->format('d M Y').' ditolak. Silakan cek kembali data/bukti.',
+            'type' => 'activity_rejected',
+        ]);
 
         return redirect()
             ->route('activities.index')

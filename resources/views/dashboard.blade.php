@@ -37,6 +37,7 @@
             font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
             font-weight: 700;
             margin-bottom: 12px;
+            text-align: center;
         }
         .donut {
             --size: 150px;
@@ -53,8 +54,9 @@
             height: 96px;
             background: #fff;
             border-radius: 50%;
-            display: grid;
-            place-items: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             padding: 8px;
             box-shadow: inset 0 0 0 1px #e5e7eb;
@@ -62,7 +64,11 @@
         .donut-value {
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin: 0;
+            line-height: 1;
+        }
+        .pointku-card {
+            text-align: center;
         }
         .kpi-pair {
             display: grid;
@@ -171,13 +177,152 @@
             justify-content: space-between;
             gap: 10px;
         }
+        .heatmap-card {
+            margin: 18px 0;
+        }
+        .section-block {
+            margin: 18px 0;
+        }
+        .heatmap {
+            display: grid;
+            gap: 10px;
+        }
+        .heatmap-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .heatmap-months {
+            display: flex;
+            gap: 4px;
+            margin-left: 38px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+        .heatmap-months span {
+            width: 12px;
+            text-align: center;
+        }
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: 38px 1fr;
+            gap: 8px;
+        }
+        .heatmap-scroll {
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .heatmap-scroll .heatmap-months,
+        .heatmap-scroll .heatmap-grid {
+            min-width: 680px;
+        }
+        .heatmap-days {
+            display: grid;
+            grid-template-rows: repeat(7, 12px);
+            gap: 4px;
+            font-size: 10px;
+            color: var(--muted);
+        }
+        .heatmap-days span {
+            display: flex;
+            align-items: center;
+            height: 12px;
+        }
+        .heatmap-weeks {
+            display: flex;
+            gap: 4px;
+        }
+        .heatmap-week {
+            display: grid;
+            grid-template-rows: repeat(7, 12px);
+            gap: 4px;
+        }
+        .heatmap-day {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background: #e5e7eb;
+        }
+        .heatmap-day.level-0 { background: #e5e7eb; }
+        .heatmap-day.level-1 { background: #c7ecef; }
+        .heatmap-day.level-2 { background: #7dd3de; }
+        .heatmap-day.level-3 { background: #22b8cf; }
+        .heatmap-day.level-4 { background: #0ea5b7; }
+        .heatmap-day.empty { background: transparent; }
+        .heatmap-legend {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+        .heatmap-legend .legend-dots {
+            display: flex;
+            gap: 4px;
+        }
+        .heatmap-legend .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
     </style>
 
     <h1>Dashboard</h1>
     <p class="muted">Ringkasan performa tim dan status validasi konten.</p>
 
+    <div class="card heatmap-card section-block">
+        <div class="heatmap-header">
+            <h2>Aktivitas 12 Bulan Terakhir</h2>
+            <span class="muted">{{ $heatmap['total'] }} kontribusi</span>
+        </div>
+        <div class="heatmap">
+            <div class="heatmap-scroll">
+                <div class="heatmap-months">
+                    @foreach ($heatmap['weeks'] as $index => $week)
+                        <span>{{ $heatmap['month_labels'][$index] ?? '' }}</span>
+                    @endforeach
+                </div>
+                <div class="heatmap-grid">
+                    <div class="heatmap-days">
+                        <span>Mon</span>
+                        <span></span>
+                        <span>Wed</span>
+                        <span></span>
+                        <span>Fri</span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="heatmap-weeks">
+                        @foreach ($heatmap['weeks'] as $week)
+                            <div class="heatmap-week">
+                                @foreach ($week as $day)
+                                    @php($title = $day['in_range'] ? $day['date'].': '.$day['count'].' aktivitas' : '')
+                                    <span class="heatmap-day level-{{ $day['level'] }} {{ $day['in_range'] ? '' : 'empty' }}"
+                                          title="{{ $title }}"></span>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="heatmap-legend">
+                <span>Less</span>
+                <div class="legend-dots">
+                    <span class="legend-dot" style="background: #e5e7eb;"></span>
+                    <span class="legend-dot" style="background: #c7ecef;"></span>
+                    <span class="legend-dot" style="background: #7dd3de;"></span>
+                    <span class="legend-dot" style="background: #22b8cf;"></span>
+                    <span class="legend-dot" style="background: #0ea5b7;"></span>
+                </div>
+                <span>More</span>
+            </div>
+        </div>
+    </div>
+
     @if (auth()->user()->role === 'leader' && $teamMemberPoints->isNotEmpty())
-        <div class="card" style="margin-bottom: 20px;">
+        <div class="card section-block">
             <h2>Perolehan Poin Tim</h2>
             <table>
                 <thead>
@@ -192,7 +337,9 @@
                 <tbody>
                     @foreach ($teamMemberPoints as $member)
                         <tr>
-                            <td>{{ $member->name }}</td>
+                            <td>
+                                <a href="{{ route('profile.view', $member) }}">{{ $member->name }}</a>
+                            </td>
                             <td>{{ strtoupper($member->role) }}</td>
                             <td>{{ number_format($member->activity_points, 2) }}</td>
                             <td>{{ number_format($member->conversion_points, 2) }}</td>
@@ -204,13 +351,12 @@
         </div>
     @endif
 
-    <div class="dashboard-grid">
-        <div class="card">
+    <div class="dashboard-grid section-block">
+        <div class="card pointku-card">
             <div class="card-title">Pointku</div>
             <div class="donut" style="--percent: {{ $pointPercent }};">
                 <div class="donut-center">
                     <div class="donut-value">{{ number_format($totalPoints, 0) }}</div>
-                    <div class="muted">Target {{ $pointTarget }}</div>
                 </div>
             </div>
             <div class="kpi-pair">
@@ -221,33 +367,6 @@
                 <div>
                     <div class="muted">Konversi</div>
                     <strong>{{ number_format($conversionPoints, 2) }}</strong>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Completed Tasks</div>
-            <div class="progress-list">
-                <div class="progress-row">
-                    <span>Aktivitas</span>
-                    <div class="progress-bar progress-blue">
-                        <span style="width: {{ $activityCompletion }}%;"></span>
-                    </div>
-                    <strong>{{ $verifiedActivities }}</strong>
-                </div>
-                <div class="progress-row">
-                    <span>Konversi</span>
-                    <div class="progress-bar progress-orange">
-                        <span style="width: {{ $conversionCompletion }}%;"></span>
-                    </div>
-                    <strong>{{ $verifiedConversions }}</strong>
-                </div>
-                <div class="progress-row">
-                    <span>Pending</span>
-                    <div class="progress-bar progress-red">
-                        <span style="width: {{ $pendingPercent }}%;"></span>
-                    </div>
-                    <strong>{{ $pendingTotal }}</strong>
                 </div>
             </div>
         </div>
@@ -267,97 +386,71 @@
         </div>
 
         <div class="card">
-            <div class="card-title">Status Verifikasi</div>
-            <div class="status-list">
-                <div class="status-item">
-                    <div class="status-left">
-                        <span class="status-dot pending"></span>
-                        Pending Aktivitas
-                    </div>
-                    <strong>{{ $pendingActivities }}</strong>
-                </div>
-                <div class="status-item">
-                    <div class="status-left">
-                        <span class="status-dot pending"></span>
-                        Pending Konversi
-                    </div>
-                    <strong>{{ $pendingConversions }}</strong>
-                </div>
-                <div class="status-item">
-                    <div class="status-left">
-                        <span class="status-dot verified"></span>
-                        Verified Aktivitas
-                    </div>
-                    <strong>{{ $verifiedActivities }}</strong>
-                </div>
-                <div class="status-item">
-                    <div class="status-left">
-                        <span class="status-dot verified"></span>
-                        Verified Konversi
-                    </div>
-                    <strong>{{ $verifiedConversions }}</strong>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Revenue Closing</div>
+            <div class="card-title">Jumlah Closing</div>
             <div class="revenue-box">
-                <div class="revenue-value">Rp {{ number_format($closingTotal, 0, ',', '.') }}</div>
+                <div class="revenue-value">{{ number_format($closingTotal, 0, ',', '.') }}</div>
                 <div class="muted">Closing terverifikasi</div>
             </div>
         </div>
 
         <div class="card">
-            <div class="card-title">Team Alerts</div>
-            <div class="alert-list">
-                @forelse ($inactiveTeams as $team)
-                    @php($lastDate = $team->last_post_date ? \Illuminate\Support\Carbon::parse($team->last_post_date)->format('d M') : '-')
-                    <div class="alert-item">
-                        <span>{{ $team->team_name }}</span>
-                        <span class="muted">{{ $lastDate }}</span>
-                    </div>
-                @empty
-                    <div class="muted">Semua tim aktif 2 hari terakhir.</div>
-                @endforelse
+            <div class="card-title">Jumlah Leads</div>
+            <div class="revenue-box">
+                <div class="revenue-value">{{ number_format($leadTotal, 0, ',', '.') }}</div>
+                <div class="muted">Leads terverifikasi</div>
             </div>
         </div>
     </div>
-
-    <div class="card" style="margin-top: 20px;">
-        <h2>Top Leaderboard</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Rangking</th>
-                    <th>Tim</th>
-                    <th>Poin Aktivitas</th>
-                    <th>Poin Konversi</th>
-                    <th>Poin Staff</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($leaderboard as $index => $team)
+    <div class="dashboard-grid section-block">
+        <div class="card">
+            <h2>Top Closing (User)</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td>#{{ $index + 1 }}</td>
-                        <td>{{ $team->team_name }}</td>
-                        <td>{{ number_format($team->activity_points, 2) }}</td>
-                        <td>{{ number_format($team->conversion_points, 2) }}</td>
-                        <td>
-                            {{ number_format($team->staff_points_total, 2) }}
-                            @if ($team->top_staff_name)
-                                <div class="muted">{{ $team->top_staff_name }} ({{ number_format($team->top_staff_points, 2) }})</div>
-                            @endif
-                        </td>
-                        <td><strong>{{ number_format($team->total_points, 2) }}</strong></td>
+                        <th>Rangking</th>
+                        <th>User</th>
+                        <th>Jumlah Closing</th>
                     </tr>
-                @empty
+                </thead>
+                <tbody>
+                    @forelse ($topClosingUsers as $index => $user)
+                        <tr>
+                            <td>#{{ $index + 1 }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td><strong>{{ number_format($user->total_closing, 0, ',', '.') }}</strong></td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="muted">Belum ada data closing.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h2>Top Aktivitas (User)</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td colspan="6" class="muted">Belum ada poin yang diverifikasi.</td>
+                        <th>Rangking</th>
+                        <th>User</th>
+                        <th>Jumlah Aktivitas</th>
                     </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse ($topActivityUsers as $index => $user)
+                        <tr>
+                            <td>#{{ $index + 1 }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td><strong>{{ number_format($user->total_activities, 0, ',', '.') }}</strong></td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="muted">Belum ada data aktivitas.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection

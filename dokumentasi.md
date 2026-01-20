@@ -79,6 +79,55 @@ Menampilkan:
 - Profil: `/profile`
 - Notifikasi: `/notifications`
 
+## Screenshot (Placeholder)
+Simpan screenshot di folder berikut:
+- `docs/screenshots/dashboard/` (Dashboard utama)
+- `docs/screenshots/activities/` (Halaman Aktivitas)
+- `docs/screenshots/conversions/` (Halaman Konversi)
+- `docs/screenshots/teams/` (Manajemen Tim)
+- `docs/screenshots/users/` (Manajemen User)
+- `docs/screenshots/profile/` (Profil user)
+- `docs/screenshots/notifications/` (Halaman Notifikasi)
+
+Contoh nama file: `desktop.png`, `mobile.png`, `detail.png`.
+
+## Detail API (Route Web)
+Semua endpoint berbasis web route (Laravel). Ringkasan:
+- Auth:
+  - `GET /login` (Form login)
+  - `POST /login` (Proses login)
+  - `POST /logout` (Logout)
+- Profil:
+  - `GET /profile` (Profil sendiri)
+  - `GET /profiles/{user}` (Lihat profil user lain)
+  - `PATCH /profile` (Update profil sendiri)
+- Aktivitas:
+  - `GET /activities` (List)
+  - `GET /activities/create` (Form input)
+  - `POST /activities` (Simpan)
+  - `POST /activities/{activity}/verify` (Review/Approve)
+  - `POST /activities/{activity}/reject` (Reject)
+- Konversi:
+  - `GET /conversions` (List)
+  - `GET /conversions/create` (Form input)
+  - `POST /conversions` (Simpan)
+  - `POST /conversions/{conversion}/verify` (Review/Approve)
+  - `POST /conversions/{conversion}/reject` (Reject)
+- Tim (superadmin):
+  - `GET /teams` (List)
+  - `POST /teams` (Tambah)
+  - `PATCH /teams/{team}` (Edit)
+  - `DELETE /teams/{team}` (Hapus, jika tidak ada data terkait)
+  - `POST /teams/members` (Tambah anggota)
+- User (superadmin):
+  - `GET /users` (List)
+  - `POST /users` (Tambah)
+  - `PATCH /users/{user}` (Edit)
+  - `DELETE /users/{user}` (Hapus)
+- Notifikasi:
+  - `GET /notifications` (List)
+  - `POST /notifications/read-all` (Tandai dibaca)
+
 ## Scheduler (Reminder)
 Aktifkan scheduler agar reminder berjalan:
 ```

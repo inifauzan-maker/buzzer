@@ -158,6 +158,48 @@
                 font-size: 13px;
                 color: var(--muted);
             }
+            .top-actions a {
+                color: inherit;
+                text-decoration: none;
+            }
+            .top-actions .profile-link {
+                padding: 6px 10px;
+                border-radius: 999px;
+                border: 1px solid var(--border);
+                background: #f9fafb;
+                font-weight: 600;
+            }
+            .notif-label {
+                font-size: 12px;
+                color: #0b5f57;
+                font-weight: 600;
+            }
+            .notif-btn {
+                position: relative;
+                width: 34px;
+                height: 34px;
+                border-radius: 50%;
+                border: 1px solid var(--border);
+                display: grid;
+                place-items: center;
+                background: #ffffff;
+            }
+            .notif-count {
+                position: absolute;
+                top: -6px;
+                right: -6px;
+                min-width: 18px;
+                height: 18px;
+                padding: 0 4px;
+                border-radius: 999px;
+                background: #ef4444;
+                color: #fff;
+                font-size: 10px;
+                font-weight: 700;
+                display: grid;
+                place-items: center;
+                box-shadow: 0 0 0 2px #fff;
+            }
             .subnav {
                 background: #e9edf3;
                 padding: 10px 26px;
@@ -291,6 +333,30 @@
                 .search { max-width: 100%; }
                 .subnav { overflow-x: auto; }
             }
+            @media (max-width: 720px) {
+                .sidebar { padding: 14px; gap: 12px; }
+                .profile {
+                    grid-template-columns: 52px 1fr;
+                    justify-items: start;
+                    text-align: left;
+                    align-items: center;
+                }
+                .avatar { width: 52px; height: 52px; font-size: 16px; }
+                .side-nav {
+                    grid-auto-flow: column;
+                    grid-auto-columns: max-content;
+                    overflow-x: auto;
+                    padding-bottom: 6px;
+                }
+                .nav-link { white-space: nowrap; }
+                .top-actions { flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
+                .notif-label { display: none; }
+                .content { padding: 16px; }
+                .card { padding: 14px; }
+                table { display: block; overflow-x: auto; }
+                th, td { white-space: nowrap; }
+                .form { max-width: 100%; }
+            }
         </style>
     </head>
     <body>
@@ -314,9 +380,6 @@
                         </a>
                         <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
                             <span class="nav-dot"></span> Leaderboard
-                        </a>
-                        <a href="{{ route('profile.show') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Profil
                         </a>
                         @if (auth()->user()->role === 'superadmin')
                             <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
@@ -349,6 +412,18 @@
                         </div>
                         <div class="top-actions">
                             <span>{{ auth()->user()->email }}</span>
+                            <a class="profile-link" href="{{ route('profile.show') }}">My Profil</a>
+                            <a class="notif-btn" title="Notifikasi" href="{{ route('notifications.index') }}">
+                                @if (!empty($notifCount))
+                                    <span class="notif-count">{{ $notifCount }}</span>
+                                @endif
+                                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="#3f475d" d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2Zm7-6V11a7 7 0 1 0-14 0v5l-2 2v1h18v-1l-2-2Z"/>
+                                </svg>
+                            </a>
+                            @if (!empty($notifCount))
+                                <a class="notif-label" href="{{ route('notifications.index') }}">Notifikasi baru</a>
+                            @endif
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button class="button button-outline" type="submit">Logout</button>

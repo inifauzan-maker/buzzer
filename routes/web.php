@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConversionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PointSettingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
@@ -19,7 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profiles/{user}', [ProfileController::class, 'showUser'])->name('profile.view');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/social-accounts', [ProfileController::class, 'storeSocialAccount'])->name('profile.social.store');
+    Route::patch('/profile/social-accounts/{socialAccount}', [ProfileController::class, 'updateSocialAccount'])->name('profile.social.update');
+    Route::delete('/profile/social-accounts/{socialAccount}', [ProfileController::class, 'destroySocialAccount'])->name('profile.social.destroy');
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
 
     Route::middleware('role:superadmin')->group(function () {
         Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
