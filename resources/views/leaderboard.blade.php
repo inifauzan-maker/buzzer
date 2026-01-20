@@ -14,6 +14,7 @@
                     <th>Tim</th>
                     <th>Poin Aktivitas</th>
                     <th>Poin Konversi</th>
+                    <th>Poin Staff</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -24,11 +25,17 @@
                         <td>{{ $team->team_name }}</td>
                         <td>{{ number_format($team->activity_points, 2) }}</td>
                         <td>{{ number_format($team->conversion_points, 2) }}</td>
+                        <td>
+                            {{ number_format($team->staff_points_total, 2) }}
+                            @if ($team->top_staff_name)
+                                <div class="muted">{{ $team->top_staff_name }} ({{ number_format($team->top_staff_points, 2) }})</div>
+                            @endif
+                        </td>
                         <td><strong>{{ number_format($team->total_points, 2) }}</strong></td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="muted">Belum ada data poin.</td>
+                        <td colspan="6" class="muted">Belum ada data poin.</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -6,9 +6,11 @@
     <h1>Konversi Lead & Closing</h1>
     <p class="muted">Input dan verifikasi konversi lead/closing.</p>
 
-    <div class="actions" style="margin-bottom: 16px;">
-        <a class="button" href="{{ route('conversions.create') }}">Input Konversi</a>
-    </div>
+    @if (auth()->user()->role !== 'guest')
+        <div class="actions" style="margin-bottom: 16px;">
+            <a class="button" href="{{ route('conversions.create') }}">Input Konversi</a>
+        </div>
+    @endif
 
     <div class="card">
         <table>
@@ -41,10 +43,20 @@
                             @if ($conversion->proof_file)
                                 <a class="button button-outline" target="_blank" rel="noopener" href="{{ \Illuminate\Support\Facades\Storage::url($conversion->proof_file) }}">Bukti</a>
                             @endif
-                            @if ($conversion->status === 'Pending' && auth()->user()->role !== 'staff')
+                            @if ($conversion->status === 'Pending' && auth()->user()->role === 'leader')
                                 <form method="POST" action="{{ route('conversions.verify', $conversion) }}" style="margin-top: 8px;">
                                     @csrf
-                                    <button class="button" type="submit">Verify</button>
+                                    <button class="button" type="submit">Review</button>
+                                </form>
+                                <form method="POST" action="{{ route('conversions.reject', $conversion) }}" style="margin-top: 8px;">
+                                    @csrf
+                                    <button class="button button-outline" type="submit">Reject</button>
+                                </form>
+                            @endif
+                            @if ($conversion->status === 'Reviewed' && auth()->user()->role === 'superadmin')
+                                <form method="POST" action="{{ route('conversions.verify', $conversion) }}" style="margin-top: 8px;">
+                                    @csrf
+                                    <button class="button" type="submit">Approve</button>
                                 </form>
                                 <form method="POST" action="{{ route('conversions.reject', $conversion) }}" style="margin-top: 8px;">
                                     @csrf

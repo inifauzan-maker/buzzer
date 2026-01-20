@@ -6,9 +6,11 @@
     <h1>Aktivitas Konten</h1>
     <p class="muted">Input dan verifikasi aktivitas konten harian.</p>
 
-    <div class="actions" style="margin-bottom: 16px;">
-        <a class="button" href="{{ route('activities.create') }}">Input Aktivitas</a>
-    </div>
+    @if (auth()->user()->role !== 'guest')
+        <div class="actions" style="margin-bottom: 16px;">
+            <a class="button" href="{{ route('activities.create') }}">Input Aktivitas</a>
+        </div>
+    @endif
 
     <div class="card">
         <table>
@@ -37,11 +39,13 @@
                             <a class="button button-outline" target="_blank" rel="noopener" href="{{ $activity->post_url }}">Buka</a>
                         </td>
                         <td>
-                            Like {{ $activity->likes }},
-                            Comm {{ $activity->comments }},
-                            Share {{ $activity->shares }},
-                            Save {{ $activity->saves }},
-                            Reach {{ $activity->reach }}
+                            <span title="Rumus: (Share×5) + (Save×3) + (Comment×2) + (Like×1) + (Reach×0.001), lalu dikali Grade A/B/C.">
+                                Like {{ $activity->likes }},
+                                Comm {{ $activity->comments }},
+                                Share {{ $activity->shares }},
+                                Save {{ $activity->saves }},
+                                Reach {{ $activity->reach }}
+                            </span>
                         </td>
                         <td>
                             <span class="status {{ strtolower($activity->status) }}">{{ $activity->status }}</span>
@@ -52,7 +56,17 @@
                             @if ($activity->evidence_screenshot)
                                 <a class="button button-outline" target="_blank" rel="noopener" href="{{ \Illuminate\Support\Facades\Storage::url($activity->evidence_screenshot) }}">Bukti</a>
                             @endif
-                            @if ($activity->status === 'Pending' && auth()->user()->role !== 'staff')
+                            @if ($activity->status === 'Pending' && auth()->user()->role === 'leader')
+                                <form method="POST" action="{{ route('activities.verify', $activity) }}" style="margin-top: 8px;">
+                                    @csrf
+                                    <button class="button" type="submit">Review</button>
+                                </form>
+                                <form method="POST" action="{{ route('activities.reject', $activity) }}" style="margin-top: 8px;">
+                                    @csrf
+                                    <button class="button button-outline" type="submit">Reject</button>
+                                </form>
+                            @endif
+                            @if ($activity->status === 'Reviewed' && auth()->user()->role === 'superadmin')
                                 <form method="POST" action="{{ route('activities.verify', $activity) }}" style="margin-top: 8px;">
                                     @csrf
                                     <div class="actions">
@@ -61,7 +75,7 @@
                                             <option value="B" selected>Grade B</option>
                                             <option value="C">Grade C</option>
                                         </select>
-                                        <button class="button" type="submit">Verify</button>
+                                        <button class="button" type="submit">Approve</button>
                                     </div>
                                 </form>
                                 <form method="POST" action="{{ route('activities.reject', $activity) }}" style="margin-top: 8px;">

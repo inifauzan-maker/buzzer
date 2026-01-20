@@ -104,13 +104,35 @@ class ConversionController extends Controller
             abort(403, 'Akses ditolak.');
         }
 
+        if ($user->role === 'leader') {
+            if ($conversion->status !== 'Pending') {
+                return redirect()
+                    ->route('conversions.index')
+                    ->withErrors(['conversion' => 'Konversi sudah diproses.']);
+            }
+
+            $conversion->status = 'Reviewed';
+            $conversion->computed_points = null;
+            $conversion->save();
+
+            return redirect()
+                ->route('conversions.index')
+                ->with('status', 'Konversi berhasil direview.');
+        }
+
+        if ($conversion->status !== 'Reviewed') {
+            return redirect()
+                ->route('conversions.index')
+                ->withErrors(['conversion' => 'Konversi harus direview leader terlebih dahulu.']);
+        }
+
         $conversion->status = 'Verified';
         $conversion->computed_points = PointCalculator::conversion($conversion);
         $conversion->save();
 
         return redirect()
             ->route('conversions.index')
-            ->with('status', 'Konversi berhasil diverifikasi.');
+            ->with('status', 'Konversi berhasil diverifikasi admin.');
     }
 
     public function reject(Conversion $conversion)

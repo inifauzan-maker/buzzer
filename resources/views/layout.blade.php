@@ -262,6 +262,7 @@
             .status.pending { background: #fef3c7; color: #92400e; }
             .status.verified { background: #d1fae5; color: #065f46; }
             .status.rejected { background: #fee2e2; color: #991b1b; }
+            .status.reviewed { background: #dbeafe; color: #1e3a8a; }
             .flash {
                 padding: 12px 16px;
                 border-radius: 12px;
@@ -320,6 +321,9 @@
                         @if (auth()->user()->role === 'superadmin')
                             <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Tim
+                            </a>
+                            <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> User
                             </a>
                         @endif
                         <a href="{{ route('activities.index') }}" class="nav-link {{ request()->routeIs('activities.*') ? 'active' : '' }}">

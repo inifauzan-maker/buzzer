@@ -17,6 +17,8 @@ class ActivityLog extends Model
         'team_id',
         'platform',
         'post_url',
+        'platform_post_id',
+        'normalized_post_url',
         'post_date',
         'likes',
         'comments',

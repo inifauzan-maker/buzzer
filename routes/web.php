@@ -8,6 +8,7 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\PointSettingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -26,16 +27,23 @@ Route::middleware('auth')->group(function () {
         Route::patch('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');
         Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
         Route::post('/teams/members', [TeamController::class, 'storeMember'])->name('teams.members.store');
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::get('/settings/points', [PointSettingController::class, 'index'])->name('settings.points');
         Route::post('/settings/points', [PointSettingController::class, 'update'])->name('settings.points.update');
     });
 
-    Route::middleware('role:superadmin,leader,staff')->group(function () {
+    Route::middleware('role:superadmin,leader,staff,guest')->group(function () {
         Route::get('/activities', [ActivityLogController::class, 'index'])->name('activities.index');
+        Route::get('/conversions', [ConversionController::class, 'index'])->name('conversions.index');
+    });
+
+    Route::middleware('role:superadmin,leader,staff')->group(function () {
         Route::get('/activities/create', [ActivityLogController::class, 'create'])->name('activities.create');
         Route::post('/activities', [ActivityLogController::class, 'store'])->name('activities.store');
 
-        Route::get('/conversions', [ConversionController::class, 'index'])->name('conversions.index');
         Route::get('/conversions/create', [ConversionController::class, 'create'])->name('conversions.create');
         Route::post('/conversions', [ConversionController::class, 'store'])->name('conversions.store');
     });

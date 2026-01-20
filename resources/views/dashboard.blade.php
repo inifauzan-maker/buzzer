@@ -176,24 +176,33 @@
     <h1>Dashboard</h1>
     <p class="muted">Ringkasan performa tim dan status validasi konten.</p>
 
-    <div class="kpi-strip">
-        <div class="kpi-card">
-            <div class="kpi-label">Total Tim</div>
-            <div class="kpi-value">{{ $totalTeams }}</div>
+    @if (auth()->user()->role === 'leader' && $teamMemberPoints->isNotEmpty())
+        <div class="card" style="margin-bottom: 20px;">
+            <h2>Perolehan Poin Tim</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Role</th>
+                        <th>Poin Aktivitas</th>
+                        <th>Poin Konversi</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($teamMemberPoints as $member)
+                        <tr>
+                            <td>{{ $member->name }}</td>
+                            <td>{{ strtoupper($member->role) }}</td>
+                            <td>{{ number_format($member->activity_points, 2) }}</td>
+                            <td>{{ number_format($member->conversion_points, 2) }}</td>
+                            <td><strong>{{ number_format($member->total_points, 2) }}</strong></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Total User</div>
-            <div class="kpi-value">{{ $totalUsers }}</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Pending Aktivitas</div>
-            <div class="kpi-value">{{ $pendingActivities }}</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Pending Konversi</div>
-            <div class="kpi-value">{{ $pendingConversions }}</div>
-        </div>
-    </div>
+    @endif
 
     <div class="dashboard-grid">
         <div class="card">
@@ -324,6 +333,7 @@
                     <th>Tim</th>
                     <th>Poin Aktivitas</th>
                     <th>Poin Konversi</th>
+                    <th>Poin Staff</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -334,11 +344,17 @@
                         <td>{{ $team->team_name }}</td>
                         <td>{{ number_format($team->activity_points, 2) }}</td>
                         <td>{{ number_format($team->conversion_points, 2) }}</td>
+                        <td>
+                            {{ number_format($team->staff_points_total, 2) }}
+                            @if ($team->top_staff_name)
+                                <div class="muted">{{ $team->top_staff_name }} ({{ number_format($team->top_staff_points, 2) }})</div>
+                            @endif
+                        </td>
                         <td><strong>{{ number_format($team->total_points, 2) }}</strong></td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="muted">Belum ada poin yang diverifikasi.</td>
+                        <td colspan="6" class="muted">Belum ada poin yang diverifikasi.</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -102,6 +102,38 @@ class DashboardController extends Controller
             })
             ->take(4);
 
+        $teamMemberPoints = collect();
+
+        if ($user->role === 'leader' && $user->team_id) {
+            $activityByUser = ActivityLog::query()
+                ->selectRaw('user_id, COALESCE(SUM(computed_points), 0) as activity_points')
+                ->where('status', 'Verified')
+                ->groupBy('user_id');
+
+            $conversionByUser = Conversion::query()
+                ->selectRaw('user_id, COALESCE(SUM(computed_points), 0) as conversion_points')
+                ->where('status', 'Verified')
+                ->groupBy('user_id');
+
+            $teamMemberPoints = User::query()
+                ->where('team_id', $user->team_id)
+                ->leftJoinSub($activityByUser, 'activity_points', 'activity_points.user_id', '=', 'users.id')
+                ->leftJoinSub($conversionByUser, 'conversion_points', 'conversion_points.user_id', '=', 'users.id')
+                ->select('users.*')
+                ->selectRaw('COALESCE(activity_points.activity_points, 0) as activity_points')
+                ->selectRaw('COALESCE(conversion_points.conversion_points, 0) as conversion_points')
+                ->orderBy('role')
+                ->orderBy('name')
+                ->get()
+                ->map(function (User $member) {
+                    $member->activity_points = (float) $member->activity_points;
+                    $member->conversion_points = (float) $member->conversion_points;
+                    $member->total_points = $member->activity_points + $member->conversion_points;
+
+                    return $member;
+                });
+        }
+
         $leaderboard = LeaderboardService::build(5);
 
         return view('dashboard', [
@@ -126,6 +158,7 @@ class DashboardController extends Controller
             'leadMax' => $leadMax,
             'closingTotal' => $closingTotal,
             'inactiveTeams' => $inactiveTeams,
+            'teamMemberPoints' => $teamMemberPoints,
             'leaderboard' => $leaderboard,
         ]);
     }

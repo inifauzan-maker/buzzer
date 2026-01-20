@@ -89,6 +89,33 @@ class ActivityLogController extends Controller
                 ->store('evidence', 'public');
         }
 
+        $data['platform_post_id'] = $this->extractPostId($data['platform'], $data['post_url']);
+        $data['normalized_post_url'] = $this->normalizePostUrl($data['post_url']);
+
+        if ($data['platform_post_id']) {
+            $duplicate = ActivityLog::where('team_id', $data['team_id'])
+                ->where('platform', $data['platform'])
+                ->where('platform_post_id', $data['platform_post_id'])
+                ->exists();
+
+            if ($duplicate) {
+                return back()
+                    ->withErrors(['post_url' => 'Postingan ini terdeteksi duplikat.'])
+                    ->withInput();
+            }
+        } elseif ($data['normalized_post_url']) {
+            $duplicate = ActivityLog::where('team_id', $data['team_id'])
+                ->where('platform', $data['platform'])
+                ->where('normalized_post_url', $data['normalized_post_url'])
+                ->exists();
+
+            if ($duplicate) {
+                return back()
+                    ->withErrors(['post_url' => 'Postingan ini terdeteksi duplikat (URL sama).'])
+                    ->withInput();
+            }
+        }
+
         if ($user->role === 'staff') {
             $data['user_id'] = $user->id;
             $data['team_id'] = $user->team_id;
@@ -117,6 +144,28 @@ class ActivityLogController extends Controller
             abort(403, 'Akses ditolak.');
         }
 
+        if ($user->role === 'leader') {
+            if ($activity->status !== 'Pending') {
+                return redirect()
+                    ->route('activities.index')
+                    ->withErrors(['activity' => 'Aktivitas sudah diproses.']);
+            }
+
+            $activity->status = 'Reviewed';
+            $activity->computed_points = null;
+            $activity->save();
+
+            return redirect()
+                ->route('activities.index')
+                ->with('status', 'Aktivitas berhasil direview.');
+        }
+
+        if ($activity->status !== 'Reviewed') {
+            return redirect()
+                ->route('activities.index')
+                ->withErrors(['activity' => 'Aktivitas harus direview leader terlebih dahulu.']);
+        }
+
         $data = $request->validate([
             'admin_grade' => 'required|in:A,B,C',
         ]);
@@ -128,7 +177,7 @@ class ActivityLogController extends Controller
 
         return redirect()
             ->route('activities.index')
-            ->with('status', 'Aktivitas berhasil diverifikasi.');
+            ->with('status', 'Aktivitas berhasil diverifikasi admin.');
     }
 
     public function reject(ActivityLog $activity)
@@ -151,5 +200,71 @@ class ActivityLogController extends Controller
     private function platforms(): array
     {
         return ['IG', 'FB', 'TT', 'YT', 'Blog', 'WA'];
+    }
+
+    private function extractPostId(string $platform, string $url): ?string
+    {
+        $platform = strtoupper($platform);
+        $url = trim($url);
+
+        if ($platform === 'IG') {
+            if (preg_match('~/(?:p|reel|tv)/([A-Za-z0-9_-]+)~', $url, $match)) {
+                return $match[1];
+            }
+        }
+
+        if ($platform === 'TT') {
+            if (preg_match('~/video/(\d+)~', $url, $match)) {
+                return $match[1];
+            }
+        }
+
+        if ($platform === 'YT') {
+            $parsed = parse_url($url);
+            if (! empty($parsed['query'])) {
+                parse_str($parsed['query'], $query);
+                if (! empty($query['v'])) {
+                    return $query['v'];
+                }
+            }
+
+            if (preg_match('~youtu\.be/([A-Za-z0-9_-]+)~', $url, $match)) {
+                return $match[1];
+            }
+
+            if (preg_match('~/shorts/([A-Za-z0-9_-]+)~', $url, $match)) {
+                return $match[1];
+            }
+        }
+
+        if ($platform === 'FB') {
+            if (preg_match('~/(?:posts|reel|videos)/(\d+)~', $url, $match)) {
+                return $match[1];
+            }
+        }
+
+        return null;
+    }
+
+    private function normalizePostUrl(string $url): ?string
+    {
+        $url = trim($url);
+
+        if ($url === '') {
+            return null;
+        }
+
+        $parts = parse_url($url);
+
+        if (! is_array($parts) || empty($parts['host'])) {
+            return null;
+        }
+
+        $host = strtolower($parts['host']);
+        $host = preg_replace('/^www\./', '', $host);
+        $path = $parts['path'] ?? '';
+        $path = rtrim($path, '/');
+
+        return $host.$path;
     }
 }
