@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@yield('title', 'SIVMI Buzzer Marketing')</title>
+        <style>
+            :root {
+                --bg: #f1f1f1;
+                --ink: #1f2937;
+                --muted: #6b7280;
+                --accent: #12b5c9;
+                --accent-dark: #0e9aa8;
+                --sidebar: #3f475d;
+                --sidebar-dark: #32394d;
+                --card: #ffffff;
+                --border: #e2e8f0;
+                --shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+            }
+            * { box-sizing: border-box; }
+            body {
+                margin: 0;
+                font-family: "Georgia", "Times New Roman", serif;
+                color: var(--ink);
+                background: linear-gradient(140deg, #f6f2ea, #e3f1f0);
+                min-height: 100vh;
+            }
+            a { color: inherit; text-decoration: none; }
+            .app-shell {
+                display: grid;
+                grid-template-columns: 240px 1fr;
+                min-height: 100vh;
+            }
+            .sidebar {
+                background: linear-gradient(180deg, var(--sidebar), var(--sidebar-dark));
+                color: #e8edf2;
+                padding: 20px 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+            }
+            .brand-block {
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+            }
+            .brand-title {
+                font-weight: 700;
+                font-size: 14px;
+            }
+            .brand-sub {
+                font-size: 10px;
+                color: rgba(232, 237, 242, 0.6);
+            }
+            .profile {
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 16px;
+                padding: 16px;
+                display: grid;
+                gap: 10px;
+                justify-items: center;
+                text-align: center;
+            }
+            .avatar {
+                width: 72px;
+                height: 72px;
+                border-radius: 50%;
+                background: var(--accent);
+                display: grid;
+                place-items: center;
+                font-weight: 700;
+                color: #fff;
+                font-size: 22px;
+                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+            }
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 4px 10px;
+                border-radius: 999px;
+                font-size: 11px;
+                background: rgba(18, 181, 201, 0.2);
+                color: #eafcfe;
+                border: 1px solid rgba(18, 181, 201, 0.4);
+            }
+            .side-nav {
+                display: grid;
+                gap: 6px;
+            }
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px 12px;
+                border-radius: 10px;
+                font-size: 14px;
+                color: rgba(232, 237, 242, 0.85);
+                transition: all 0.2s ease;
+            }
+            .nav-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(232, 237, 242, 0.4);
+            }
+            .nav-link.active,
+            .nav-link:hover {
+                background: rgba(18, 181, 201, 0.2);
+                color: #ffffff;
+            }
+            .nav-link.active .nav-dot,
+            .nav-link:hover .nav-dot {
+                background: var(--accent);
+            }
+            .sidebar-footer {
+                margin-top: auto;
+                font-size: 12px;
+                color: rgba(232, 237, 242, 0.6);
+            }
+            .main {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            .topbar {
+                background: #ffffff;
+                border-bottom: 1px solid var(--border);
+                padding: 16px 26px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+            }
+            .search {
+                flex: 1;
+                max-width: 420px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 6px 12px;
+                background: #f9fafb;
+            }
+            .search input {
+                border: none;
+                outline: none;
+                background: transparent;
+                width: 100%;
+                font-family: inherit;
+                font-size: 14px;
+            }
+            .top-actions {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 13px;
+                color: var(--muted);
+            }
+            .subnav {
+                background: #e9edf3;
+                padding: 10px 26px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 14px;
+                font-size: 13px;
+                color: #3f475d;
+            }
+            .subnav a {
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: #3f475d;
+            }
+            .subnav a.active {
+                color: var(--accent-dark);
+            }
+            .content {
+                padding: 26px;
+                max-width: 1200px;
+                width: 100%;
+                margin: 0 auto;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 16px;
+            }
+            .card {
+                background: var(--card);
+                padding: 18px;
+                border-radius: 16px;
+                box-shadow: var(--shadow);
+                border: 1px solid rgba(15, 118, 110, 0.08);
+            }
+            .card h3 {
+                margin: 0 0 6px;
+                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+            }
+            .card p {
+                margin: 0;
+                color: var(--muted);
+            }
+            h1, h2 {
+                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+            }
+            h1 { margin-top: 0; }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 14px;
+            }
+            th, td {
+                text-align: left;
+                padding: 10px 8px;
+                border-bottom: 1px solid var(--border);
+            }
+            th {
+                font-size: 12px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: var(--muted);
+            }
+            .form {
+                display: grid;
+                gap: 12px;
+                max-width: 720px;
+            }
+            label {
+                font-size: 13px;
+                color: var(--muted);
+            }
+            input, select, textarea {
+                padding: 10px 12px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                font-family: inherit;
+                font-size: 14px;
+            }
+            .button {
+                background: var(--accent);
+                color: white;
+                border: none;
+                padding: 10px 16px;
+                border-radius: 10px;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            .button:hover { background: var(--accent-dark); }
+            .button-outline {
+                background: transparent;
+                color: var(--accent-dark);
+                border: 1px solid var(--accent-dark);
+            }
+            .status {
+                padding: 6px 12px;
+                border-radius: 999px;
+                font-size: 12px;
+                display: inline-block;
+            }
+            .status.pending { background: #fef3c7; color: #92400e; }
+            .status.verified { background: #d1fae5; color: #065f46; }
+            .status.rejected { background: #fee2e2; color: #991b1b; }
+            .flash {
+                padding: 12px 16px;
+                border-radius: 12px;
+                background: #ecfeff;
+                color: #0f766e;
+                margin-bottom: 16px;
+                border: 1px solid rgba(15, 118, 110, 0.2);
+            }
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .muted {
+                color: var(--muted);
+                font-size: 13px;
+            }
+            @media (max-width: 980px) {
+                .app-shell { grid-template-columns: 200px 1fr; }
+                .content { padding: 22px; }
+            }
+            @media (max-width: 820px) {
+                .app-shell { grid-template-columns: 1fr; }
+                .sidebar { position: sticky; top: 0; z-index: 10; }
+                .topbar { flex-direction: column; align-items: stretch; }
+                .search { max-width: 100%; }
+                .subnav { overflow-x: auto; }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app-shell">
+            @auth
+                <aside class="sidebar">
+                    <div class="brand-block">
+                        <div class="brand-title">SIVMI</div>
+                        <div class="brand-sub">Buzzer Marketing</div>
+                    </div>
+                    <div class="profile">
+                        <div class="avatar">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</div>
+                        <div>
+                            <div>{{ auth()->user()->name }}</div>
+                            <div class="badge">{{ strtoupper(auth()->user()->role) }}</div>
+                        </div>
+                    </div>
+                    <nav class="side-nav">
+                        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Dashboard
+                        </a>
+                        <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Leaderboard
+                        </a>
+                        <a href="{{ route('profile.show') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Profil
+                        </a>
+                        @if (auth()->user()->role === 'superadmin')
+                            <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Tim
+                            </a>
+                        @endif
+                        <a href="{{ route('activities.index') }}" class="nav-link {{ request()->routeIs('activities.*') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Aktivitas
+                        </a>
+                        <a href="{{ route('conversions.index') }}" class="nav-link {{ request()->routeIs('conversions.*') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Konversi
+                        </a>
+                        @if (auth()->user()->role === 'superadmin')
+                            <a href="{{ route('settings.points') }}" class="nav-link {{ request()->routeIs('settings.points*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Settings Poin
+                            </a>
+                        @endif
+                    </nav>
+                    <div class="sidebar-footer">SIVMI panel v1.0</div>
+                </aside>
+            @endauth
+            <div class="main">
+                @auth
+                    <header class="topbar">
+                        <div class="search">
+                            <input type="text" placeholder="Cari tim, aktivitas, atau user">
+                        </div>
+                        <div class="top-actions">
+                            <span>{{ auth()->user()->email }}</span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="button button-outline" type="submit">Logout</button>
+                            </form>
+                        </div>
+                    </header>
+                @endauth
+                <main class="content">
+                    @if (session('status'))
+                        <div class="flash">{{ session('status') }}</div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="flash">
+                            <strong>Validasi gagal:</strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @yield('content')
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
