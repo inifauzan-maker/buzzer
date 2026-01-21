@@ -4,33 +4,18 @@
 
 @section('content')
     <style>
-        .kpi-strip {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-        .kpi-card {
-            background: var(--card);
-            border-radius: 14px;
-            padding: 12px 14px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-        .kpi-label {
-            font-size: 11px;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-        .kpi-value {
-            font-size: 20px;
-            font-weight: 700;
-            margin-top: 6px;
-        }
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .full-span {
+            grid-column: 1 / -1;
+        }
+        .target-grid {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(260px, 1fr));
             gap: 18px;
         }
         .card-title {
@@ -39,143 +24,78 @@
             margin-bottom: 12px;
             text-align: center;
         }
-        .donut {
-            --size: 150px;
-            width: var(--size);
-            height: var(--size);
-            border-radius: 50%;
-            background: conic-gradient(var(--accent) calc(var(--percent) * 1%), #e5e7eb 0);
-            display: grid;
-            place-items: center;
-            margin: 0 auto 14px;
-        }
-        .donut-center {
-            width: 96px;
-            height: 96px;
-            background: #fff;
-            border-radius: 50%;
+        .card-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 8px;
-            box-shadow: inset 0 0 0 1px #e5e7eb;
-        }
-        .donut-value {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0;
-            line-height: 1;
-        }
-        .pointku-card {
-            text-align: center;
-        }
-        .kpi-pair {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-        .kpi-pair strong {
-            display: block;
-            margin-top: 4px;
-        }
-        .progress-list {
-            display: grid;
-            gap: 12px;
-        }
-        .progress-row {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr 36px;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-        }
-        .progress-bar {
-            background: #e5e7eb;
-            border-radius: 999px;
-            height: 10px;
-            overflow: hidden;
-        }
-        .progress-bar span {
-            display: block;
-            height: 100%;
-            border-radius: 999px;
-        }
-        .progress-blue span { background: #12b5c9; }
-        .progress-orange span { background: #f97316; }
-        .progress-red span { background: #ef4444; }
-        .bar-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 10px;
-            height: 150px;
-            padding: 10px 6px 24px;
-            border-bottom: 1px dashed var(--border);
-        }
-        .bar {
-            flex: 1;
-            min-width: 26px;
-            border-radius: 8px 8px 0 0;
-            position: relative;
-        }
-        .bar span {
-            position: absolute;
-            bottom: -22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            color: var(--muted);
-            white-space: nowrap;
-        }
-        .bar:nth-child(odd) { background: #12b5c9; }
-        .bar:nth-child(even) { background: #3f475d; }
-        .status-list {
-            display: grid;
-            gap: 10px;
-            font-size: 13px;
-        }
-        .status-item {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 10px;
-        }
-        .status-left {
-            display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
         }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #94a3b8;
+        .card-header .card-title {
+            margin-bottom: 0;
+            text-align: left;
         }
-        .status-dot.pending { background: #f97316; }
-        .status-dot.verified { background: #12b5c9; }
-        .status-dot.total { background: #3f475d; }
-        .revenue-box {
-            background: #e6f7fa;
-            border-radius: 14px;
-            padding: 18px;
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .staff-kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 12px 0 16px;
+        }
+        .staff-kpi {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 10px 12px;
             display: grid;
             gap: 6px;
             text-align: center;
         }
-        .revenue-value {
-            font-size: 26px;
-            font-weight: 700;
-            color: #0b5f57;
+        .staff-kpi strong {
+            font-size: 16px;
         }
-        .alert-list {
+        .staff-rank {
             display: grid;
-            gap: 8px;
+            gap: 10px;
             font-size: 13px;
         }
-        .alert-item {
-            display: flex;
-            justify-content: space-between;
+        .staff-row {
+            display: grid;
+            grid-template-columns: 1fr 120px;
             gap: 10px;
+            align-items: center;
+        }
+        .staff-name {
+            font-weight: 600;
+        }
+        .staff-bar {
+            height: 8px;
+            border-radius: 999px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+        .staff-bar span {
+            display: block;
+            height: 100%;
+            border-radius: 999px;
+            background: #3f475d;
+        }
+        .lead-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .lead-filter select {
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            padding: 0 10px;
+            background: #fff;
+            font-size: 12px;
         }
         .heatmap-card {
             margin: 18px 0;
@@ -322,6 +242,11 @@
             font-size: 11px;
             color: var(--muted);
         }
+        @media (max-width: 640px) {
+            .target-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 
     <h1>Dashboard</h1>
@@ -407,83 +332,102 @@
     @endif
 
     <div class="dashboard-grid section-block">
-        <div class="card pointku-card">
-            <div class="card-title">Pointku</div>
-            <div class="donut" style="--percent: {{ $pointPercent }};">
-                <div class="donut-center">
-                    <div class="donut-value">{{ number_format($totalPoints, 0) }}</div>
+        <div class="target-grid">
+            <div class="card target-card">
+                <div class="card-title">Target Closing {{ $targetYear }}</div>
+                <div class="target-mini">
+                    <div class="target-mini-title">{{ $targetLabel }}</div>
+                    <div class="target-bar-chart">
+                        <div class="target-bar-stack">
+                            <div class="target-bar target" style="height: {{ $closingTargetHeight }}%;"></div>
+                            <div class="target-bar achieved" style="height: {{ $closingAchievedHeight }}%;"></div>
+                        </div>
+                        <div class="target-bar-values">
+                            <span>Target {{ number_format($targetClosing, 0, ',', '.') }}</span>
+                            <span>Pencapaian {{ number_format($targetClosingAchieved, 0, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="muted">{{ $targetClosingPercent }}% tercapai</div>
                 </div>
             </div>
-            <div class="kpi-pair">
+            <div class="card target-card">
+                <div class="card-title">Target Leads {{ $targetYear }}</div>
+                <div class="target-mini">
+                    <div class="target-mini-title">{{ $targetLabel }}</div>
+                    <div class="target-bar-chart">
+                        <div class="target-bar-stack">
+                            <div class="target-bar target" style="height: {{ $leadsTargetHeight }}%;"></div>
+                            <div class="target-bar leads" style="height: {{ $leadsAchievedHeight }}%;"></div>
+                        </div>
+                        <div class="target-bar-values">
+                            <span>Target {{ number_format($targetLeads, 0, ',', '.') }}</span>
+                            <span>Pencapaian {{ number_format($targetLeadsAchieved, 0, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="muted">{{ $targetLeadsPercent }}% tercapai</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card full-span">
+            <div class="card-header">
                 <div>
-                    <div class="muted">Aktivitas</div>
-                    <strong>{{ number_format($activityPoints, 2) }}</strong>
+                    <div class="card-title">Performa Staff Bulan Ini</div>
+                    <div class="card-subtitle">
+                        {{ $leadMonthOptions[$leadMonth] ?? $leadMonth }} {{ $leadYear }}
+                        @if (!empty($erUserLabel))
+                            • {{ $erUserLabel }}
+                        @endif
+                    </div>
                 </div>
-                <div>
-                    <div class="muted">Konversi</div>
-                    <strong>{{ number_format($conversionPoints, 2) }}</strong>
+                @if (!empty($erUserOptions) && $erUserOptions->isNotEmpty())
+                    <form class="lead-filter" method="GET" action="{{ route('dashboard') }}">
+                        <input type="hidden" name="lead_month" value="{{ $leadMonth }}">
+                        <input type="hidden" name="lead_year" value="{{ $leadYear }}">
+                        <select name="er_user_id" onchange="this.form.submit()">
+                            <option value="0" @selected(empty($erUserId))>Semua Staff</option>
+                            @foreach ($erUserOptions as $option)
+                                <option value="{{ $option->id }}" @selected($erUserId == $option->id)>{{ $option->name }}</option>
+                            @endforeach
+                        </select>
+                    </form>
+                @endif
+            </div>
+            <div class="staff-kpis">
+                <div class="staff-kpi">
+                    <span class="muted">Total Poin</span>
+                    <strong>{{ number_format($staffTotalPoints, 2) }}</strong>
                 </div>
+                <div class="staff-kpi">
+                    <span class="muted">ER Rate</span>
+                    <strong>{{ number_format($erRate, 2) }}%</strong>
+                </div>
+                <div class="staff-kpi">
+                    <span class="muted">Closing / Leads</span>
+                    <strong>{{ $staffClosingCount }} / {{ $staffLeadCount }}</strong>
+                </div>
+                <div class="staff-kpi">
+                    <span class="muted">Hari Aktif</span>
+                    <strong>{{ $staffActiveDays }} hari</strong>
+                </div>
+            </div>
+            <div class="staff-rank">
+                @forelse ($staffRankings as $staff)
+                    @php($rankPercent = $staffRankMax > 0 ? round(($staff->total_points / $staffRankMax) * 100) : 0)
+                    <div class="staff-row">
+                        <div>
+                            <div class="staff-name">{{ $staff->name }}</div>
+                            <div class="platform-value">{{ number_format($staff->total_points, 2) }} poin</div>
+                        </div>
+                        <div class="staff-bar">
+                            <span style="width: {{ $rankPercent }}%;"></span>
+                        </div>
+                    </div>
+                @empty
+                    <span class="muted">Belum ada data staff.</span>
+                @endforelse
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-title">Leads Harian</div>
-            <div class="bar-chart">
-                @foreach ($leadSeries as $lead)
-                    <div class="bar" style="height: {{ $lead['height'] }}%;">
-                        <span>{{ $lead['date'] }}</span>
-                    </div>
-                @endforeach
-            </div>
-            <p class="muted">Total 5 hari: {{ $leadDailyTotal }} lead masuk.</p>
-        </div>
-
-        <div class="card target-card">
-            <div class="card-title">{{ $targetLabel }} {{ $targetYear }}</div>
-            <div class="target-mini">
-                <div class="target-mini-title">Target Closing</div>
-                <div class="target-bar-chart">
-                    <div class="target-bar-stack">
-                        <div class="target-bar target" style="height: {{ $closingTargetHeight }}%;"></div>
-                        <div class="target-bar achieved" style="height: {{ $closingAchievedHeight }}%;"></div>
-                    </div>
-                    <div class="target-bar-values">
-                        <span>Target {{ number_format($targetClosing, 0, ',', '.') }}</span>
-                        <span>Pencapaian {{ number_format($targetClosingAchieved, 0, ',', '.') }}</span>
-                    </div>
-                </div>
-                <div class="muted">{{ $targetClosingPercent }}% tercapai</div>
-            </div>
-            <div class="target-mini">
-                <div class="target-mini-title">Target Leads</div>
-                <div class="target-bar-chart">
-                    <div class="target-bar-stack">
-                        <div class="target-bar target" style="height: {{ $leadsTargetHeight }}%;"></div>
-                        <div class="target-bar leads" style="height: {{ $leadsAchievedHeight }}%;"></div>
-                    </div>
-                    <div class="target-bar-values">
-                        <span>Target {{ number_format($targetLeads, 0, ',', '.') }}</span>
-                        <span>Pencapaian {{ number_format($targetLeadsAchieved, 0, ',', '.') }}</span>
-                    </div>
-                </div>
-                <div class="muted">{{ $targetLeadsPercent }}% tercapai</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Jumlah Closing</div>
-            <div class="revenue-box">
-                <div class="revenue-value">{{ number_format($closingTotal, 0, ',', '.') }}</div>
-                <div class="muted">Closing terverifikasi</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Jumlah Leads</div>
-            <div class="revenue-box">
-                <div class="revenue-value">{{ number_format($leadTotal, 0, ',', '.') }}</div>
-                <div class="muted">Leads terverifikasi</div>
-            </div>
-        </div>
     </div>
 @endsection

@@ -8,12 +8,14 @@ use App\Models\Team;
 use App\Models\TeamMemberTarget;
 use App\Models\TeamTarget;
 use App\Models\User;
+use App\Services\PointCalculator;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
 
@@ -132,27 +134,281 @@ class DashboardController extends Controller
             ? (int) round(($targetLeadsAchieved / $leadsMax) * 100)
             : 0;
 
+        $currentYear = (int) now()->year;
+        $leadYear = (int) $request->query('lead_year', $currentYear);
+        $leadMonth = (int) $request->query('lead_month', (int) now()->month);
+        if ($leadMonth < 1 || $leadMonth > 12) {
+            $leadMonth = (int) now()->month;
+        }
+        if ($leadYear < 2000 || $leadYear > $currentYear + 1) {
+            $leadYear = $currentYear;
+        }
+
+        $startMonth = Carbon::create($leadYear, $leadMonth, 1)->startOfDay();
+
+        $erSettings = PointCalculator::settings();
+        $erGoodMin = (float) ($erSettings['er_good_min'] ?? 1);
+        $erHighMin = (float) ($erSettings['er_high_min'] ?? 3);
+        $erViralMin = (float) ($erSettings['er_viral_min'] ?? 6);
+        $erGoodPoints = (float) ($erSettings['er_good_points'] ?? 10);
+        $erHighPoints = (float) ($erSettings['er_high_points'] ?? 30);
+        $erViralPoints = (float) ($erSettings['er_viral_points'] ?? 50);
+
+        $erUserOptions = collect();
+        $erUserIds = [];
+        $erUserId = null;
+        $erUserLabel = 'Semua Staff';
+
+        if ($user->role === 'leader') {
+            $erUserOptions = User::query()
+                ->where('team_id', $user->team_id)
+                ->where('role', 'staff')
+                ->orderBy('name')
+                ->get(['id', 'name']);
+        } elseif ($user->role === 'superadmin') {
+            $erUserOptions = User::query()
+                ->where('role', 'staff')
+                ->orderBy('name')
+                ->get(['id', 'name']);
+        } else {
+            $erUserId = $user->id;
+            $erUserLabel = $user->name;
+        }
+
+        if ($erUserId === null) {
+            $erUserIds = $erUserOptions->pluck('id')->all();
+            $erUserId = (int) $request->query('er_user_id', 0);
+            if ($erUserId && ! in_array($erUserId, $erUserIds, true)) {
+                $erUserId = 0;
+            }
+            if ($erUserId) {
+                $erUserLabel = $erUserOptions->firstWhere('id', $erUserId)?->name ?? $erUserLabel;
+            }
+        }
+
+        $daysInMonth = $startMonth->daysInMonth;
+        $labelInterval = $daysInMonth >= 28 ? 3 : 2;
         $leadSeries = [];
         $leadMax = 0;
-        for ($i = 4; $i >= 0; $i--) {
-            $date = Carbon::today()->subDays($i);
-            $count = (clone $conversionBase)
+        $leadUserId = $erUserId ?: null;
+
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+            $date = $startMonth->copy()->day($day);
+            $leadQuery = (clone $conversionBase)
                 ->where('type', 'Lead')
-                ->whereDate('created_at', $date->toDateString())
-                ->count();
-            $leadSeries[] = [
-                'date' => $date->format('d M'),
-                'count' => $count,
-            ];
+                ->whereDate('created_at', $date->toDateString());
+            if ($leadUserId) {
+                $leadQuery->where('user_id', $leadUserId);
+            }
+            $count = $leadQuery->count();
             $leadMax = max($leadMax, $count);
+            $leadSeries[] = [
+                'date' => $date->format('j'),
+                'count' => $count,
+                'show_label' => $day === 1 || $day === $daysInMonth || $day % $labelInterval === 0,
+            ];
         }
+
         $leadSeries = array_map(function (array $lead) use ($leadMax) {
             $height = $leadMax > 0 ? (int) round(($lead['count'] / $leadMax) * 100) : 0;
             $lead['height'] = max($height, 6);
 
             return $lead;
         }, $leadSeries);
+
         $leadDailyTotal = array_sum(array_column($leadSeries, 'count'));
+        $leadMonthOptions = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember',
+        ];
+        $leadYearOptions = range($currentYear - 2, $currentYear + 1);
+        if (! in_array($leadYear, $leadYearOptions, true)) {
+            $leadYearOptions[] = $leadYear;
+            sort($leadYearOptions);
+        }
+
+        $monthEnd = $startMonth->copy()->endOfMonth();
+        $erQuery = (clone $activityBase)
+            ->where('status', 'Verified')
+            ->whereBetween('post_date', [$startMonth->toDateString(), $monthEnd->toDateString()]);
+
+        if ($erUserId) {
+            $erQuery->where('user_id', $erUserId);
+        } elseif (! empty($erUserIds)) {
+            $erQuery->whereIn('user_id', $erUserIds);
+        }
+
+        $erStats = $erQuery
+            ->selectRaw('COALESCE(SUM(likes), 0) as likes_total')
+            ->selectRaw('COALESCE(SUM(comments), 0) as comments_total')
+            ->selectRaw('COALESCE(SUM(saves), 0) as saves_total')
+            ->selectRaw('COALESCE(SUM(shares), 0) as shares_total')
+            ->selectRaw('COALESCE(SUM(reach), 0) as reach_total')
+            ->first();
+
+        $engagementTotal = (int) ($erStats->likes_total ?? 0)
+            + (int) ($erStats->comments_total ?? 0)
+            + (int) ($erStats->saves_total ?? 0)
+            + (int) ($erStats->shares_total ?? 0);
+        $reachTotal = (int) ($erStats->reach_total ?? 0);
+        $erRate = $reachTotal > 0 ? round(($engagementTotal / $reachTotal) * 100, 2) : 0.0;
+
+        $erLabel = 'Low';
+        $erPoints = 0;
+        if ($erRate >= $erViralMin) {
+            $erLabel = 'Viral';
+            $erPoints = $erViralPoints;
+        } elseif ($erRate >= $erHighMin) {
+            $erLabel = 'High';
+            $erPoints = $erHighPoints;
+        } elseif ($erRate >= $erGoodMin) {
+            $erLabel = 'Good';
+            $erPoints = $erGoodPoints;
+        }
+
+        $erScaleMax = max(1.0, $erViralMin);
+        $erProgress = (int) min(100, round(($erRate / $erScaleMax) * 100));
+
+        $topPlatforms = (clone $activityBase)
+            ->where('status', 'Verified')
+            ->whereBetween('post_date', [$startMonth->toDateString(), $monthEnd->toDateString()])
+            ->selectRaw('platform, COALESCE(SUM(computed_points), 0) as total_points')
+            ->groupBy('platform')
+            ->orderByDesc('total_points')
+            ->limit(3)
+            ->get();
+        $topPlatformMax = (float) ($topPlatforms->max('total_points') ?? 0);
+
+        $weeklySeries = [];
+        $weekMax = 0;
+        $weekStartBase = Carbon::today()->startOfWeek(Carbon::MONDAY);
+        for ($i = 4; $i >= 0; $i--) {
+            $weekStart = $weekStartBase->copy()->subWeeks($i)->startOfDay();
+            $weekEnd = $weekStart->copy()->endOfWeek(Carbon::SUNDAY);
+            $closingCount = (clone $conversionBase)
+                ->where('status', 'Verified')
+                ->where('type', 'Closing')
+                ->whereBetween('created_at', [$weekStart, $weekEnd])
+                ->count();
+            $leadCount = (clone $conversionBase)
+                ->where('status', 'Verified')
+                ->where('type', 'Lead')
+                ->whereBetween('created_at', [$weekStart, $weekEnd])
+                ->count();
+            $weekMax = max($weekMax, $closingCount, $leadCount);
+            $weeklySeries[] = [
+                'label' => $weekStart->format('d M'),
+                'closing' => $closingCount,
+                'leads' => $leadCount,
+            ];
+        }
+
+        $activeDays = (clone $activityBase)
+            ->where('status', 'Verified')
+            ->whereBetween('post_date', [$startMonth->toDateString(), $monthEnd->toDateString()])
+            ->select('post_date')
+            ->distinct()
+            ->count('post_date');
+        $totalDays = $startMonth->daysInMonth;
+        $consistencyPercent = $totalDays > 0
+            ? (int) round(($activeDays / $totalDays) * 100)
+            : 0;
+
+        $staffScopeIds = [];
+        if ($erUserId) {
+            $staffScopeIds = [$erUserId];
+        } elseif (! empty($erUserIds)) {
+            $staffScopeIds = $erUserIds;
+        } elseif ($user->role === 'staff') {
+            $staffScopeIds = [$user->id];
+        }
+
+        $staffActivityPoints = 0.0;
+        $staffConversionPoints = 0.0;
+        $staffClosingCount = 0;
+        $staffLeadCount = 0;
+        $staffActiveDays = 0;
+        $staffRankings = collect();
+        $staffRankMax = 0.0;
+
+        if (! empty($staffScopeIds)) {
+            $staffActivityPoints = (float) (clone $activityBase)
+                ->where('status', 'Verified')
+                ->whereBetween('post_date', [$startMonth->toDateString(), $monthEnd->toDateString()])
+                ->whereIn('user_id', $staffScopeIds)
+                ->sum('computed_points');
+
+            $staffConversionPoints = (float) (clone $conversionBase)
+                ->where('status', 'Verified')
+                ->whereBetween('created_at', [$startMonth, $monthEnd])
+                ->whereIn('user_id', $staffScopeIds)
+                ->sum('computed_points');
+
+            $staffClosingCount = (int) (clone $conversionBase)
+                ->where('status', 'Verified')
+                ->where('type', 'Closing')
+                ->whereBetween('created_at', [$startMonth, $monthEnd])
+                ->whereIn('user_id', $staffScopeIds)
+                ->count();
+
+            $staffLeadCount = (int) (clone $conversionBase)
+                ->where('status', 'Verified')
+                ->where('type', 'Lead')
+                ->whereBetween('created_at', [$startMonth, $monthEnd])
+                ->whereIn('user_id', $staffScopeIds)
+                ->count();
+
+            $staffActiveDays = (int) (clone $activityBase)
+                ->where('status', 'Verified')
+                ->whereBetween('post_date', [$startMonth->toDateString(), $monthEnd->toDateString()])
+                ->whereIn('user_id', $staffScopeIds)
+                ->select('post_date')
+                ->distinct()
+                ->count('post_date');
+
+            $activityByUser = ActivityLog::query()
+                ->selectRaw('user_id, COALESCE(SUM(computed_points), 0) as activity_points')
+                ->where('status', 'Verified')
+                ->whereBetween('post_date', [$startMonth->toDateString(), $monthEnd->toDateString()])
+                ->groupBy('user_id');
+
+            $conversionByUser = Conversion::query()
+                ->selectRaw('user_id, COALESCE(SUM(computed_points), 0) as conversion_points')
+                ->where('status', 'Verified')
+                ->whereBetween('created_at', [$startMonth, $monthEnd])
+                ->groupBy('user_id');
+
+            $staffRankings = User::query()
+                ->whereIn('users.id', $staffScopeIds)
+                ->leftJoinSub($activityByUser, 'activity_points', 'activity_points.user_id', '=', 'users.id')
+                ->leftJoinSub($conversionByUser, 'conversion_points', 'conversion_points.user_id', '=', 'users.id')
+                ->select('users.id', 'users.name')
+                ->selectRaw('COALESCE(activity_points.activity_points, 0) as activity_points')
+                ->selectRaw('COALESCE(conversion_points.conversion_points, 0) as conversion_points')
+                ->get()
+                ->map(function (User $member) {
+                    $member->activity_points = (float) $member->activity_points;
+                    $member->conversion_points = (float) $member->conversion_points;
+                    $member->total_points = $member->activity_points + $member->conversion_points;
+
+                    return $member;
+                })
+                ->sortByDesc('total_points')
+                ->take(5)
+                ->values();
+
+            $staffRankMax = (float) ($staffRankings->max('total_points') ?? 0);
+        }
 
         $closingTotal = (clone $conversionBase)
             ->where('type', 'Closing')
@@ -242,6 +498,32 @@ class DashboardController extends Controller
             'leadSeries' => $leadSeries,
             'leadMax' => $leadMax,
             'leadDailyTotal' => $leadDailyTotal,
+            'leadYear' => $leadYear,
+            'leadMonth' => $leadMonth,
+            'leadYearOptions' => $leadYearOptions,
+            'leadMonthOptions' => $leadMonthOptions,
+            'erRate' => $erRate,
+            'erLabel' => $erLabel,
+            'erPoints' => $erPoints,
+            'erProgress' => $erProgress,
+            'erUserId' => $erUserId,
+            'erUserLabel' => $erUserLabel,
+            'erUserOptions' => $erUserOptions,
+            'topPlatforms' => $topPlatforms,
+            'topPlatformMax' => $topPlatformMax,
+            'weeklySeries' => $weeklySeries,
+            'weekMax' => $weekMax,
+            'activeDays' => $activeDays,
+            'totalDays' => $totalDays,
+            'consistencyPercent' => $consistencyPercent,
+            'staffActivityPoints' => $staffActivityPoints,
+            'staffConversionPoints' => $staffConversionPoints,
+            'staffTotalPoints' => $staffActivityPoints + $staffConversionPoints,
+            'staffClosingCount' => $staffClosingCount,
+            'staffLeadCount' => $staffLeadCount,
+            'staffActiveDays' => $staffActiveDays,
+            'staffRankings' => $staffRankings,
+            'staffRankMax' => $staffRankMax,
             'closingTotal' => $closingTotal,
             'leadTotal' => $leadTotal,
             'inactiveTeams' => $inactiveTeams,
