@@ -24,13 +24,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            $user = Auth::user();
-
-            if ($user && $user->role === 'staff') {
-                return redirect()->route('profile.show');
-            }
-
-            return redirect()->intended(route('dashboard'));
+            return redirect()->route('menu');
         }
 
         return back()
