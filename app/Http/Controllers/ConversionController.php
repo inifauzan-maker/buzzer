@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\PointCalculator;
+use App\Services\SystemActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -90,7 +91,9 @@ class ConversionController extends Controller
 
         $data['status'] = 'Pending';
 
-        Conversion::create($data);
+        $conversion = Conversion::create($data);
+
+        SystemActivityLogger::log($user, 'Mengirim konversi '.$conversion->type.' sejumlah '.$conversion->amount.' untuk verifikasi.');
 
         return redirect()
             ->route('conversions.index')
@@ -116,6 +119,8 @@ class ConversionController extends Controller
             $conversion->computed_points = null;
             $conversion->save();
 
+            SystemActivityLogger::log($user, 'Review konversi '.$conversion->type.' (ID '.$conversion->id.').');
+
             return redirect()
                 ->route('conversions.index')
                 ->with('status', 'Konversi berhasil direview.');
@@ -130,6 +135,8 @@ class ConversionController extends Controller
         $conversion->status = 'Verified';
         $conversion->computed_points = PointCalculator::conversion($conversion);
         $conversion->save();
+
+        SystemActivityLogger::log($user, 'Verifikasi konversi '.$conversion->type.' (ID '.$conversion->id.').');
 
         Notification::create([
             'user_id' => $conversion->user_id,
@@ -154,6 +161,8 @@ class ConversionController extends Controller
         $conversion->status = 'Rejected';
         $conversion->computed_points = null;
         $conversion->save();
+
+        SystemActivityLogger::log($user, 'Menolak konversi '.$conversion->type.' (ID '.$conversion->id.').');
 
         Notification::create([
             'user_id' => $conversion->user_id,

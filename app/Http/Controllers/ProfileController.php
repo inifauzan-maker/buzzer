@@ -7,6 +7,7 @@ use App\Models\Conversion;
 use App\Models\SocialAccount;
 use App\Models\TeamMemberTarget;
 use App\Models\User;
+use App\Services\SystemActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -45,6 +46,8 @@ class ProfileController extends Controller
         }
 
         $user->update($data);
+
+        SystemActivityLogger::log($user, 'Memperbarui profil.');
 
         return redirect()
             ->route('profile.show')

@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\TeamMemberTarget;
 use App\Models\TeamTarget;
 use App\Models\User;
+use App\Services\SystemActivityLogger;
 use Illuminate\Http\Request;
 
 class TeamTargetController extends Controller
@@ -171,6 +172,8 @@ class TeamTargetController extends Controller
             ]
         );
 
+        SystemActivityLogger::log($user, 'Menetapkan target tahunan tim tahun '.$data['year'].'.');
+
         return redirect()
             ->route('targets.index', ['year' => $data['year']])
             ->with('status', 'Target tim tahunan berhasil disimpan.');
@@ -217,6 +220,8 @@ class TeamTargetController extends Controller
                 ]
             );
         }
+
+        SystemActivityLogger::log($user, 'Menetapkan target tahunan anggota tim tahun '.$data['year'].'.');
 
         return redirect()
             ->route('targets.index', ['year' => $data['year']])

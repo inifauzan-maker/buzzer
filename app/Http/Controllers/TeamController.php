@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Services\SystemActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -29,7 +30,9 @@ class TeamController extends Controller
             'reminder_phone' => 'nullable|string|max:30',
         ]);
 
-        Team::create($data);
+        $team = Team::create($data);
+
+        SystemActivityLogger::log($request->user(), 'Menambahkan tim '.$team->team_name.'.');
 
         return redirect()
             ->route('teams.index')
@@ -38,6 +41,8 @@ class TeamController extends Controller
 
     public function update(Request $request, Team $team)
     {
+        $oldName = $team->team_name;
+
         $data = $request->validate([
             'team_name' => [
                 'required',
@@ -49,6 +54,8 @@ class TeamController extends Controller
         ]);
 
         $team->update($data);
+
+        SystemActivityLogger::log($request->user(), 'Memperbarui tim '.$oldName.' menjadi '.$team->team_name.'.');
 
         return redirect()
             ->route('teams.index')
@@ -66,6 +73,8 @@ class TeamController extends Controller
                 ->route('teams.index')
                 ->withErrors(['team' => 'Tim tidak bisa dihapus karena masih memiliki data (user/aktivitas/konversi).']);
         }
+
+        SystemActivityLogger::log(request()->user(), 'Menghapus tim '.$team->team_name.'.');
 
         $team->delete();
 
@@ -97,6 +106,8 @@ class TeamController extends Controller
             }
         }
 
+        $teamName = Team::find($data['team_id'])?->team_name ?? 'Tim';
+
         User::create([
             'team_id' => $data['team_id'],
             'role' => $data['role'],
@@ -105,6 +116,8 @@ class TeamController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+
+        SystemActivityLogger::log($request->user(), 'Menambahkan '.$data['role'].' '.$data['name'].' ke tim '.$teamName.'.');
 
         return redirect()
             ->route('teams.index')

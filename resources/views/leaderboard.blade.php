@@ -3,39 +3,67 @@
 @section('title', 'Leaderboard')
 
 @section('content')
-    <h1>Leaderboard Tim</h1>
-    <p class="muted">Peringkat tim berdasarkan total poin terverifikasi.</p>
+    <h1>Leaderboard</h1>
+    <p class="muted">Peringkat berdasarkan perolehan poin leader dan staff.</p>
 
-    <div class="card">
+    <div class="card" style="margin-bottom: 18px;">
+        <h2>Leaderboard Leader</h2>
         <table>
             <thead>
                 <tr>
                     <th>Rangking</th>
+                    <th>Nama</th>
                     <th>Tim</th>
                     <th>Poin Aktivitas</th>
                     <th>Poin Konversi</th>
-                    <th>Poin Staff</th>
                     <th>Total</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($leaderboard as $index => $team)
+                @forelse ($leaderboardLeaders as $index => $user)
                     <tr>
                         <td>#{{ $index + 1 }}</td>
-                        <td>{{ $team->team_name }}</td>
-                        <td>{{ number_format($team->activity_points, 2) }}</td>
-                        <td>{{ number_format($team->conversion_points, 2) }}</td>
-                        <td>
-                            {{ number_format($team->staff_points_total, 2) }}
-                            @if ($team->top_staff_name)
-                                <div class="muted">{{ $team->top_staff_name }} ({{ number_format($team->top_staff_points, 2) }})</div>
-                            @endif
-                        </td>
-                        <td><strong>{{ number_format($team->total_points, 2) }}</strong></td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->team_name ?? '-' }}</td>
+                        <td>{{ number_format($user->activity_points, 2) }}</td>
+                        <td>{{ number_format($user->conversion_points, 2) }}</td>
+                        <td><strong>{{ number_format($user->total_points, 2) }}</strong></td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="muted">Belum ada data poin.</td>
+                        <td colspan="6" class="muted">Belum ada data leader.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Leaderboard Staff</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rangking</th>
+                    <th>Nama</th>
+                    <th>Tim</th>
+                    <th>Poin Aktivitas</th>
+                    <th>Poin Konversi</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($leaderboardStaff as $index => $user)
+                    <tr>
+                        <td>#{{ $index + 1 }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->team_name ?? '-' }}</td>
+                        <td>{{ number_format($user->activity_points, 2) }}</td>
+                        <td>{{ number_format($user->conversion_points, 2) }}</td>
+                        <td><strong>{{ number_format($user->total_points, 2) }}</strong></td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="muted">Belum ada data staff.</td>
                     </tr>
                 @endforelse
             </tbody>

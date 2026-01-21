@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Services\SystemActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -41,7 +42,7 @@ class UserController extends Controller
             }
         }
 
-        User::create([
+        $created = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
@@ -49,6 +50,8 @@ class UserController extends Controller
             'team_id' => $data['role'] === 'superadmin' ? null : $data['team_id'],
             'password' => Hash::make($data['password']),
         ]);
+
+        SystemActivityLogger::log($request->user(), 'Menambahkan user '.$created->name.' ('.$created->role.').');
 
         return redirect()
             ->route('users.index')
@@ -86,6 +89,8 @@ class UserController extends Controller
 
         $user->update($update);
 
+        SystemActivityLogger::log($request->user(), 'Memperbarui user '.$user->name.' ('.$user->role.').');
+
         return redirect()
             ->route('users.index')
             ->with('status', 'User berhasil diperbarui.');
@@ -98,6 +103,8 @@ class UserController extends Controller
                 ->route('users.index')
                 ->withErrors(['user' => 'Tidak bisa menghapus akun sendiri.']);
         }
+
+        SystemActivityLogger::log($request->user(), 'Menghapus user '.$user->name.' ('.$user->role.').');
 
         $user->delete();
 

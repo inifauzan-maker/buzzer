@@ -48,6 +48,27 @@
                 font-family: inherit;
                 font-size: 14px;
             }
+            .input-wrap {
+                position: relative;
+            }
+            .input-wrap input {
+                padding-right: 42px;
+            }
+            .toggle-password {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                padding: 4px;
+                color: var(--muted);
+            }
+            .toggle-password svg {
+                width: 18px;
+                height: 18px;
+            }
             .form {
                 display: grid;
                 gap: 14px;
@@ -90,7 +111,14 @@
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input id="password" name="password" type="password" required>
+                    <div class="input-wrap">
+                        <input id="password" name="password" type="password" required>
+                        <button class="toggle-password" type="button" data-toggle-password aria-label="Lihat password">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="currentColor" d="M12 5c5 0 9.27 3.11 11 7-1.73 3.89-6 7-11 7S2.73 15.89 1 12c1.73-3.89 6-7 11-7Zm0 2C8.13 7 4.59 9.27 3.06 12 4.59 14.73 8.13 17 12 17s7.41-2.27 8.94-5C19.41 9.27 15.87 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <label>
                     <input type="checkbox" name="remember" value="1"> Ingat saya
@@ -98,5 +126,16 @@
                 <button class="button" type="submit">Masuk</button>
             </form>
         </div>
+        <script>
+            const toggleButton = document.querySelector('[data-toggle-password]');
+            const passwordInput = document.getElementById('password');
+            if (toggleButton && passwordInput) {
+                toggleButton.addEventListener('click', () => {
+                    const isHidden = passwordInput.type === 'password';
+                    passwordInput.type = isHidden ? 'text' : 'password';
+                    toggleButton.setAttribute('aria-label', isHidden ? 'Sembunyikan password' : 'Lihat password');
+                });
+            }
+        </script>
     </body>
 </html>

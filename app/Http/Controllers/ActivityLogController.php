@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\PointCalculator;
+use App\Services\SystemActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -130,7 +131,9 @@ class ActivityLogController extends Controller
         $data['status'] = 'Pending';
         $data['admin_grade'] = 'B';
 
-        ActivityLog::create($data);
+        $activity = ActivityLog::create($data);
+
+        SystemActivityLogger::log($user, 'Mengirim aktivitas '.$activity->platform.' untuk verifikasi.');
 
         return redirect()
             ->route('activities.index')
@@ -156,6 +159,8 @@ class ActivityLogController extends Controller
             $activity->computed_points = null;
             $activity->save();
 
+            SystemActivityLogger::log($user, 'Review aktivitas '.$activity->platform.' (ID '.$activity->id.').');
+
             return redirect()
                 ->route('activities.index')
                 ->with('status', 'Aktivitas berhasil direview.');
@@ -175,6 +180,8 @@ class ActivityLogController extends Controller
         $activity->status = 'Verified';
         $activity->computed_points = PointCalculator::activity($activity);
         $activity->save();
+
+        SystemActivityLogger::log($user, 'Verifikasi aktivitas '.$activity->platform.' (ID '.$activity->id.') grade '.$activity->admin_grade.'.');
 
         Notification::create([
             'user_id' => $activity->user_id,
@@ -199,6 +206,8 @@ class ActivityLogController extends Controller
         $activity->status = 'Rejected';
         $activity->computed_points = null;
         $activity->save();
+
+        SystemActivityLogger::log($user, 'Menolak aktivitas '.$activity->platform.' (ID '.$activity->id.').');
 
         Notification::create([
             'user_id' => $activity->user_id,

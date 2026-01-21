@@ -392,6 +392,9 @@
                         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <span class="nav-dot"></span> Dashboard
                         </a>
+                        <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Leaderboard
+                        </a>
                         @if (auth()->user()->role === 'leader')
                             <a href="{{ route('targets.index') }}" class="nav-link {{ request()->routeIs('targets.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Target Tim
@@ -414,6 +417,9 @@
                             </a>
                             <a href="{{ route('targets.admin') }}" class="nav-link {{ request()->routeIs('targets.admin') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Target Tim
+                            </a>
+                            <a href="{{ route('activity-logs.index') }}" class="nav-link {{ request()->routeIs('activity-logs.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Log Aktivitas
                             </a>
                         @endif
                         <a href="{{ route('activities.index') }}" class="nav-link {{ request()->routeIs('activities.*') ? 'active' : '' }}">
