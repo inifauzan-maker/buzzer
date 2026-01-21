@@ -117,7 +117,5 @@
         </div>
     </div>
 
-    <div style="margin-top: 16px;">
-        {{ $logs->links() }}
-    </div>
+    {{ $logs->links('components.pagination') }}
 @endsection

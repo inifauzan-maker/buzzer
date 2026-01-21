@@ -309,6 +309,55 @@
                 color: var(--accent-dark);
                 border: 1px solid var(--accent-dark);
             }
+            .pagination {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin-top: 12px;
+            }
+            .pagination-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .pagination-summary {
+                font-size: 12px;
+                color: var(--muted);
+            }
+            .page {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 32px;
+                height: 32px;
+                padding: 0 10px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                background: #fff;
+                font-size: 12px;
+                color: var(--ink);
+                text-decoration: none;
+            }
+            .page.current {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: #fff;
+                font-weight: 700;
+            }
+            .page.disabled {
+                background: #f1f5f9;
+                border-color: #e2e8f0;
+                color: var(--muted);
+                cursor: default;
+            }
+            .page.dots {
+                border: none;
+                background: transparent;
+                padding: 0 4px;
+                min-width: auto;
+            }
             .status {
                 padding: 6px 12px;
                 border-radius: 999px;

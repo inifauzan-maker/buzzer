@@ -84,8 +84,6 @@
                 @endforelse
             </tbody>
         </table>
-        <div style="margin-top: 12px;">
-            {{ $activities->links() }}
-        </div>
+        {{ $activities->links('components.pagination') }}
     </div>
 @endsection

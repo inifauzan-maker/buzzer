@@ -44,8 +44,6 @@
                 @endforelse
             </tbody>
         </table>
-        <div style="margin-top: 12px;">
-            {{ $notifications->links() }}
-        </div>
+        {{ $notifications->links('components.pagination') }}
     </div>
 @endsection

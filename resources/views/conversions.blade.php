@@ -72,8 +72,6 @@
                 @endforelse
             </tbody>
         </table>
-        <div style="margin-top: 12px;">
-            {{ $conversions->links() }}
-        </div>
+        {{ $conversions->links('components.pagination') }}
     </div>
 @endsection
