@@ -6,7 +6,6 @@ use App\Models\ActivityLog;
 use App\Models\Conversion;
 use App\Models\Team;
 use App\Models\User;
-use App\Services\LeaderboardService;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -140,15 +139,11 @@ class DashboardController extends Controller
                 });
         }
 
-        $leaderboard = LeaderboardService::build(5);
         $heatmap = $this->buildHeatmap(
             (clone $activityBase)->where('status', 'Verified'),
             Carbon::today()->subDays(364),
             Carbon::today()
         );
-
-        $topActivityUsers = $this->buildTopUsersByActivity(clone $activityBase);
-        $topClosingUsers = $this->buildTopUsersByClosing(clone $conversionBase);
 
         return view('dashboard', [
             'totalTeams' => $totalTeams,
@@ -174,10 +169,7 @@ class DashboardController extends Controller
             'leadTotal' => $leadTotal,
             'inactiveTeams' => $inactiveTeams,
             'teamMemberPoints' => $teamMemberPoints,
-            'leaderboard' => $leaderboard,
             'heatmap' => $heatmap,
-            'topActivityUsers' => $topActivityUsers,
-            'topClosingUsers' => $topClosingUsers,
         ]);
     }
 
@@ -272,34 +264,4 @@ class DashboardController extends Controller
         return 4;
     }
 
-    private function buildTopUsersByActivity(Builder $baseQuery)
-    {
-        $activityTotals = $baseQuery
-            ->where('status', 'Verified')
-            ->selectRaw('user_id, COUNT(*) as total_activities')
-            ->groupBy('user_id');
-
-        return User::query()
-            ->joinSub($activityTotals, 'activity_totals', 'activity_totals.user_id', '=', 'users.id')
-            ->select('users.id', 'users.name', 'activity_totals.total_activities')
-            ->orderByDesc('activity_totals.total_activities')
-            ->limit(5)
-            ->get();
-    }
-
-    private function buildTopUsersByClosing(Builder $baseQuery)
-    {
-        $closingTotals = $baseQuery
-            ->where('status', 'Verified')
-            ->where('type', 'Closing')
-            ->selectRaw('user_id, COALESCE(SUM(amount), 0) as total_closing')
-            ->groupBy('user_id');
-
-        return User::query()
-            ->joinSub($closingTotals, 'closing_totals', 'closing_totals.user_id', '=', 'users.id')
-            ->select('users.id', 'users.name', 'closing_totals.total_closing')
-            ->orderByDesc('closing_totals.total_closing')
-            ->limit(5)
-            ->get();
-    }
 }

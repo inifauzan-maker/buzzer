@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\ActivityLog;
+use App\Models\ChatMessage;
 use App\Models\Conversion;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,20 @@ class AppServiceProvider extends ServiceProvider
                         ->count();
             }
 
+            $chatUnreadCount = 0;
+            if (in_array($user->role, ['leader', 'staff'], true)) {
+                $chatUnreadCount = ChatMessage::query()
+                    ->whereNull('read_at')
+                    ->where('sender_id', '!=', $user->id)
+                    ->whereHas('thread', function ($query) use ($user) {
+                        $query->where('user_one_id', $user->id)
+                            ->orWhere('user_two_id', $user->id);
+                    })
+                    ->count();
+            }
+
             $view->with('notifCount', $notifCount);
+            $view->with('chatUnreadCount', $chatUnreadCount);
         });
     }
 }

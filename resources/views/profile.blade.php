@@ -72,6 +72,56 @@
             height: 10px;
             border-radius: 50%;
         }
+        .target-metrics {
+            display: grid;
+            gap: 6px;
+            font-size: 13px;
+        }
+        .bar-cell {
+            display: grid;
+            gap: 6px;
+            font-size: 12px;
+        }
+        .bar-chart {
+            position: relative;
+            height: 110px;
+            padding: 10px 8px 14px 12px;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 6px;
+            background: repeating-linear-gradient(
+                to top,
+                rgba(148, 163, 184, 0.25) 0,
+                rgba(148, 163, 184, 0.25) 1px,
+                transparent 1px,
+                transparent 28px
+            );
+            border-left: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .bar-stack {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            height: 70px;
+            justify-content: center;
+        }
+        .bar {
+            width: 22px;
+            border-radius: 6px 6px 4px 4px;
+            background: #94a3b8;
+        }
+        .bar.achieved { background: #12b5c9; }
+        .bar.target { background: #93c5fd; }
+        .bar.leads { background: #f97316; }
+        .bar-values {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--muted);
+        }
         .social-table td, .social-table th {
             font-size: 13px;
         }
@@ -156,6 +206,47 @@
                     <div class="split-row">
                         <strong>Total</strong>
                         <strong>{{ number_format($activityPoints + $conversionPoints, 2) }}</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Target Tahunan {{ $targetYear }}</h3>
+                @php
+                    $closingMax = max($memberTargetClosing, $memberClosingAchieved);
+                    $closingTargetHeight = $closingMax > 0 ? round(($memberTargetClosing / $closingMax) * 100) : 0;
+                    $closingAchievedHeight = $closingMax > 0 ? round(($memberClosingAchieved / $closingMax) * 100) : 0;
+                    $leadsMax = max($memberTargetLeads, $memberLeadsAchieved);
+                    $leadsTargetHeight = $leadsMax > 0 ? round(($memberTargetLeads / $leadsMax) * 100) : 0;
+                    $leadsAchievedHeight = $leadsMax > 0 ? round(($memberLeadsAchieved / $leadsMax) * 100) : 0;
+                @endphp
+                <div class="target-metrics">
+                    <div class="muted">Closing</div>
+                    <div class="bar-cell">
+                        <div class="bar-chart">
+                            <div class="bar-stack">
+                                <div class="bar target" style="height: {{ $closingTargetHeight }}%;"></div>
+                                <div class="bar achieved" style="height: {{ $closingAchievedHeight }}%;"></div>
+                            </div>
+                            <div class="bar-values">
+                                <span>Target {{ number_format($memberTargetClosing, 0, ',', '.') }}</span>
+                                <span>Pencapaian {{ number_format($memberClosingAchieved, 0, ',', '.') }}</span>
+                            </div>
+                        </div>
+                        <div class="muted">{{ $memberClosingPercent }}%</div>
+                    </div>
+                    <div class="muted">Leads</div>
+                    <div class="bar-cell">
+                        <div class="bar-chart">
+                            <div class="bar-stack">
+                                <div class="bar target" style="height: {{ $leadsTargetHeight }}%;"></div>
+                                <div class="bar leads" style="height: {{ $leadsAchievedHeight }}%;"></div>
+                            </div>
+                            <div class="bar-values">
+                                <span>Target {{ number_format($memberTargetLeads, 0, ',', '.') }}</span>
+                                <span>Pencapaian {{ number_format($memberLeadsAchieved, 0, ',', '.') }}</span>
+                            </div>
+                        </div>
+                        <div class="muted">{{ $memberLeadsPercent }}%</div>
                     </div>
                 </div>
             </div>

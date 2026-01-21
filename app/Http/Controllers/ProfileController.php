@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ActivityLog;
 use App\Models\Conversion;
 use App\Models\SocialAccount;
+use App\Models\TeamMemberTarget;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -132,6 +133,46 @@ class ProfileController extends Controller
             ->orderBy('handle')
             ->get();
 
+        $targetYear = now()->year;
+        $memberTargetClosing = 0;
+        $memberTargetLeads = 0;
+        $memberClosingAchieved = 0;
+        $memberLeadsAchieved = 0;
+        $memberClosingPercent = 0;
+        $memberLeadsPercent = 0;
+
+        if ($user->role === 'staff') {
+            $memberTarget = TeamMemberTarget::query()
+                ->where('user_id', $user->id)
+                ->where('year', $targetYear)
+                ->where('month', 0)
+                ->first();
+
+            $memberTargetClosing = (int) ($memberTarget?->target_closing ?? 0);
+            $memberTargetLeads = (int) ($memberTarget?->target_leads ?? 0);
+
+            $memberClosingAchieved = (int) Conversion::query()
+                ->where('user_id', $user->id)
+                ->where('status', 'Verified')
+                ->where('type', 'Closing')
+                ->whereYear('created_at', $targetYear)
+                ->sum('amount');
+
+            $memberLeadsAchieved = (int) Conversion::query()
+                ->where('user_id', $user->id)
+                ->where('status', 'Verified')
+                ->where('type', 'Lead')
+                ->whereYear('created_at', $targetYear)
+                ->sum('amount');
+
+            $memberClosingPercent = $memberTargetClosing > 0
+                ? min(100, (int) round(($memberClosingAchieved / $memberTargetClosing) * 100))
+                : 0;
+            $memberLeadsPercent = $memberTargetLeads > 0
+                ? min(100, (int) round(($memberLeadsAchieved / $memberTargetLeads) * 100))
+                : 0;
+        }
+
         return view('profile', [
             'user' => $user,
             'isOwner' => $isOwner,
@@ -140,6 +181,13 @@ class ProfileController extends Controller
             'conversionPoints' => (float) $conversionPoints,
             'socialAccounts' => $socialAccounts,
             'platformOptions' => $this->platformOptions(),
+            'targetYear' => $targetYear,
+            'memberTargetClosing' => $memberTargetClosing,
+            'memberTargetLeads' => $memberTargetLeads,
+            'memberClosingAchieved' => $memberClosingAchieved,
+            'memberLeadsAchieved' => $memberLeadsAchieved,
+            'memberClosingPercent' => $memberClosingPercent,
+            'memberLeadsPercent' => $memberLeadsPercent,
         ]);
     }
 

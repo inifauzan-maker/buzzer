@@ -113,6 +113,20 @@
             .nav-link:hover .nav-dot {
                 background: var(--accent);
             }
+            .nav-badge {
+                margin-left: auto;
+                min-width: 18px;
+                height: 18px;
+                padding: 0 5px;
+                border-radius: 999px;
+                background: #ef4444;
+                color: #fff;
+                font-size: 10px;
+                font-weight: 700;
+                display: grid;
+                place-items: center;
+                box-shadow: 0 0 0 2px rgba(63, 71, 93, 0.6);
+            }
             .sidebar-footer {
                 margin-top: auto;
                 font-size: 12px;
@@ -378,15 +392,28 @@
                         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <span class="nav-dot"></span> Dashboard
                         </a>
-                        <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Leaderboard
-                        </a>
+                        @if (auth()->user()->role === 'leader')
+                            <a href="{{ route('targets.index') }}" class="nav-link {{ request()->routeIs('targets.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Target Tim
+                            </a>
+                        @endif
+                        @if (in_array(auth()->user()->role, ['leader', 'staff'], true))
+                            <a href="{{ route('chat.index') }}" class="nav-link {{ request()->routeIs('chat.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Chat
+                                @if (!empty($chatUnreadCount))
+                                    <span class="nav-badge">{{ $chatUnreadCount }}</span>
+                                @endif
+                            </a>
+                        @endif
                         @if (auth()->user()->role === 'superadmin')
                             <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Tim
                             </a>
                             <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> User
+                            </a>
+                            <a href="{{ route('targets.admin') }}" class="nav-link {{ request()->routeIs('targets.admin') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Target Tim
                             </a>
                         @endif
                         <a href="{{ route('activities.index') }}" class="nav-link {{ request()->routeIs('activities.*') ? 'active' : '' }}">

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\TeamTarget;
 
 class Team extends Model
 {
@@ -39,5 +40,10 @@ class Team extends Model
     public function leader(): HasOne
     {
         return $this->hasOne(User::class)->where('role', 'leader');
+    }
+
+    public function targets(): HasMany
+    {
+        return $this->hasMany(TeamTarget::class);
     }
 }
