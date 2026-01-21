@@ -418,9 +418,6 @@
                             <a href="{{ route('targets.admin') }}" class="nav-link {{ request()->routeIs('targets.admin') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Target Tim
                             </a>
-                            <a href="{{ route('activity-logs.index') }}" class="nav-link {{ request()->routeIs('activity-logs.*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Log Aktivitas
-                            </a>
                         @endif
                         <a href="{{ route('activities.index') }}" class="nav-link {{ request()->routeIs('activities.*') ? 'active' : '' }}">
                             <span class="nav-dot"></span> Aktivitas
@@ -431,6 +428,11 @@
                         @if (auth()->user()->role === 'superadmin')
                             <a href="{{ route('settings.points') }}" class="nav-link {{ request()->routeIs('settings.points*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Settings Poin
+                            </a>
+                        @endif
+                        @if (auth()->user()->role === 'superadmin')
+                            <a href="{{ route('activity-logs.index') }}" class="nav-link {{ request()->routeIs('activity-logs.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Log Aktivitas
                             </a>
                         @endif
                     </nav>

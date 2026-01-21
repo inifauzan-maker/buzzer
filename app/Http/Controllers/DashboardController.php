@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ActivityLog;
 use App\Models\Conversion;
 use App\Models\Team;
+use App\Models\TeamMemberTarget;
+use App\Models\TeamTarget;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -63,6 +65,73 @@ class DashboardController extends Controller
             ? min(100, round(($totalPoints / $pointTarget) * 100))
             : 0;
 
+        $targetYear = now()->year;
+        $targetLabel = 'Target Keseluruhan';
+        $targetClosing = 0;
+        $targetLeads = 0;
+
+        if ($user->role === 'staff') {
+            $targetLabel = 'Target Saya';
+            $memberTarget = TeamMemberTarget::query()
+                ->where('user_id', $user->id)
+                ->where('year', $targetYear)
+                ->where('month', 0)
+                ->first();
+            $targetClosing = (int) ($memberTarget?->target_closing ?? 0);
+            $targetLeads = (int) ($memberTarget?->target_leads ?? 0);
+        } elseif ($user->role === 'leader') {
+            $targetLabel = 'Target Tim';
+            $teamTarget = TeamTarget::query()
+                ->where('team_id', $user->team_id)
+                ->where('year', $targetYear)
+                ->where('month', 0)
+                ->first();
+            $targetClosing = (int) ($teamTarget?->target_closing ?? 0);
+            $targetLeads = (int) ($teamTarget?->target_leads ?? 0);
+        } else {
+            $targetClosing = (int) TeamTarget::query()
+                ->where('year', $targetYear)
+                ->where('month', 0)
+                ->sum('target_closing');
+            $targetLeads = (int) TeamTarget::query()
+                ->where('year', $targetYear)
+                ->where('month', 0)
+                ->sum('target_leads');
+        }
+
+        $targetClosingAchieved = (clone $conversionBase)
+            ->where('status', 'Verified')
+            ->where('type', 'Closing')
+            ->whereYear('created_at', $targetYear)
+            ->sum('amount');
+
+        $targetLeadsAchieved = (clone $conversionBase)
+            ->where('status', 'Verified')
+            ->where('type', 'Lead')
+            ->whereYear('created_at', $targetYear)
+            ->sum('amount');
+
+        $targetClosingPercent = $targetClosing > 0
+            ? min(100, (int) round(($targetClosingAchieved / $targetClosing) * 100))
+            : 0;
+        $targetLeadsPercent = $targetLeads > 0
+            ? min(100, (int) round(($targetLeadsAchieved / $targetLeads) * 100))
+            : 0;
+        $closingMax = max($targetClosing, $targetClosingAchieved);
+        $closingTargetHeight = $closingMax > 0
+            ? (int) round(($targetClosing / $closingMax) * 100)
+            : 0;
+        $closingAchievedHeight = $closingMax > 0
+            ? (int) round(($targetClosingAchieved / $closingMax) * 100)
+            : 0;
+        $leadsMax = max($targetLeads, $targetLeadsAchieved);
+        $leadsTargetHeight = $leadsMax > 0
+            ? (int) round(($targetLeads / $leadsMax) * 100)
+            : 0;
+        $leadsAchievedHeight = $leadsMax > 0
+            ? (int) round(($targetLeadsAchieved / $leadsMax) * 100)
+            : 0;
+
         $leadSeries = [];
         $leadMax = 0;
         for ($i = 4; $i >= 0; $i--) {
@@ -77,6 +146,13 @@ class DashboardController extends Controller
             ];
             $leadMax = max($leadMax, $count);
         }
+        $leadSeries = array_map(function (array $lead) use ($leadMax) {
+            $height = $leadMax > 0 ? (int) round(($lead['count'] / $leadMax) * 100) : 0;
+            $lead['height'] = max($height, 6);
+
+            return $lead;
+        }, $leadSeries);
+        $leadDailyTotal = array_sum(array_column($leadSeries, 'count'));
 
         $closingTotal = (clone $conversionBase)
             ->where('type', 'Closing')
@@ -165,11 +241,24 @@ class DashboardController extends Controller
             'pointPercent' => $pointPercent,
             'leadSeries' => $leadSeries,
             'leadMax' => $leadMax,
+            'leadDailyTotal' => $leadDailyTotal,
             'closingTotal' => $closingTotal,
             'leadTotal' => $leadTotal,
             'inactiveTeams' => $inactiveTeams,
             'teamMemberPoints' => $teamMemberPoints,
             'heatmap' => $heatmap,
+            'targetLabel' => $targetLabel,
+            'targetYear' => $targetYear,
+            'targetClosing' => $targetClosing,
+            'targetLeads' => $targetLeads,
+            'targetClosingAchieved' => $targetClosingAchieved,
+            'targetLeadsAchieved' => $targetLeadsAchieved,
+            'targetClosingPercent' => $targetClosingPercent,
+            'targetLeadsPercent' => $targetLeadsPercent,
+            'closingTargetHeight' => $closingTargetHeight,
+            'closingAchievedHeight' => $closingAchievedHeight,
+            'leadsTargetHeight' => $leadsTargetHeight,
+            'leadsAchievedHeight' => $leadsAchievedHeight,
         ]);
     }
 

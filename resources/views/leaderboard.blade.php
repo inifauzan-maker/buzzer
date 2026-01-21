@@ -14,8 +14,8 @@
                     <th>Rangking</th>
                     <th>Nama</th>
                     <th>Tim</th>
-                    <th>Poin Aktivitas</th>
                     <th>Poin Konversi</th>
+                    <th>Poin Aktivitas</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -25,8 +25,8 @@
                         <td>#{{ $index + 1 }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->team_name ?? '-' }}</td>
-                        <td>{{ number_format($user->activity_points, 2) }}</td>
                         <td>{{ number_format($user->conversion_points, 2) }}</td>
+                        <td>{{ number_format($user->activity_points, 2) }}</td>
                         <td><strong>{{ number_format($user->total_points, 2) }}</strong></td>
                     </tr>
                 @empty
@@ -46,8 +46,8 @@
                     <th>Rangking</th>
                     <th>Nama</th>
                     <th>Tim</th>
-                    <th>Poin Aktivitas</th>
                     <th>Poin Konversi</th>
+                    <th>Poin Aktivitas</th>
                     <th>Total</th>
                 </tr>
             </thead>
@@ -57,8 +57,8 @@
                         <td>#{{ $index + 1 }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->team_name ?? '-' }}</td>
-                        <td>{{ number_format($user->activity_points, 2) }}</td>
                         <td>{{ number_format($user->conversion_points, 2) }}</td>
+                        <td>{{ number_format($user->activity_points, 2) }}</td>
                         <td><strong>{{ number_format($user->total_points, 2) }}</strong></td>
                     </tr>
                 @empty

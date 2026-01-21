@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Settings Poin</h1>
-    <p class="muted">Ubah bobot poin untuk tiap indikator.</p>
+    <p class="muted">Ubah bobot poin konversi dan ambang ER.</p>
 
     <div class="card">
         <form method="POST" action="{{ route('settings.points.update') }}">

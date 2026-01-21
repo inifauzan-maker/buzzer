@@ -39,7 +39,7 @@
                             <a class="button button-outline" target="_blank" rel="noopener" href="{{ $activity->post_url }}">Buka</a>
                         </td>
                         <td>
-                            <span title="Rumus: (Share×5) + (Save×3) + (Comment×2) + (Like×1) + (Reach×0.001), lalu dikali Grade A/B/C.">
+                            <span title="Rumus ER: (Like+Comm+Save+Share) / Reach. Bobot: <1% (0), >=1% (10), >=3% (30), >=6% (50).">
                                 Like {{ $activity->likes }},
                                 Comm {{ $activity->comments }},
                                 Share {{ $activity->shares }},
@@ -49,7 +49,6 @@
                         </td>
                         <td>
                             <span class="status {{ strtolower($activity->status) }}">{{ $activity->status }}</span>
-                            <div class="muted">Grade {{ $activity->admin_grade }}</div>
                         </td>
                         <td>{{ $activity->computed_points ? number_format($activity->computed_points, 2) : '-' }}</td>
                         <td>
@@ -69,14 +68,7 @@
                             @if ($activity->status === 'Reviewed' && auth()->user()->role === 'superadmin')
                                 <form method="POST" action="{{ route('activities.verify', $activity) }}" style="margin-top: 8px;">
                                     @csrf
-                                    <div class="actions">
-                                        <select name="admin_grade" required>
-                                            <option value="A">Grade A</option>
-                                            <option value="B" selected>Grade B</option>
-                                            <option value="C">Grade C</option>
-                                        </select>
-                                        <button class="button" type="submit">Approve</button>
-                                    </div>
+                                    <button class="button" type="submit">Approve</button>
                                 </form>
                                 <form method="POST" action="{{ route('activities.reject', $activity) }}" style="margin-top: 8px;">
                                     @csrf

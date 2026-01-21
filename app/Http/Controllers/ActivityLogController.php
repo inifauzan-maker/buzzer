@@ -129,7 +129,6 @@ class ActivityLogController extends Controller
         $data['saves'] = $data['saves'] ?? 0;
         $data['reach'] = $data['reach'] ?? 0;
         $data['status'] = 'Pending';
-        $data['admin_grade'] = 'B';
 
         $activity = ActivityLog::create($data);
 
@@ -172,16 +171,11 @@ class ActivityLogController extends Controller
                 ->withErrors(['activity' => 'Aktivitas harus direview leader terlebih dahulu.']);
         }
 
-        $data = $request->validate([
-            'admin_grade' => 'required|in:A,B,C',
-        ]);
-
-        $activity->admin_grade = $data['admin_grade'];
         $activity->status = 'Verified';
         $activity->computed_points = PointCalculator::activity($activity);
         $activity->save();
 
-        SystemActivityLogger::log($user, 'Verifikasi aktivitas '.$activity->platform.' (ID '.$activity->id.') grade '.$activity->admin_grade.'.');
+        SystemActivityLogger::log($user, 'Verifikasi aktivitas '.$activity->platform.' (ID '.$activity->id.').');
 
         Notification::create([
             'user_id' => $activity->user_id,

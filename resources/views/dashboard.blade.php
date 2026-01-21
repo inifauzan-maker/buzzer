@@ -267,6 +267,61 @@
             height: 12px;
             border-radius: 3px;
         }
+        .target-card {
+            display: grid;
+            gap: 12px;
+        }
+        .target-mini {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 12px;
+            display: grid;
+            gap: 8px;
+        }
+        .target-mini-title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .target-bar-chart {
+            position: relative;
+            height: 110px;
+            padding: 10px 8px 14px 12px;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 6px;
+            background: repeating-linear-gradient(
+                to top,
+                rgba(148, 163, 184, 0.25) 0,
+                rgba(148, 163, 184, 0.25) 1px,
+                transparent 1px,
+                transparent 28px
+            );
+            border-left: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .target-bar-stack {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            height: 70px;
+            justify-content: center;
+        }
+        .target-bar {
+            width: 22px;
+            border-radius: 6px 6px 4px 4px;
+            background: #94a3b8;
+        }
+        .target-bar.achieved { background: #12b5c9; }
+        .target-bar.target { background: #93c5fd; }
+        .target-bar.leads { background: #f97316; }
+        .target-bar-values {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--muted);
+        }
     </style>
 
     <h1>Dashboard</h1>
@@ -375,14 +430,44 @@
             <div class="card-title">Leads Harian</div>
             <div class="bar-chart">
                 @foreach ($leadSeries as $lead)
-                    @php($height = $leadMax > 0 ? round(($lead['count'] / $leadMax) * 100) : 0)
-                    <div class="bar" style="height: {{ max($height, 6) }}%;">
+                    <div class="bar" style="height: {{ $lead['height'] }}%;">
                         <span>{{ $lead['date'] }}</span>
                     </div>
                 @endforeach
             </div>
-            @php($leadTotal = array_sum(array_column($leadSeries, 'count')))
-            <p class="muted">Total 5 hari: {{ $leadTotal }} lead masuk.</p>
+            <p class="muted">Total 5 hari: {{ $leadDailyTotal }} lead masuk.</p>
+        </div>
+
+        <div class="card target-card">
+            <div class="card-title">{{ $targetLabel }} {{ $targetYear }}</div>
+            <div class="target-mini">
+                <div class="target-mini-title">Target Closing</div>
+                <div class="target-bar-chart">
+                    <div class="target-bar-stack">
+                        <div class="target-bar target" style="height: {{ $closingTargetHeight }}%;"></div>
+                        <div class="target-bar achieved" style="height: {{ $closingAchievedHeight }}%;"></div>
+                    </div>
+                    <div class="target-bar-values">
+                        <span>Target {{ number_format($targetClosing, 0, ',', '.') }}</span>
+                        <span>Pencapaian {{ number_format($targetClosingAchieved, 0, ',', '.') }}</span>
+                    </div>
+                </div>
+                <div class="muted">{{ $targetClosingPercent }}% tercapai</div>
+            </div>
+            <div class="target-mini">
+                <div class="target-mini-title">Target Leads</div>
+                <div class="target-bar-chart">
+                    <div class="target-bar-stack">
+                        <div class="target-bar target" style="height: {{ $leadsTargetHeight }}%;"></div>
+                        <div class="target-bar leads" style="height: {{ $leadsAchievedHeight }}%;"></div>
+                    </div>
+                    <div class="target-bar-values">
+                        <span>Target {{ number_format($targetLeads, 0, ',', '.') }}</span>
+                        <span>Pencapaian {{ number_format($targetLeadsAchieved, 0, ',', '.') }}</span>
+                    </div>
+                </div>
+                <div class="muted">{{ $targetLeadsPercent }}% tercapai</div>
+            </div>
         </div>
 
         <div class="card">

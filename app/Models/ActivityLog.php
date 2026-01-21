@@ -27,7 +27,6 @@ class ActivityLog extends Model
         'reach',
         'evidence_screenshot',
         'status',
-        'admin_grade',
         'computed_points',
     ];
 

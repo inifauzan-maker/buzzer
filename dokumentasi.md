@@ -29,20 +29,36 @@ Data seeder tim dan anggota bisa diubah di:
 3. Superadmin approve -> status `Verified`, poin dihitung.
 
 ## Perhitungan Poin
-Engagement:
+Engagement (ER rate):
 ```
-(Share * 5) + (Save * 3) + (Comment * 2) + (Like * 1) + (Reach * 0.001)
+ER = (Like + Comment + Save + Share) / Reach * 100
 ```
-Hasil engagement dikalikan grade:
-- A = 1.2
-- B = 1.0
-- C = 0.8
+Bobot poin berdasarkan ER:
+- < 1%: 0 poin
+- >= 1%: 10 poin
+- >= 3%: 30 poin
+- >= 6%: 50 poin
+
+Contoh:
+- Like 120 + Comment 30 + Save 50 + Share 20 = 220 interaksi
+- Reach 4.000
+- ER = (220 / 4.000) * 100 = 5.5% -> 30 poin
+
+Contoh 0 poin:
+- Like 5 + Comment 2 + Save 1 + Share 2 = 10 interaksi
+- Reach 2.000
+- ER = (10 / 2.000) * 100 = 0.5% -> 0 poin
+
+Contoh viral:
+- Like 400 + Comment 80 + Save 120 + Share 50 = 650 interaksi
+- Reach 8.000
+- ER = (650 / 8.000) * 100 = 8.125% -> 50 poin
 
 Konversi:
 - Closing: amount * bobot closing
 - Lead: amount * bobot lead
 
-Bobot poin dapat diubah di menu Settings Poin (tabel `point_settings`).
+Bobot poin dapat diubah di menu Settings Poin (tabel `point_settings`), termasuk ambang ER.
 
 ## Anti-Duplikat Post
 Sistem menolak post duplikat per tim+platform berdasarkan:
