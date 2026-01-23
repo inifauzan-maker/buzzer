@@ -24,7 +24,8 @@ class NotificationController extends Controller
                     'status' => $n->read_at ? 'Dibaca' : 'Baru',
                     'created_at' => $n->created_at,
                 ];
-            });
+            })
+            ->toBase();
 
         if ($user->role === 'superadmin') {
             $collection = $collection->merge(
@@ -40,6 +41,7 @@ class NotificationController extends Controller
                             'created_at' => $log->created_at,
                         ];
                     })
+                    ->toBase()
             )->merge(
                 Conversion::where('status', 'Reviewed')
                     ->latest()
@@ -53,6 +55,7 @@ class NotificationController extends Controller
                             'created_at' => $conv->created_at,
                         ];
                     })
+                    ->toBase()
             );
         } elseif ($user->role === 'leader') {
             $collection = $collection->merge(
@@ -69,6 +72,7 @@ class NotificationController extends Controller
                             'created_at' => $log->created_at,
                         ];
                     })
+                    ->toBase()
             )->merge(
                 Conversion::where('status', 'Pending')
                     ->where('team_id', $user->team_id)
@@ -83,6 +87,7 @@ class NotificationController extends Controller
                             'created_at' => $conv->created_at,
                         ];
                     })
+                    ->toBase()
             );
         }
 
