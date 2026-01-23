@@ -92,7 +92,7 @@ class NotificationController extends Controller
         }
 
         $collection = $collection
-            ->filter(fn ($item) => ! empty($item['created_at']))
+            ->filter(fn ($item) => ! empty($item->created_at))
             ->sortByDesc('created_at')
             ->values();
 
