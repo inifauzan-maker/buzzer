@@ -55,6 +55,14 @@
                             @if ($activity->evidence_screenshot)
                                 <a class="button button-outline" target="_blank" rel="noopener" href="{{ \Illuminate\Support\Facades\Storage::url($activity->evidence_screenshot) }}">Bukti</a>
                             @endif
+                            @php
+                                $canEdit = auth()->user()->role === 'superadmin'
+                                    || (auth()->user()->role === 'leader' && $activity->team_id === auth()->user()->team_id)
+                                    || (auth()->user()->role === 'staff' && $activity->user_id === auth()->id());
+                            @endphp
+                            @if ($canEdit)
+                                <a class="button button-outline" style="margin-top: 8px; display: inline-block;" href="{{ route('activities.edit', $activity) }}">Edit</a>
+                            @endif
                             @if ($activity->status === 'Pending' && auth()->user()->role === 'leader')
                                 <form method="POST" action="{{ route('activities.verify', $activity) }}" style="margin-top: 8px;">
                                     @csrf

@@ -127,7 +127,7 @@
     </style>
 
     <h1>Chat</h1>
-    <p class="muted">Komunikasi antara leader dengan anggota tim atau sesama leader.</p>
+    <p class="muted">Komunikasi antar pengguna.</p>
 
     <div class="chat-shell">
         <div class="card chat-panel">

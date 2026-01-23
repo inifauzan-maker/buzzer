@@ -123,59 +123,23 @@ class ChatController extends Controller
                 ->pluck('total', 'chat_thread_id');
         }
 
-        $leaders = collect();
-        $members = collect();
+        $contacts = User::query()
+            ->where('id', '!=', $user->id)
+            ->orderBy('role')
+            ->orderBy('name')
+            ->with('team')
+            ->get();
 
-        if ($user->role === 'leader') {
-            $members = User::query()
-                ->where('team_id', $user->team_id)
-                ->where('role', 'staff')
-                ->orderBy('name')
-                ->with('team')
-                ->get();
-
-            $leaders = User::query()
-                ->where('role', 'leader')
-                ->where('id', '!=', $user->id)
-                ->orderBy('name')
-                ->with('team')
-                ->get();
-        } elseif ($user->role === 'staff') {
-            $leaders = User::query()
-                ->where('team_id', $user->team_id)
-                ->where('role', 'leader')
-                ->orderBy('name')
-                ->with('team')
-                ->get();
-        }
-
-        $contactGroups = collect([
-            'Leader' => $leaders,
-            'Anggota Tim' => $members,
-        ])->filter(fn ($group) => $group->isNotEmpty());
+        $contactGroups = $contacts->groupBy(function (User $u) {
+            return ucfirst($u->role ?? 'User');
+        });
 
         return [$threads, $contactGroups, $unreadCounts];
     }
 
     private function canChatWith(User $user, User $target): bool
     {
-        if ($user->id === $target->id) {
-            return false;
-        }
-
-        if ($user->role === 'leader') {
-            if ($target->role === 'leader') {
-                return true;
-            }
-
-            return $target->role === 'staff' && $target->team_id === $user->team_id;
-        }
-
-        if ($user->role === 'staff') {
-            return $target->role === 'leader' && $target->team_id === $user->team_id;
-        }
-
-        return false;
+        return $user->id !== $target->id;
     }
 
     private function normalizePair(int $firstId, int $secondId): array

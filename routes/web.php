@@ -9,6 +9,8 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PointSettingController;
+use App\Http\Controllers\DataSiswaController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SystemActivityLogController;
 use App\Http\Controllers\TeamTargetController;
@@ -19,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/pendaftaran', [\App\Http\Controllers\PublicRegistrationController::class, 'create'])->name('public.register');
+Route::post('/pendaftaran', [\App\Http\Controllers\PublicRegistrationController::class, 'store'])->name('public.register.store');
+Route::get('/pendaftaran/sekolah', [\App\Http\Controllers\PublicRegistrationController::class, 'schools'])
+    ->name('public.register.schools');
+Route::get('/pendaftaran/programs', [\App\Http\Controllers\PublicRegistrationController::class, 'programs'])
+    ->name('public.register.programs');
 
 Route::middleware('auth')->group(function () {
     Route::get('/menu', [MenuController::class, 'index'])->name('menu');
@@ -38,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
         Route::patch('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');
         Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+        Route::get('/data-siswa', [DataSiswaController::class, 'index'])->name('data-siswa.index');
         Route::post('/teams/members', [TeamController::class, 'storeMember'])->name('teams.members.store');
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -50,6 +59,17 @@ Route::middleware('auth')->group(function () {
         Route::post('/settings/points', [PointSettingController::class, 'update'])->name('settings.points.update');
     });
 
+    Route::middleware('role:superadmin,leader,staff')->group(function () {
+        Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+    });
+
+    Route::middleware('role:superadmin')->group(function () {
+        Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
+        Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
+        Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
+        Route::delete('/produk/{produk}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+    });
+
     Route::middleware('role:superadmin,leader,staff,guest')->group(function () {
         Route::get('/activities', [ActivityLogController::class, 'index'])->name('activities.index');
         Route::get('/conversions', [ConversionController::class, 'index'])->name('conversions.index');
@@ -58,6 +78,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:superadmin,leader,staff')->group(function () {
         Route::get('/activities/create', [ActivityLogController::class, 'create'])->name('activities.create');
         Route::post('/activities', [ActivityLogController::class, 'store'])->name('activities.store');
+        Route::get('/activities/{activity}/edit', [ActivityLogController::class, 'edit'])->name('activities.edit');
+        Route::patch('/activities/{activity}', [ActivityLogController::class, 'update'])->name('activities.update');
 
         Route::get('/conversions/create', [ConversionController::class, 'create'])->name('conversions.create');
         Route::post('/conversions', [ConversionController::class, 'store'])->name('conversions.store');

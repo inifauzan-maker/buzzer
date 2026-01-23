@@ -56,6 +56,72 @@ class ActivityLogController extends Controller
         ]);
     }
 
+    public function edit(Request $request, ActivityLog $activity)
+    {
+        $user = $request->user();
+
+        if ($user->role === 'staff' && $activity->user_id !== $user->id) {
+            abort(403, 'Akses ditolak.');
+        }
+        if ($user->role === 'leader' && $activity->team_id !== $user->team_id) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        $teams = Team::where('id', $activity->team_id)->get();
+        $users = User::where('id', $activity->user_id)->get();
+
+        return view('activities-edit', [
+            'activity' => $activity,
+            'teams' => $teams,
+            'users' => $users,
+            'lockTeam' => true,
+            'lockUser' => true,
+        ]);
+    }
+
+    public function update(Request $request, ActivityLog $activity)
+    {
+        $user = $request->user();
+
+        if ($user->role === 'staff' && $activity->user_id !== $user->id) {
+            abort(403, 'Akses ditolak.');
+        }
+        if ($user->role === 'leader' && $activity->team_id !== $user->team_id) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        $data = $request->validate([
+            'likes' => 'nullable|integer|min:0',
+            'comments' => 'nullable|integer|min:0',
+            'shares' => 'nullable|integer|min:0',
+            'saves' => 'nullable|integer|min:0',
+            'reach' => 'nullable|integer|min:0',
+            'evidence_screenshot' => 'nullable|image|max:2048',
+        ]);
+
+        if ($request->hasFile('evidence_screenshot')) {
+            $data['evidence_screenshot'] = $request->file('evidence_screenshot')
+                ->store('evidence', 'public');
+        }
+
+        $activity->update([
+            'likes' => $data['likes'] ?? 0,
+            'comments' => $data['comments'] ?? 0,
+            'shares' => $data['shares'] ?? 0,
+            'saves' => $data['saves'] ?? 0,
+            'reach' => $data['reach'] ?? 0,
+            'evidence_screenshot' => $data['evidence_screenshot'] ?? $activity->evidence_screenshot,
+            'status' => 'Pending',
+            'computed_points' => null,
+        ]);
+
+        SystemActivityLogger::log($user, 'Mengubah engagement aktivitas '.$activity->platform.' (ID '.$activity->id.').');
+
+        return redirect()
+            ->route('activities.index')
+            ->with('status', 'Data engagement berhasil diperbarui. Status direset ke Pending.');
+    }
+
     public function store(Request $request)
     {
         $user = $request->user();

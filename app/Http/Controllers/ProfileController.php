@@ -21,6 +21,11 @@ class ProfileController extends Controller
 
     public function showUser(User $user)
     {
+        $viewer = request()->user();
+        if ($user->role === 'superadmin' && $viewer?->role !== 'superadmin') {
+            abort(403, 'Akses ditolak.');
+        }
+
         return $this->renderProfile($user, false);
     }
 

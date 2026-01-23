@@ -23,7 +23,12 @@
                 @forelse ($leaderboardLeaders as $index => $user)
                     <tr>
                         <td>#{{ $index + 1 }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td>
+                            <a href="{{ route('profile.view', $user->id) }}"
+                               title="Lihat profil {{ $user->name }}">
+                                {{ $user->name }}
+                            </a>
+                        </td>
                         <td>{{ $user->team_name ?? '-' }}</td>
                         <td>{{ number_format($user->conversion_points, 2) }}</td>
                         <td>{{ number_format($user->activity_points, 2) }}</td>
@@ -55,7 +60,12 @@
                 @forelse ($leaderboardStaff as $index => $user)
                     <tr>
                         <td>#{{ $index + 1 }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td>
+                            <a href="{{ route('profile.view', $user->id) }}"
+                               title="Lihat profil {{ $user->name }}">
+                                {{ $user->name }}
+                            </a>
+                        </td>
                         <td>{{ $user->team_name ?? '-' }}</td>
                         <td>{{ number_format($user->conversion_points, 2) }}</td>
                         <td>{{ number_format($user->activity_points, 2) }}</td>

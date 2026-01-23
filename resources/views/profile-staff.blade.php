@@ -26,7 +26,11 @@
             </div>
             <div class="legend">
                 @forelse ($platformPoints as $index => $row)
-                    @php($percent = $totalPlatformPoints > 0 ? round(($row->total_points / $totalPlatformPoints) * 100) : 0)
+                    @php
+                        $percent = $totalPlatformPoints > 0
+                            ? round(($row->total_points / $totalPlatformPoints) * 100)
+                            : 0;
+                    @endphp
                     <div class="legend-item">
                         <div class="legend-left">
                             <span class="legend-dot" style="background: {{ $colors[$index % count($colors)] }};"></span>
@@ -40,6 +44,7 @@
             </div>
         </div>
     </div>
+
     <div class="card">
         <h3>Aktivitas vs Konversi</h3>
         <div class="split-card">
@@ -57,6 +62,7 @@
             </div>
         </div>
     </div>
+
     <div class="card">
         <h3>Target Tahunan {{ $targetYear }}</h3>
         @php
