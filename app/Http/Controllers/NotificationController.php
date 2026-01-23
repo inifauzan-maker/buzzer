@@ -18,7 +18,7 @@ class NotificationController extends Controller
             ->latest()
             ->get()
             ->map(function (Notification $n) {
-                return [
+                return (object) [
                     'title' => $n->title,
                     'message' => $n->message,
                     'status' => $n->read_at ? 'Dibaca' : 'Baru',
@@ -33,7 +33,7 @@ class NotificationController extends Controller
                     ->take(50)
                     ->get()
                     ->map(function (ActivityLog $log) {
-                        return [
+                        return (object) [
                             'title' => 'Aktivitas perlu keputusan',
                             'message' => 'Aktivitas '.$log->platform.' pada '.$log->post_date?->format('d M Y'),
                             'status' => 'Reviewed',
@@ -46,7 +46,7 @@ class NotificationController extends Controller
                     ->take(50)
                     ->get()
                     ->map(function (Conversion $conv) {
-                        return [
+                        return (object) [
                             'title' => 'Konversi perlu keputusan',
                             'message' => ucfirst($conv->type).' sebesar '.$conv->amount,
                             'status' => 'Reviewed',
@@ -62,7 +62,7 @@ class NotificationController extends Controller
                     ->take(50)
                     ->get()
                     ->map(function (ActivityLog $log) {
-                        return [
+                        return (object) [
                             'title' => 'Aktivitas menunggu verifikasi',
                             'message' => 'Aktivitas '.$log->platform.' pada '.$log->post_date?->format('d M Y'),
                             'status' => 'Pending',
@@ -76,7 +76,7 @@ class NotificationController extends Controller
                     ->take(50)
                     ->get()
                     ->map(function (Conversion $conv) {
-                        return [
+                        return (object) [
                             'title' => 'Konversi menunggu verifikasi',
                             'message' => ucfirst($conv->type).' sebesar '.$conv->amount,
                             'status' => 'Pending',
