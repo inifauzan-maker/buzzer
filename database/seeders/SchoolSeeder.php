@@ -13,7 +13,7 @@ class SchoolSeeder extends Seeder
             return;
         }
 
-        $jsonPath = base_path('pendaftaran/database/schools.json');
+        $jsonPath = database_path('seeders/data/schools.json');
         $csvPath = base_path('pendaftaran/database/sekolahVM.csv');
         $rows = [];
 

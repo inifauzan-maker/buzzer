@@ -1,0 +1,3746 @@
+[
+  {
+    "id": 1,
+    "name": "-",
+    "type": "",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 2,
+    "name": "Al Azhar syifa Budi Parahyangan",
+    "type": "AL",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 3,
+    "name": "Al Wildan 4",
+    "type": "AL",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 4,
+    "name": "Bintang Pelajar  Islamic boarding school",
+    "type": "BINTANG",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 5,
+    "name": "Binus",
+    "type": "BINUS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 6,
+    "name": "BPK PENABUR BANDA",
+    "type": "BPK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 7,
+    "name": "Cikal",
+    "type": "CIKAL",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 8,
+    "name": "Citra Kasih Don Bosco Pondok Indah",
+    "type": "CITRA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 9,
+    "name": "Cornaga Homeschooling",
+    "type": "CORNAGA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 10,
+    "name": "Darul hikam intergrated school",
+    "type": "DARUL",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 11,
+    "name": "DHIS Primary",
+    "type": "DHIS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 12,
+    "name": "Essenville",
+    "type": "ESSENVILLE",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 13,
+    "name": "FIWA boarding school",
+    "type": "FIWA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 14,
+    "name": "Global mandiri jakarta",
+    "type": "GLOBAL",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 15,
+    "name": "Global prestasi school",
+    "type": "GLOBAL",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 16,
+    "name": "Highfield Depok",
+    "type": "HIGHFIELD",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 17,
+    "name": "HighScope TB Simatupang",
+    "type": "HIGHSCOPE",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 18,
+    "name": "Homeschooling Fikar School",
+    "type": "HOMESCHOOLING",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 19,
+    "name": "HOMESCHOOLING HSPG",
+    "type": "HOMESCHOOLING",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 20,
+    "name": "Homeschooling Kak Seto",
+    "type": "HOMESCHOOLING",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 21,
+    "name": "IIBS AL IZZAH Batu Malang",
+    "type": "IIBS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 22,
+    "name": "Jakarta Islamic Girls Boarding School",
+    "type": "JAKARTA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 23,
+    "name": "Labschool UPI",
+    "type": "LABSCHOOL",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 24,
+    "name": "MA Istiqlal",
+    "type": "MA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 25,
+    "name": "MA Pembangunan UIN",
+    "type": "MA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 26,
+    "name": "MA Pembangunan UIN Jakarta",
+    "type": "MA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 27,
+    "name": "MA Syaraful Haramain IBS Bogor",
+    "type": "MA",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 28,
+    "name": "MA Zakaria",
+    "type": "MA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 29,
+    "name": "Madrasah Alliyah Pembangun Jakarta",
+    "type": "MADRASAH",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 30,
+    "name": "Maghfirah Islamic Leadership Boarding School",
+    "type": "MAGHFIRAH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 31,
+    "name": "MAN 12 Jakarta Barat",
+    "type": "MA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 32,
+    "name": "MAN 22 Jakarta",
+    "type": "MA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 33,
+    "name": "MAN 4 Jakarta",
+    "type": "MA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 34,
+    "name": "MAN 9 JAKARTA",
+    "type": "MA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 35,
+    "name": "MAN Insan Cendekia Tanah Laut",
+    "type": "MA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 36,
+    "name": "MAS Zakaria",
+    "type": "MA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 37,
+    "name": "Mentari Intercultural School Bintaro",
+    "type": "MENTARI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 38,
+    "name": "MTSN 22 Jakarta",
+    "type": "MTS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMP"
+  },
+  {
+    "id": 39,
+    "name": "Muhammadiyah Boarding School Ki Bagus Hadikusumo Bogor.",
+    "type": "MUHAMMADIYAH",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 40,
+    "name": "Mutiara Bunda",
+    "type": "MUTIARA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 41,
+    "name": "New World International School",
+    "type": "NEW",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 42,
+    "name": "PKBM Edukasi Jakarta",
+    "type": "PKBM",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 43,
+    "name": "PKBM Generasi Juara",
+    "type": "PKBM",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 44,
+    "name": "Pribadi School",
+    "type": "PRIBADI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 45,
+    "name": "Prime One School",
+    "type": "PRIME",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 46,
+    "name": "Regents Secondary school Bali",
+    "type": "REGENTS",
+    "city": "Bali",
+    "province": "Bali",
+    "level_group": "SMA"
+  },
+  {
+    "id": 47,
+    "name": "Sabilunnajah",
+    "type": "SABILUNNAJAH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 48,
+    "name": "Sampoerna Academy",
+    "type": "SAMPOERNA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 49,
+    "name": "Santa Angela Bandung",
+    "type": "SANTA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 50,
+    "name": "SD Al Azhar 1",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 51,
+    "name": "SD AL Azhar 36",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 52,
+    "name": "SD IT Alamy Subang",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 53,
+    "name": "SD Mutiara Bunda",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 54,
+    "name": "SDIT Qordova, Rancaekek",
+    "type": "SDIT",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 55,
+    "name": "SDK Penabur Bintaro",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 56,
+    "name": "SDN 035 SOKA",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 57,
+    "name": "SDN 8 Gandaria",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 58,
+    "name": "SDN Rawamangun 12 Pagi",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 59,
+    "name": "SDS Al gifari",
+    "type": "SD",
+    "city": "",
+    "province": "",
+    "level_group": "SD"
+  },
+  {
+    "id": 60,
+    "name": "SDS Jakarta Islamic School",
+    "type": "SD",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SD"
+  },
+  {
+    "id": 61,
+    "name": "SDS Victory Plus School Kota bekasi",
+    "type": "SD",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SD"
+  },
+  {
+    "id": 62,
+    "name": "Sekolah Bunda Mulia",
+    "type": "SEKOLAH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 63,
+    "name": "Sekolah Kuntum cemerlang",
+    "type": "SEKOLAH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 64,
+    "name": "Sekolah Menengah Kejuruan (SMK) Telkom Bandung",
+    "type": "SEKOLAH",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 65,
+    "name": "Sekolah Murid Merdeka",
+    "type": "SEKOLAH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 66,
+    "name": "Sekolah Murid Merdeka (SMM)",
+    "type": "SEKOLAH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 67,
+    "name": "Sekolah Murid Merdeka (SMM) Hub JGC Jaktim",
+    "type": "SEKOLAH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 68,
+    "name": "Sekolah Pribadi Bandung",
+    "type": "SEKOLAH",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 69,
+    "name": "SMA 1 RANCAEKEK",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 70,
+    "name": "SMA 23 Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 71,
+    "name": "SMA Al Azhar 1 jakarta",
+    "type": "SMA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 72,
+    "name": "SMA Al Azhar 9 Yogyakarta",
+    "type": "SMA",
+    "city": "Yogyakarta",
+    "province": "DI Yogyakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 73,
+    "name": "SMA AL Azhar Syifa Budi Parahyangan",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 74,
+    "name": "SMA Al Azhar Syifabudi Parahyangan",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 75,
+    "name": "SMA Al Izhar Jakarta",
+    "type": "SMA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 76,
+    "name": "SMA Al-Azhar Syifa Budi Parahyangan",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 77,
+    "name": "SMA Al-biruni",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 78,
+    "name": "SMA Al-Kautsar LabSchool Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 79,
+    "name": "SMA Albanna Bali",
+    "type": "SMA",
+    "city": "Bali",
+    "province": "Bali",
+    "level_group": "SMA"
+  },
+  {
+    "id": 80,
+    "name": "SMA Alfa Centauri",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 81,
+    "name": "SMA Avicenna Cinere",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 82,
+    "name": "SMA BPI 1",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 83,
+    "name": "SMA BPI 1 BANDUNG",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 84,
+    "name": "SMA Cendekia Muda",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 85,
+    "name": "SMA Darul Hikam",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 86,
+    "name": "SMA DON BOSCO III CIKARANG",
+    "type": "SMA",
+    "city": "Cikarang",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 87,
+    "name": "Sma Edu Global scholl",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 88,
+    "name": "SMA Global Islamic School 2 Serpong",
+    "type": "SMA",
+    "city": "Serpong",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 89,
+    "name": "SMA Global Mandiri Cibubur",
+    "type": "SMA",
+    "city": "Cibubur",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 90,
+    "name": "SMA Global Mandiri, cakung Jakarta Timur",
+    "type": "SMA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 91,
+    "name": "SMA Global Prestasi School",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 92,
+    "name": "SMA Global Prestasi School Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 93,
+    "name": "SMA Hellomotion",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 94,
+    "name": "SMA Ignatius Global School Palembang",
+    "type": "SMA",
+    "city": "Palembang",
+    "province": "Sumatera Selatan",
+    "level_group": "SMA"
+  },
+  {
+    "id": 95,
+    "name": "SMA Inteligensia",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 96,
+    "name": "SMA Islam Fitrah Al Fikri",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 97,
+    "name": "SMA Islam Hidayatullah",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 98,
+    "name": "SMA IT Al Irsyad Al Islamiyyah Purwokerto",
+    "type": "SMA",
+    "city": "Purwokerto",
+    "province": "Jawa Tengah",
+    "level_group": "SMA"
+  },
+  {
+    "id": 99,
+    "name": "SMA It Iqra Bengkulu",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 100,
+    "name": "SMA IT miftahul khoir",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 101,
+    "name": "SMA IT Ukhuwah Banjarmasin",
+    "type": "SMA",
+    "city": "Banjarmasin",
+    "province": "Kalimantan Selatan",
+    "level_group": "SMA"
+  },
+  {
+    "id": 102,
+    "name": "SMA Kartika XIX-19 Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 103,
+    "name": "SMA Katolik Sang Timur Tomang",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 104,
+    "name": "SMA Kolese Gonzaga",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 105,
+    "name": "SMA KOLESE GONZAGA JAKARTA",
+    "type": "SMA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 106,
+    "name": "SMA Kristen Kalam.Kudus",
+    "type": "SMA",
+    "city": "Kudus",
+    "province": "Jawa Tengah",
+    "level_group": "SMA"
+  },
+  {
+    "id": 107,
+    "name": "SMA Kuntum Cemerlang",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 108,
+    "name": "SMA lab school setiabudi",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 109,
+    "name": "SMA Labschool , Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 110,
+    "name": "SMA Labschool Cibubur",
+    "type": "SMA",
+    "city": "Cibubur",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 111,
+    "name": "SMA Labschool Cirendeu",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 112,
+    "name": "SMA LABSCHOOL UPI",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 113,
+    "name": "SMA LABSCHOOL UPI BANDUNG",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 114,
+    "name": "SMA Lazuardi",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 115,
+    "name": "SMA MBS Ki Bagus Hadikusumo",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 116,
+    "name": "SMA Muh 1 Jogja",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 117,
+    "name": "SMA MUTIARA BUNDA",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 118,
+    "name": "SMA Negeri 1 Banjarmasin",
+    "type": "SMA",
+    "city": "Banjarmasin",
+    "province": "Kalimantan Selatan",
+    "level_group": "SMA"
+  },
+  {
+    "id": 119,
+    "name": "SMA Negeri 12 Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 120,
+    "name": "SMA Negeri 6 Kendari",
+    "type": "SMA",
+    "city": "Kendari",
+    "province": "Sulawesi Tenggara",
+    "level_group": "SMA"
+  },
+  {
+    "id": 121,
+    "name": "SMA Negri 3 semarang",
+    "type": "SMA",
+    "city": "Semarang",
+    "province": "Jawa Tengah",
+    "level_group": "SMA"
+  },
+  {
+    "id": 122,
+    "name": "SMA PANGUDI LUHUR 2 SERVASIUS",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 123,
+    "name": "SMA Penabur Bintaro",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 124,
+    "name": "SMA PGII 1 Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 125,
+    "name": "SMA PIUS Tegal",
+    "type": "SMA",
+    "city": "Tegal",
+    "province": "Jawa Tengah",
+    "level_group": "SMA"
+  },
+  {
+    "id": 126,
+    "name": "SMA PKP",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 127,
+    "name": "SMA Plus Assalam",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 128,
+    "name": "SMA Presiden Jababeka",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 129,
+    "name": "SMA Pribadi Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 130,
+    "name": "SMA Regina Pacis Jakarta",
+    "type": "SMA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 131,
+    "name": "SMA Santa Ursula BSD",
+    "type": "SMA",
+    "city": "Tangerang Selatan",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 132,
+    "name": "SMA Santa Ursula Jakarta",
+    "type": "SMA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 133,
+    "name": "Sma St Maria 1 Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 134,
+    "name": "SMA Stella Maris",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 135,
+    "name": "SMA Sumbangsih",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 136,
+    "name": "SMA Talenta",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 137,
+    "name": "SMA Taman Madya 1 Jakarta",
+    "type": "SMA",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 138,
+    "name": "SMA Taruna Bakti",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 139,
+    "name": "SMA Taruna Bakti Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 140,
+    "name": "SMA Taruna Bangsa",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 141,
+    "name": "SMA Telkom",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 142,
+    "name": "SMA Telkom Bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 143,
+    "name": "SMA TRIMULIA",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 144,
+    "name": "SMA Trimulia Pasteur",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 145,
+    "name": "SMA trinitas bandung",
+    "type": "SMA",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 146,
+    "name": "SMA VIDATRA",
+    "type": "SMA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 147,
+    "name": "SMA. ST. THOMAS 1 MEDAN",
+    "type": "SMA",
+    "city": "Medan",
+    "province": "Sumatera Utara",
+    "level_group": "SMA"
+  },
+  {
+    "id": 148,
+    "name": "SMAD Labschool Cibubur",
+    "type": "SMAD",
+    "city": "Cibubur",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 149,
+    "name": "SMAI 9 Al Azhar",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 150,
+    "name": "SMAI Al Azhar 1",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 151,
+    "name": "SMAI Al Azhar 19 Jakarta",
+    "type": "SMAI",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 152,
+    "name": "SMAI Al Azhar 2",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 153,
+    "name": "SMAI Al Azhar 22",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 154,
+    "name": "SMAI Al Azhar 3",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 155,
+    "name": "SMAI Al Azhar 4 Kota bekasi",
+    "type": "SMAI",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 156,
+    "name": "SMAI Al Azhar BSD",
+    "type": "SMAI",
+    "city": "Tangerang Selatan",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 157,
+    "name": "SMAI Al Azhar Kelapa Gading Jakarta",
+    "type": "SMAI",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 158,
+    "name": "SMAI Al Jabr Islamic School",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 159,
+    "name": "SMAI AL Jannah Cibubur",
+    "type": "SMAI",
+    "city": "Cibubur",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 160,
+    "name": "SMAI Al Wildan 4",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 161,
+    "name": "SMAI Al-Azhar 8 Summarecon Kota Bekasi",
+    "type": "SMAI",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 162,
+    "name": "SMAI Al-Azhar BSD",
+    "type": "SMAI",
+    "city": "Tangerang Selatan",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 163,
+    "name": "SMAI Al-Izhar",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 164,
+    "name": "SMAI Al-Izhar Pondok Labu",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 165,
+    "name": "SMAI Al-Wildan Islamic School 10 Jakarta",
+    "type": "SMAI",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 166,
+    "name": "SMAI Dian Didaktika",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 167,
+    "name": "SMAI FITRAH ALFIKRI Depok",
+    "type": "SMAI",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 168,
+    "name": "SMAI Jakarta Islamic School",
+    "type": "SMAI",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 169,
+    "name": "SMAI PB. Soedirman 1 Kota Bekasi",
+    "type": "SMAI",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 170,
+    "name": "SMAI PU Al-BAYAN PUTRI Selabintana",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 171,
+    "name": "SMAI Quran Asy Syahid Boarding School",
+    "type": "SMAI",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 172,
+    "name": "SMAIT Al Lauzah",
+    "type": "SMAIT",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 173,
+    "name": "SMAIT Al-Fityan Tangerang",
+    "type": "SMAIT",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 174,
+    "name": "SMAIT Auliya",
+    "type": "SMAIT",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 175,
+    "name": "SMAIT Nurul Fikri",
+    "type": "SMAIT",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 176,
+    "name": "SMAIT Nurul Fikri Boarding School Bogor",
+    "type": "SMAIT",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 177,
+    "name": "SMAIT Pesantren Nurrurahman",
+    "type": "SMAIT",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 178,
+    "name": "SMAIT Sinar Cendekia",
+    "type": "SMAIT",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 179,
+    "name": "SMAIT Thariq Bin Ziyad Kabupaten Bekasi",
+    "type": "SMAIT",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 180,
+    "name": "SMAK 1 BPK PENABUR",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 181,
+    "name": "SMAK 1 Penabur",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 182,
+    "name": "SMAK 1 Penabur Jakarta",
+    "type": "SMAK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 183,
+    "name": "SMAK 2 PENABUR Jakarta",
+    "type": "SMAK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 184,
+    "name": "SMAK 4 Penabur",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 185,
+    "name": "SMAK 5 Penabur Jakarta",
+    "type": "SMAK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 186,
+    "name": "SMAK 6 Penabur Jakarta",
+    "type": "SMAK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 187,
+    "name": "SMAK 7 PENABUR Jakarta",
+    "type": "SMAK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 188,
+    "name": "SMAK IPEKA",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 189,
+    "name": "SMAK IPEKA Grand Wisata",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 190,
+    "name": "SMAK Ipeka Grandwisata",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 191,
+    "name": "SMAK Mater Dei",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 192,
+    "name": "SMAK Penabur Banda",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 193,
+    "name": "SMAK Penabur Bintaro Jaya",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 194,
+    "name": "SMAK Penabur Gading Serpong",
+    "type": "SMAK",
+    "city": "Serpong",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 195,
+    "name": "SMAK Penabur Harapan Indah",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 196,
+    "name": "SMAK Penabur Jababeka",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 197,
+    "name": "SMAK Penabur Kota Tangerang",
+    "type": "SMAK",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 198,
+    "name": "SMAK PENABUR Summarecon Bekasi",
+    "type": "SMAK",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 199,
+    "name": "SMAK Sang Timur Jakarta",
+    "type": "SMAK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 200,
+    "name": "SMAK Tiara Kasih",
+    "type": "SMAK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 201,
+    "name": "SMAN 1 bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 202,
+    "name": "SMAN 1 Bogor",
+    "type": "SMAN",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 203,
+    "name": "SMAN 1 Cibinong",
+    "type": "SMAN",
+    "city": "Cibinong",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 204,
+    "name": "SMAN 1 Cileungsi",
+    "type": "SMAN",
+    "city": "Cileungsi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 205,
+    "name": "SMAN 1 CILEUNYI",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 206,
+    "name": "SMAN 1 Cimahi",
+    "type": "SMAN",
+    "city": "Cimahi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 207,
+    "name": "SMAN 1 CIREBON",
+    "type": "SMAN",
+    "city": "Cirebon",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 208,
+    "name": "SMAN 1 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 209,
+    "name": "SMAN 1 kandangan",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 210,
+    "name": "SMAN 1 Kota Bekasi",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 211,
+    "name": "SMAN 1 Kota Bogor",
+    "type": "SMAN",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 212,
+    "name": "SMAN 1 Margahayu",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 213,
+    "name": "SMAN 1 NGAMPRAH",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 214,
+    "name": "SMAN 1 Tambun Selatan Kabupaten Bekasi",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 215,
+    "name": "SMAN 1 TANJUNG",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 216,
+    "name": "SMAN 1 Wamena",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 217,
+    "name": "SMAN 10 Depok",
+    "type": "SMAN",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 218,
+    "name": "SMAN 10 Kota Bekasi",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 219,
+    "name": "SMAN 101 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 220,
+    "name": "SMAN 103 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 221,
+    "name": "SMAN 105 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 222,
+    "name": "SMAN 11 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 223,
+    "name": "SMAN 11 Tangerang Selatan",
+    "type": "SMAN",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 224,
+    "name": "SMAN 12 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 225,
+    "name": "SMAN 13 JAKARTA",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 226,
+    "name": "SMAN 13 Kota Bekasi",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 227,
+    "name": "SMAN 15 Kota Bekasi",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 228,
+    "name": "SMAN 16 BANDUNG",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 229,
+    "name": "SMAN 2 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 230,
+    "name": "SMAN 2 Cihampelas , Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 231,
+    "name": "SMAN 2 CIREBON",
+    "type": "SMAN",
+    "city": "Cirebon",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 232,
+    "name": "SMAN 2 Gunung Putri",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 233,
+    "name": "SMAN 2 Kota bekasi",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 234,
+    "name": "SMAN 2 KOTA JAMBI",
+    "type": "SMAN",
+    "city": "Jambi",
+    "province": "Jambi",
+    "level_group": "SMA"
+  },
+  {
+    "id": 235,
+    "name": "SMAN 2 Kota Tangerang Selatan",
+    "type": "SMAN",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 236,
+    "name": "SMAN 2 Sukabumi",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 237,
+    "name": "SMAN 20 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 238,
+    "name": "SMAN 21 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 239,
+    "name": "SMAN 22 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 240,
+    "name": "SMAN 23 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 241,
+    "name": "SMAN 25 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 242,
+    "name": "SMAN 26 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 243,
+    "name": "SMAN 27 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 244,
+    "name": "SMAN 28 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 245,
+    "name": "SMAN 28 Tangerang",
+    "type": "SMAN",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 246,
+    "name": "SMAN 3 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 247,
+    "name": "SMAN 3 Bogor",
+    "type": "SMAN",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 248,
+    "name": "SMAN 3 Depok",
+    "type": "SMAN",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 249,
+    "name": "SMAN 31 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 250,
+    "name": "SMAN 34 Jakarta Selatan",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 251,
+    "name": "SMAN 35 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 252,
+    "name": "SMAN 36 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 253,
+    "name": "SMAN 42 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 254,
+    "name": "SMAN 44 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 255,
+    "name": "SMAN 45 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 256,
+    "name": "SMAN 46 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 257,
+    "name": "SMAN 47 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 258,
+    "name": "SMAN 48 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 259,
+    "name": "SMAN 5 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 260,
+    "name": "SMAN 5 Depok",
+    "type": "SMAN",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 261,
+    "name": "SMAN 5 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 262,
+    "name": "SMAN 5 Kota Bekasi",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 263,
+    "name": "SMAN 5 Tangerang Selatan",
+    "type": "SMAN",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 264,
+    "name": "SMAN 52 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 265,
+    "name": "SMAN 6 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 266,
+    "name": "SMAN 6 Yogyakarta",
+    "type": "SMAN",
+    "city": "Yogyakarta",
+    "province": "DI Yogyakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 267,
+    "name": "SMAN 61 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 268,
+    "name": "SMAN 63 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 269,
+    "name": "SMAN 66 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 270,
+    "name": "SMAN 67",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 271,
+    "name": "SMAN 7 BANDUNG",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 272,
+    "name": "SMAN 7 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 273,
+    "name": "SMAN 7 Kota Tangerang Selatan",
+    "type": "SMAN",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 274,
+    "name": "SMAN 70 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 275,
+    "name": "SMAN 78 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 276,
+    "name": "SMAN 79 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 277,
+    "name": "SMAN 8",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 278,
+    "name": "SMAN 8 Bandung",
+    "type": "SMAN",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 279,
+    "name": "SMAN 8 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 280,
+    "name": "SMAN 8 Pekanbaru",
+    "type": "SMAN",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 281,
+    "name": "SMAN 8 Tangerang",
+    "type": "SMAN",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 282,
+    "name": "SMAN 81 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 283,
+    "name": "SMAN 85 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 284,
+    "name": "SMAN 9 KOTA BEKASI",
+    "type": "SMAN",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 285,
+    "name": "SMAN 9 Tangerang Selatan",
+    "type": "SMAN",
+    "city": "Tangerang",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 286,
+    "name": "SMAN 90 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 287,
+    "name": "SMAN 91 Jakarta",
+    "type": "SMAN",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 288,
+    "name": "SMAN PGRI 1 Kota Bogor",
+    "type": "SMAN",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 289,
+    "name": "SMAS AIPL",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 290,
+    "name": "SMAS Al-Abidin Surakarta",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 291,
+    "name": "SMAS Al-Madinah Cibinong",
+    "type": "SMAS",
+    "city": "Cibinong",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 292,
+    "name": "SMAS Angkasa 1 Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 293,
+    "name": "SMAS Athalia",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 294,
+    "name": "SMAS Atisa Lippo Karawaci",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 295,
+    "name": "SMAS Avicenna Cinere",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 296,
+    "name": "SMAS Avicenna jagakarsa",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 297,
+    "name": "SMAS Bhakti Idhata",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 298,
+    "name": "SMAS Bhakti Mulya 400",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 299,
+    "name": "SMAS Bina Nusantara Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 300,
+    "name": "SMAS Bintara Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 301,
+    "name": "SMAS Binus School Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 302,
+    "name": "SMAS Binus Simprug",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 303,
+    "name": "SMAS Budi Cendekia Islamic School Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 304,
+    "name": "SMAS Budi Cendikia Islamic School Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 305,
+    "name": "SMAS Budi Insan Cendikia Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 306,
+    "name": "SMAS Bunda Hati Kudus Kota Wisata",
+    "type": "SMAS",
+    "city": "Kudus",
+    "province": "Jawa Tengah",
+    "level_group": "SMA"
+  },
+  {
+    "id": 307,
+    "name": "SMAS Charitas Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 308,
+    "name": "SMAS Cikal Amri Setu",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 309,
+    "name": "SMAS Cikal Lebak Bulus",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 310,
+    "name": "SMAS Cikal Serpong",
+    "type": "SMAS",
+    "city": "Serpong",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 311,
+    "name": "SMAS Cipta Cendikia Cibinong",
+    "type": "SMAS",
+    "city": "Cibinong",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 312,
+    "name": "SMAS Cita Buana",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 313,
+    "name": "SMAS CITRA BERKAT",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 314,
+    "name": "SMAS Citra Kasih Don Bosco Pondok Indah",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 315,
+    "name": "SMAS Dewi Sartika",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 316,
+    "name": "SMAS Diponegoro 1 Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 317,
+    "name": "SMAS Don Bosco II Pulomas Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 318,
+    "name": "SMAS Embun Pagi Islamic School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 319,
+    "name": "SMAS Erudio",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 320,
+    "name": "SMAS Fajar Hidayah Kota wisata",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 321,
+    "name": "SMAS GANDHI MEMORIAL INTERCONTINENTAL SCHOOL",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 322,
+    "name": "SMAS Gandhi School ancol",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 323,
+    "name": "SMAS Garuda Cendekia",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 324,
+    "name": "SMAS Global Islamic School 2 Serpong",
+    "type": "SMAS",
+    "city": "Serpong",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 325,
+    "name": "SMAS Global Jaya School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 326,
+    "name": "SMAS Global Mandiri Cibubur",
+    "type": "SMAS",
+    "city": "Cibubur",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 327,
+    "name": "SMAS Global Prestasi Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 328,
+    "name": "SMAS Global Prestasi School Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 329,
+    "name": "SMAS Global Prestasi School Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 330,
+    "name": "SMAS Global Sevilla School Pulomas Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 331,
+    "name": "SMAS Hang Tuah 1",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 332,
+    "name": "SMAS Hellomotion",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 333,
+    "name": "SMAS Highfield Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 334,
+    "name": "SMAS Ibnu Hajar Boarding School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 335,
+    "name": "SMAS IF Al Fikri Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 336,
+    "name": "SMAS Insan Rabbany",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 337,
+    "name": "SMAS IT Buahati Cipayung",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 338,
+    "name": "SMAS Jakarta Islamic School",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 339,
+    "name": "SMAS John Paul's School Harapan Indah",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 340,
+    "name": "SMAS Karakter",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 341,
+    "name": "SMAS Karakter Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 342,
+    "name": "SMAS Kartika X-I Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 343,
+    "name": "SMAS Katolik Ricci 2",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 344,
+    "name": "SMAS Kolese Gonzaga",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 345,
+    "name": "SMAS Kolese Kanisius",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 346,
+    "name": "SMAS Kolese Kanisius Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 347,
+    "name": "SMAS Kristen Calvin Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 348,
+    "name": "SMAS Labschool Cibubur",
+    "type": "SMAS",
+    "city": "Cibubur",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 349,
+    "name": "SMAS Labschool Cirendeu",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 350,
+    "name": "SMAS Labschool Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 351,
+    "name": "SMAS Labschool Kebayoran",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 352,
+    "name": "SMAS Madania",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 353,
+    "name": "SMAS MAHATMA GADING INTERCULTURAL SCHOOL",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 354,
+    "name": "SMAS Mahatma Gading School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 355,
+    "name": "SMAS Marsudirini Bogor",
+    "type": "SMAS",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 356,
+    "name": "SMAS Marsudirini Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 357,
+    "name": "SMAS Marthia Bakti",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 358,
+    "name": "SMAS Mentari Intercultural School Bintaro",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 359,
+    "name": "SMAS Muhamadiyah 11 Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 360,
+    "name": "SMAS Muhammadiyah 11",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 361,
+    "name": "SMAS Muhammadiyah 3",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 362,
+    "name": "SMAS Muhammadiyah 3 Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 363,
+    "name": "SMAS Muhammadiyah 4 Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 364,
+    "name": "SMAS Muhammadiyah 5 Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 365,
+    "name": "SMAS Mutiara Harapan Islamic School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 366,
+    "name": "SMAS Nassa School Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 367,
+    "name": "SMAS Nizamia Andaludia",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 368,
+    "name": "SMAS Nizamia High School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 369,
+    "name": "SMAS Nizamia High School (NHS)",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 370,
+    "name": "SMAS Notre dame",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 371,
+    "name": "SMAS Pembangunan Jaya",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 372,
+    "name": "SMAS Pembangunan Jaya Bintaro",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 373,
+    "name": "SMAS Pilar Indonesia Kabupaten Bogor",
+    "type": "SMAS",
+    "city": "Bogor",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 374,
+    "name": "SMAS Plus Islamic Village",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 375,
+    "name": "SMAS Plus Pembangunan Jaya",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 376,
+    "name": "SMAS Plus Pembangunan Jaya Bintaro",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 377,
+    "name": "SMAS Plus PGRI Cibinong",
+    "type": "SMAS",
+    "city": "Cibinong",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 378,
+    "name": "SMAS Presiden Jababeka",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 379,
+    "name": "SMAS Pribadi Margonda Depok",
+    "type": "SMAS",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 380,
+    "name": "SMAS Royal Well School Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 381,
+    "name": "SMAS Santa Laurensia",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 382,
+    "name": "SMAS Santa Ursula BSD",
+    "type": "SMAS",
+    "city": "Tangerang Selatan",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 383,
+    "name": "SMAS Santa Ursula Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 384,
+    "name": "SMAS Santo Yakobus",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 385,
+    "name": "SMAS School Of Human",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 386,
+    "name": "SMAS School of Human Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 387,
+    "name": "SMAS Sekolah Cikal Lebak Bulus",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 388,
+    "name": "SMAS Sekolah Cikal Serpong",
+    "type": "SMAS",
+    "city": "Serpong",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 389,
+    "name": "SMAS Sekolah Harapan Bangsa Senior High School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 390,
+    "name": "SMAS Sinar Cendekia BSD",
+    "type": "SMAS",
+    "city": "Tangerang Selatan",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 391,
+    "name": "SMAS SPH Kemang Village",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 392,
+    "name": "SMAS St Theresia Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 393,
+    "name": "SMAS ST Yakobus Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 394,
+    "name": "SMAS St. Agustinus Budhaya 2",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 395,
+    "name": "SMAS St. Theresia Jakarta",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 396,
+    "name": "SMAS Stella Maris",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 397,
+    "name": "SMAS Strada Santo Thomas Aquino",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 398,
+    "name": "SMAS Syafana Islamic School",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 399,
+    "name": "SMAS Tarakanita 1",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 400,
+    "name": "SMAS Tarakanita Gading Serpong",
+    "type": "SMAS",
+    "city": "Serpong",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 401,
+    "name": "SMAS Taruna Bangsa Sentul",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 402,
+    "name": "SMAS Theresia",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 403,
+    "name": "SMAS Unity Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 404,
+    "name": "SMAS Vianney",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 405,
+    "name": "SMAS VICTORY PLUS Kota Bekasi",
+    "type": "SMAS",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 406,
+    "name": "SMAS Yadika 5 Joglo Jakarta Barat",
+    "type": "SMAS",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 407,
+    "name": "SMAS Yaspen Tugu Ibu",
+    "type": "SMAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 408,
+    "name": "SMK Bina Informatika",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 409,
+    "name": "SMK Daarut Tauhid Boarding School",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 410,
+    "name": "SMK Informatika Fithrah Insani Bandung",
+    "type": "SMK",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 411,
+    "name": "SMK Negeri 2 Bandung",
+    "type": "SMK",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 412,
+    "name": "SMK Negeri 2 Palembang",
+    "type": "SMK",
+    "city": "Palembang",
+    "province": "Sumatera Selatan",
+    "level_group": "SMA"
+  },
+  {
+    "id": 413,
+    "name": "SMK PB Sudirman 2 Jakarta",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 414,
+    "name": "SMK Raden Umar Said Kudus",
+    "type": "SMK",
+    "city": "Kudus",
+    "province": "Jawa Tengah",
+    "level_group": "SMA"
+  },
+  {
+    "id": 415,
+    "name": "SMK Skye Digipreneur",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 416,
+    "name": "SMK Telkom Bandung",
+    "type": "SMK",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 417,
+    "name": "SMKN 1 Cibinong",
+    "type": "SMK",
+    "city": "Cibinong",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 418,
+    "name": "SMKN 14 Bandung",
+    "type": "SMK",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 419,
+    "name": "SMKN 18 Jakarta",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 420,
+    "name": "SMKN 2 Bandung",
+    "type": "SMK",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 421,
+    "name": "SMKN 2 Cimahi",
+    "type": "SMK",
+    "city": "Cimahi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 422,
+    "name": "SMKN 4 Bandung",
+    "type": "SMK",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 423,
+    "name": "SMKN 48 Jakarta Timur",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 424,
+    "name": "SMKN 58 JAKARTA",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 425,
+    "name": "SMKN 71 Jakarta",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 426,
+    "name": "SMKN 9 bandung",
+    "type": "SMK",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 427,
+    "name": "SMKS Ananda Kota Bekasi",
+    "type": "SMK",
+    "city": "Bekasi",
+    "province": "Jawa Barat",
+    "level_group": "SMA"
+  },
+  {
+    "id": 428,
+    "name": "SMKS Bunda Mulia",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 429,
+    "name": "SMKS Diponegoro 1",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 430,
+    "name": "SMKS Diponegoro Jakarta",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 431,
+    "name": "SMKS Ekonomika",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 432,
+    "name": "SMKS Metland",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 433,
+    "name": "SMKS Mondial Jakarta",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 434,
+    "name": "SMKS Prestasi Prima Jakarta",
+    "type": "SMK",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMA"
+  },
+  {
+    "id": 435,
+    "name": "SMKS Sumbangsih",
+    "type": "SMK",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 436,
+    "name": "SMP  Mutiara Bunda ( Arca Manik Bandung)",
+    "type": "SMP",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 437,
+    "name": "SMP Al Azhar 36 Bandung",
+    "type": "SMP",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 438,
+    "name": "SMP Avicenna Cinere",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 439,
+    "name": "SMP Darmayudha Pekanbaru",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 440,
+    "name": "SMP Highfields Depok",
+    "type": "SMP",
+    "city": "Depok",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 441,
+    "name": "SMP Islam Cendekia Muda",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 442,
+    "name": "SMP MUHAMMADIYAH 8 ANTAPANI",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 443,
+    "name": "SMP NFBSL",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 444,
+    "name": "SMP Taruna Bakti",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 445,
+    "name": "SMPI Al -Azhar 12 Rawamangun",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 446,
+    "name": "SMPI Al Azhar 12 Rawamangun",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 447,
+    "name": "SMPI Al Wildan 10 Jakarta",
+    "type": "SMP",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMP"
+  },
+  {
+    "id": 448,
+    "name": "SMPI Al-Himidiyah",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 449,
+    "name": "SMPI Syafana Islamic School",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 450,
+    "name": "SMPIT Nurul Iman Jakarta",
+    "type": "SMP",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMP"
+  },
+  {
+    "id": 451,
+    "name": "SMPN 1 Bandung",
+    "type": "SMP",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 452,
+    "name": "SMPN 2 Bandung",
+    "type": "SMP",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 453,
+    "name": "SMPN 255 JAKARTA",
+    "type": "SMP",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMP"
+  },
+  {
+    "id": 454,
+    "name": "SMPN 28 BANDUNG",
+    "type": "SMP",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 455,
+    "name": "SMPN 5 BANDUNG",
+    "type": "SMP",
+    "city": "Bandung",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 456,
+    "name": "SMPN 51 Jakarta",
+    "type": "SMP",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMP"
+  },
+  {
+    "id": 457,
+    "name": "SMPS Azhari Islamic School",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 458,
+    "name": "SMPS Hang Tuah 3 Jakarta",
+    "type": "SMP",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMP"
+  },
+  {
+    "id": 459,
+    "name": "SMPS Labschool Cibubur",
+    "type": "SMP",
+    "city": "Cibubur",
+    "province": "Jawa Barat",
+    "level_group": "SMP"
+  },
+  {
+    "id": 460,
+    "name": "SMPS Labschool Jakarta",
+    "type": "SMP",
+    "city": "Jakarta",
+    "province": "DKI Jakarta",
+    "level_group": "SMP"
+  },
+  {
+    "id": 461,
+    "name": "SMPS Muhammadiyah 9",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 462,
+    "name": "SMPS Regina Pacis",
+    "type": "SMP",
+    "city": "",
+    "province": "",
+    "level_group": "SMP"
+  },
+  {
+    "id": 463,
+    "name": "St john meruya",
+    "type": "ST",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 464,
+    "name": "Syafana Islamic School",
+    "type": "SYAFANA",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 465,
+    "name": "Tunas Unggul",
+    "type": "TUNAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 466,
+    "name": "Unisadhuguna International College (UIC College BSD)",
+    "type": "UNISADHUGUNA",
+    "city": "Tangerang Selatan",
+    "province": "Banten",
+    "level_group": "SMA"
+  },
+  {
+    "id": 467,
+    "name": "Universitas Telkom",
+    "type": "UNIVERSITAS",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  },
+  {
+    "id": 468,
+    "name": "UPH College",
+    "type": "UPH",
+    "city": "",
+    "province": "",
+    "level_group": "SMA"
+  }
+]
