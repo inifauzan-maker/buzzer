@@ -215,104 +215,116 @@
             <div class="menu-grid">
                 @php
                     $userRole = auth()->user()->role ?? 'guest';
+                    $isAdmin = $userRole === 'superadmin';
                     $canProduk = in_array($userRole, ['superadmin', 'leader', 'staff'], true);
                     $canDataSiswa = $userRole === 'superadmin';
                 @endphp
-                <div class="menu-card card-buzzer disabled" title="Segera hadir" aria-disabled="true">
-                    <span class="card-content">
-                        <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="white" d="M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z"/>
-                        </svg>
-                        <span>Dashboard</span>
-                    </span>
-                </div>
-                @if ($canProduk)
-                    <a class="menu-card card-konten" href="{{ route('produk.index') }}">
+                @if ($isAdmin)
+                    <div class="menu-card card-buzzer disabled" title="Segera hadir" aria-disabled="true">
                         <span class="card-content">
                             <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill="white" d="M6 2h12a2 2 0 0 1 2 2v5h-2V4H6v16h7v2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm10 8 6 3-6 3v-2h-6v-2h6v-2Z"/>
+                                <path fill="white" d="M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z"/>
                             </svg>
-                            <span>Produk</span>
+                            <span>Dashboard</span>
+                        </span>
+                    </div>
+                    <a class="menu-card card-buzzer" href="{{ route('dashboard') }}">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M3 10v4a1 1 0 0 0 1 1h2l4 3v-6l-4 3H4v-6h2l4 3V6l-4 3H4a1 1 0 0 0-1 1Zm12-2.5 5.5-2A1 1 0 0 1 22 6.4v11.2a1 1 0 0 1-1.5.9l-5.5-2V7.5Z"/>
+                            </svg>
+                            <span>Buzzer Marketing</span>
                         </span>
                     </a>
-                @else
+                    @if ($canProduk)
+                        <a class="menu-card card-konten" href="{{ route('produk.index') }}">
+                            <span class="card-content">
+                                <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="white" d="M6 2h12a2 2 0 0 1 2 2v5h-2V4H6v16h7v2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm10 8 6 3-6 3v-2h-6v-2h6v-2Z"/>
+                                </svg>
+                                <span>Produk</span>
+                            </span>
+                        </a>
+                    @else
+                        <div class="menu-card card-konten disabled" title="Segera hadir" aria-disabled="true">
+                            <span class="card-content">
+                                <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="white" d="M6 2h12a2 2 0 0 1 2 2v5h-2V4H6v16h7v2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm10 8 6 3-6 3v-2h-6v-2h6v-2Z"/>
+                                </svg>
+                                <span>Produk</span>
+                            </span>
+                        </div>
+                    @endif
+                    @if ($canDataSiswa)
+                        <a class="menu-card card-konten" href="{{ route('data-siswa.index') }}">
+                            <span class="card-content">
+                                <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="white" d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"/>
+                                </svg>
+                                <span>Data Siswa</span>
+                            </span>
+                        </a>
+                    @else
+                        <div class="menu-card card-konten disabled" title="Segera hadir" aria-disabled="true">
+                            <span class="card-content">
+                                <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="white" d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"/>
+                                </svg>
+                                <span>Data Siswa</span>
+                            </span>
+                        </div>
+                    @endif
+                    <div class="menu-card card-ads disabled" title="Segera hadir" aria-disabled="true">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
+                            </svg>
+                            <span class="card-label">Ads</span>
+                            <span class="card-label">Iklan</span>
+                        </span>
+                    </div>
+                    <div class="menu-card card-sosial disabled" title="Segera hadir" aria-disabled="true">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M7 6a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm10-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5-4 5 4m5-6-5 4m-4 2 5-4"/>
+                            </svg>
+                            <span>Media Sosial</span>
+                        </span>
+                    </div>
                     <div class="menu-card card-konten disabled" title="Segera hadir" aria-disabled="true">
                         <span class="card-content">
                             <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill="white" d="M6 2h12a2 2 0 0 1 2 2v5h-2V4H6v16h7v2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm10 8 6 3-6 3v-2h-6v-2h6v-2Z"/>
+                                <path fill="white" d="M4 4h12l4 4v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm11 1v4h4l-4-4ZM6 12h12v2H6v-2Zm0 4h8v2H6v-2Z"/>
                             </svg>
-                            <span>Produk</span>
+                            <span>Konten Marketing</span>
                         </span>
                     </div>
-                @endif
-                @if ($canDataSiswa)
-                    <a class="menu-card card-konten" href="{{ route('data-siswa.index') }}">
-                        <span class="card-content">
-                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill="white" d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"/>
-                            </svg>
-                            <span>Data Siswa</span>
-                        </span>
-                    </a>
-                @else
                     <div class="menu-card card-konten disabled" title="Segera hadir" aria-disabled="true">
                         <span class="card-content">
                             <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill="white" d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"/>
+                                <path fill="white" d="M4 6h10v2H4V6Zm0 5h16v2H4v-2Zm0 5h12v2H4v-2Z"/>
                             </svg>
-                            <span>Data Siswa</span>
+                            <span>Leads</span>
                         </span>
                     </div>
+                    <div class="menu-card card-sosial disabled" title="Segera hadir" aria-disabled="true">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v3H2V6a2 2 0 0 1 2-2h3V2Zm15 9v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9h20Zm-11 3H7v4h4v-4Zm6 0h-4v4h4v-4Z"/>
+                            </svg>
+                            <span>Event</span>
+                        </span>
+                    </div>
+                @else
+                    <a class="menu-card card-buzzer" href="{{ route('dashboard') }}">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M3 10v4a1 1 0 0 0 1 1h2l4 3v-6l-4 3H4v-6h2l4 3V6l-4 3H4a1 1 0 0 0-1 1Zm12-2.5 5.5-2A1 1 0 0 1 22 6.4v11.2a1 1 0 0 1-1.5.9l-5.5-2V7.5Z"/>
+                            </svg>
+                            <span>Buzzer Marketing</span>
+                        </span>
+                    </a>
                 @endif
-                <div class="menu-card card-ads disabled" title="Segera hadir" aria-disabled="true">
-                    <span class="card-content">
-                        <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="white" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
-                        </svg>
-                        <span class="card-label">Ads</span>
-                        <span class="card-label">Iklan</span>
-                    </span>
-                </div>
-                <div class="menu-card card-sosial disabled" title="Segera hadir" aria-disabled="true">
-                    <span class="card-content">
-                        <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="white" d="M7 6a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm10-2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5-4 5 4m5-6-5 4m-4 2 5-4"/>
-                        </svg>
-                        <span>Media Sosial</span>
-                    </span>
-                </div>
-                <a class="menu-card card-buzzer" href="{{ route('dashboard') }}">
-                    <span class="card-content">
-                        <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="white" d="M3 10v4a1 1 0 0 0 1 1h2l4 3v-6l-4 3H4v-6h2l4 3V6l-4 3H4a1 1 0 0 0-1 1Zm12-2.5 5.5-2A1 1 0 0 1 22 6.4v11.2a1 1 0 0 1-1.5.9l-5.5-2V7.5Z"/>
-                        </svg>
-                        <span>Buzzer Marketing</span>
-                    </span>
-                </a>
-                <div class="menu-card card-konten disabled" title="Segera hadir" aria-disabled="true">
-                    <span class="card-content">
-                        <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="white" d="M4 4h12l4 4v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm11 1v4h4l-4-4ZM6 12h12v2H6v-2Zm0 4h8v2H6v-2Z"/>
-                        </svg>
-                        <span>Konten Marketing</span>
-                    </span>
-                </div>
-                <div class="menu-card card-konten disabled" title="Segera hadir" aria-disabled="true">
-                    <span class="card-content">
-                        <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="white" d="M4 6h10v2H4V6Zm0 5h16v2H4v-2Zm0 5h12v2H4v-2Z"/>
-                        </svg>
-                        <span>Leads</span>
-                    </span>
-                </div>
-                <div class="menu-card card-sosial disabled" title="Segera hadir" aria-disabled="true">
-                    <span class="card-content">
-                        <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill="white" d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v3H2V6a2 2 0 0 1 2-2h3V2Zm15 9v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9h20Zm-11 3H7v4h4v-4Zm6 0h-4v4h4v-4Z"/>
-                        </svg>
-                        <span>Event</span>
-                    </span>
-                </div>
             </div>
         </div>
     </body>

@@ -195,6 +195,11 @@
                 background: rgba(99, 26, 156, 0.08);
             }
 
+            .suggest-item.suggest-add {
+                font-weight: 600;
+                color: var(--accent-dark);
+            }
+
             .suggest-name {
                 font-weight: 600;
             }
@@ -317,7 +322,8 @@
                                     <input type="hidden" id="school-name" name="school_name" />
                                     <div class="suggest-list" id="school-suggest"></div>
                                     <small class="text-muted">
-                                        Ketik SMAN/SMAS/SMK/MA untuk memunculkan daftar sekolah favorit.
+                                        Ketik SMAN/SMAS/SMK/MA untuk memunculkan daftar sekolah favorit. Jika tidak ada,
+                                        pilih opsi tambah sekolah.
                                     </small>
                                 </label>
                                 <label class="input-field">
@@ -466,6 +472,7 @@
 
             let activeSchool = null;
             let suggestTimer = null;
+            let lastSchoolQuery = "";
 
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
@@ -496,6 +503,8 @@
                 return null;
             };
 
+            const normalizeSchoolName = (value) => (value || "").trim().toUpperCase();
+
             const setSchoolValues = (school) => {
                 activeSchool = school;
                 schoolInput.value = school?.name ?? schoolInput.value;
@@ -508,10 +517,8 @@
 
             const renderSchoolSuggestions = (items) => {
                 schoolSuggest.innerHTML = "";
-                if (!items.length) {
-                    schoolSuggest.classList.remove("is-visible");
-                    return;
-                }
+                const upperQuery = normalizeSchoolName(lastSchoolQuery);
+                const hasExact = items.some((item) => normalizeSchoolName(item.name || item.label || "") === upperQuery);
 
                 items.forEach((item) => {
                     const btn = document.createElement("div");
@@ -544,10 +551,32 @@
                     schoolSuggest.appendChild(btn);
                 });
 
+                if (!hasExact && upperQuery.length >= 3) {
+                    const addBtn = document.createElement("div");
+                    addBtn.className = "suggest-item suggest-add";
+                    addBtn.textContent = `Tambah sekolah: ${upperQuery}`;
+                    addBtn.addEventListener("click", () => {
+                        activeSchool = null;
+                        schoolInput.value = upperQuery;
+                        schoolIdInput.value = "";
+                        schoolNameInput.value = upperQuery;
+                        updateClassLevels(resolveLevelGroup(upperQuery));
+                        resetPrograms();
+                        schoolSuggest.classList.remove("is-visible");
+                    });
+                    schoolSuggest.appendChild(addBtn);
+                }
+
+                if (!items.length && upperQuery.length < 3) {
+                    schoolSuggest.classList.remove("is-visible");
+                    return;
+                }
+
                 schoolSuggest.classList.add("is-visible");
             };
 
             const fetchSchools = (query) => {
+                lastSchoolQuery = query;
                 fetch(`/pendaftaran/sekolah?q=${encodeURIComponent(query)}`)
                     .then((response) => response.json())
                     .then((payload) => {
@@ -582,7 +611,9 @@
                 setTimeout(() => {
                     schoolSuggest.classList.remove("is-visible");
                     if (!activeSchool) {
-                        schoolNameInput.value = schoolInput.value.trim();
+                        const upperName = normalizeSchoolName(schoolInput.value);
+                        schoolInput.value = upperName;
+                        schoolNameInput.value = upperName;
                         updateClassLevels(resolveLevelGroup(schoolNameInput.value));
                     }
                 }, 150);

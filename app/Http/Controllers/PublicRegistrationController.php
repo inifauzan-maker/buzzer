@@ -59,7 +59,36 @@ class PublicRegistrationController extends Controller
         ]);
 
         $schoolId = isset($data['school_id']) ? (int) $data['school_id'] : null;
-        $isSpecialSchool = $this->isSpecialSchool($data['school_name'] ?? '');
+        $schoolName = trim((string) ($data['school_name'] ?? ''));
+        $isSpecialSchool = $this->isSpecialSchool($schoolName);
+        if (! $schoolId && $schoolName !== '') {
+            $upperName = strtoupper($schoolName);
+            $data['school_name'] = $upperName;
+            $existingSchool = School::query()
+                ->whereRaw('UPPER(name) = ?', [$upperName])
+                ->first();
+
+            if ($existingSchool) {
+                $data['school_id'] = $existingSchool->id;
+                $schoolId = $existingSchool->id;
+                $isSpecialSchool = $this->isSpecialSchool($existingSchool->name);
+                if ($existingSchool->level_group && ! $this->classMatchesLevelGroup($data['class_level'] ?? '', $existingSchool->level_group)) {
+                    return $this->errorResponse(
+                        $request,
+                        ['class_level' => ['Jenjang kelas tidak sesuai dengan asal sekolah.']],
+                        422
+                    );
+                }
+            } else {
+                $levelGroup = $this->inferSchoolLevelGroup($data['class_level'] ?? '');
+                $newSchool = School::create([
+                    'name' => $upperName,
+                    'level_group' => $levelGroup,
+                ]);
+                $data['school_id'] = $newSchool->id;
+                $schoolId = $newSchool->id;
+            }
+        }
         if ($schoolId) {
             $school = School::query()->find($schoolId);
             if (! $school) {
@@ -226,6 +255,16 @@ class PublicRegistrationController extends Controller
             'VII', 'VIII', 'IX' => 'SMP',
             'X', 'XI' => 'X-XI',
             'XII' => 'XII',
+            default => null,
+        };
+    }
+
+    private function inferSchoolLevelGroup(string $classLevel): ?string
+    {
+        return match ($classLevel) {
+            'I', 'II', 'III', 'IV', 'V', 'VI' => 'SD',
+            'VII', 'VIII', 'IX' => 'SMP',
+            'X', 'XI', 'XII' => 'SMA',
             default => null,
         };
     }
