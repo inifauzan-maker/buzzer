@@ -25,15 +25,20 @@
             </thead>
             <tbody>
                 @forelse ($notifications as $notification)
+                    @php
+                        $statusLabel = $notification->status ?? (data_get($notification, 'read_at') ? 'Dibaca' : 'Baru');
+                        $statusClass = match (strtolower($statusLabel)) {
+                            'dibaca' => 'verified',
+                            'reviewed' => 'reviewed',
+                            'pending' => 'pending',
+                            default => 'pending',
+                        };
+                    @endphp
                     <tr>
                         <td>{{ $notification->title }}</td>
                         <td>{{ $notification->message ?? '-' }}</td>
                         <td>
-                            @if ($notification->read_at)
-                                <span class="status verified">Dibaca</span>
-                            @else
-                                <span class="status pending">Baru</span>
-                            @endif
+                            <span class="status {{ $statusClass }}">{{ $statusLabel }}</span>
                         </td>
                         <td>{{ $notification->created_at?->format('d M Y H:i') }}</td>
                     </tr>
