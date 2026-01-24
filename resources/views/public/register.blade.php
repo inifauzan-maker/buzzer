@@ -158,6 +158,10 @@
                 color: #0e0e0e;
             }
 
+            .is-hidden {
+                display: none;
+            }
+
             .text-muted {
                 font-size: 12px;
                 opacity: 0.7;
@@ -303,11 +307,19 @@
                     <form id="registration-form" class="form" method="POST" action="{{ route('public.register.store') }}">
                         @csrf
                         <section class="form-section section-block">
-                            <div class="section-heading">A. Biodata Siswa</div>
+                            <div class="section-heading">I. Biodata Siswa</div>
                             <div class="form-grid">
                                 <label class="input-field">
                                     Nama Lengkap
                                     <input type="text" id="full-name" name="full_name" placeholder="Nama lengkap" required />
+                                </label>
+                                <label class="input-field">
+                                    Tempat Lahir
+                                    <input type="text" id="birth-place" name="birth_place" placeholder="Tempat lahir" required />
+                                </label>
+                                <label class="input-field">
+                                    Tanggal Lahir
+                                    <input type="date" id="birth-date" name="birth_date" required />
                                 </label>
                                 <label class="input-field full">
                                     Asal Sekolah
@@ -333,12 +345,12 @@
                                     </select>
                                 </label>
                                 <label class="input-field">
-                                    Lokasi Belajar
-                                    <select id="study-location" name="study_location" required>
-                                        <option value="">Pilih lokasi belajar</option>
-                                        @foreach ($locations as $value => $label)
-                                            <option value="{{ $value }}">{{ $label }}</option>
-                                        @endforeach
+                                    Jurusan
+                                    <select id="major" name="major" required>
+                                        <option value="">Pilih jurusan</option>
+                                        <option value="IPA">IPA</option>
+                                        <option value="IPS">IPS</option>
+                                        <option value="Lainnya">Lainnya</option>
                                     </select>
                                 </label>
                                 <label class="input-field">
@@ -351,11 +363,47 @@
                                         required
                                     />
                                 </label>
+                                <label class="input-field">
+                                    Ukuran Kaos
+                                    <select id="shirt-size" name="shirt_size" required>
+                                        <option value="">Pilih ukuran</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
+                                </label>
+                                <label class="input-field is-hidden" id="shirt-size-other-wrap">
+                                    Ukuran Kaos (Lainnya)
+                                    <input type="text" id="shirt-size-other" name="shirt_size_other" placeholder="Isi ukuran lainnya" />
+                                </label>
+                                <label class="input-field">
+                                    Media Sosial yang sering digunakan
+                                    <select id="social-media" name="social_media" required>
+                                        <option value="">Pilih media sosial</option>
+                                        <option value="Facebook">Facebook</option>
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="Tiktok">Tiktok</option>
+                                        <option value="X">X (Twitter)</option>
+                                        <option value="Youtube">Youtube</option>
+                                        <option value="Lainnya">Lainnya</option>
+                                    </select>
+                                </label>
+                                <label class="input-field">
+                                    Lokasi Belajar
+                                    <select id="study-location" name="study_location" required>
+                                        <option value="">Pilih lokasi belajar</option>
+                                        @foreach ($locations as $value => $label)
+                                            <option value="{{ $value }}">{{ $label }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
                             </div>
                         </section>
 
                         <section class="form-section section-block">
-                            <div class="section-heading">B. Data Orang Tua / Wali</div>
+                            <div class="section-heading">II. Data Orang Tua / Wali</div>
                             <div class="form-grid">
                                 <label class="input-field">
                                     Nama Orang Tua/Wali
@@ -407,35 +455,64 @@
                                     Detail Alamat (Opsional)
                                     <textarea id="address-detail" name="address_detail" rows="2"></textarea>
                                 </label>
-                                <hr class="divider" />
-                                <label class="input-field full">
-                                    Sumber Informasi
-                                    <div class="checkbox-grid">
-                                        @php
-                                            $refSources = ['Website', 'Instagram', 'Tiktok', 'Facebook', 'X', 'Sekolah', 'Brosur', 'Teman', 'Keluarga', 'Lainnya'];
-                                        @endphp
-                                        @foreach ($refSources as $source)
-                                            <label class="checkbox-item">
-                                                <input type="checkbox" name="referral_sources[]" value="{{ $source }}" />
-                                                <span>{{ $source }}</span>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </label>
                             </div>
                         </section>
 
                         <section class="form-section section-block">
-                            <div class="section-heading">C. Program Bimbel</div>
+                            <div class="section-heading">III. Sumber Informasi</div>
                             <label class="input-field full">
-                                Program Bimbel
-                                <select id="program" name="program_id" required disabled>
-                                    <option value="">Pilih program sesuai jenjang kelas</option>
+                                Sumber Informasi
+                                <select id="referral-source" name="referral_sources">
+                                    <option value="">Pilih sumber informasi</option>
+                                    <option value="Website">Website</option>
+                                    <option value="Instagram">Instagram</option>
+                                    <option value="Tiktok">Tiktok</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="X">X (Twitter)</option>
+                                    <option value="Sekolah">Sekolah</option>
+                                    <option value="Brosur">Brosur</option>
+                                    <option value="Teman">Teman</option>
+                                    <option value="Keluarga">Keluarga</option>
+                                    <option value="Lainnya">Lainnya</option>
                                 </select>
-                                <small class="text-muted">
-                                    Program otomatis mengikuti jenjang kelas yang dipilih.
-                                </small>
                             </label>
+                        </section>
+
+                        <section class="form-section section-block">
+                            <div class="section-heading">IV. Program Bimbel</div>
+                            <div class="form-grid">
+                                <label class="input-field full">
+                                    Program Bimbel
+                                    <select id="program" name="program_id" required disabled>
+                                        <option value="">Pilih program sesuai jenjang kelas</option>
+                                    </select>
+                                    <small class="text-muted">
+                                        Program otomatis mengikuti jenjang kelas yang dipilih.
+                                    </small>
+                                </label>
+                                <label class="input-field">
+                                    Waktu Belajar - Hari
+                                    <select id="study-day" name="study_day" required>
+                                        <option value="">Pilih hari</option>
+                                        <option value="Sabtu">Sabtu</option>
+                                        <option value="Minggu">Minggu</option>
+                                    </select>
+                                </label>
+                                <label class="input-field">
+                                    Waktu Belajar - Jam
+                                    <select id="study-time" name="study_time" required>
+                                        <option value="">Pilih jam</option>
+                                    </select>
+                                </label>
+                                <label class="input-field">
+                                    Sistem Pembayaran
+                                    <select id="payment-system" name="payment_system" required>
+                                        <option value="">Pilih sistem pembayaran</option>
+                                        <option value="Lunas">Lunas</option>
+                                        <option value="Angsuran">Angsuran</option>
+                                    </select>
+                                </label>
+                            </div>
                         </section>
 
                         <div class="form-actions">
@@ -455,8 +532,14 @@
             const schoolNameInput = document.getElementById("school-name");
             const classSelect = document.getElementById("class-level");
             const programSelect = document.getElementById("program");
+            const shirtSizeSelect = document.getElementById("shirt-size");
+            const shirtSizeOtherWrap = document.getElementById("shirt-size-other-wrap");
+            const shirtSizeOtherInput = document.getElementById("shirt-size-other");
             const phoneInput = document.getElementById("phone-number");
             const studyLocationSelect = document.getElementById("study-location");
+            const studyDaySelect = document.getElementById("study-day");
+            const studyTimeSelect = document.getElementById("study-time");
+            const paymentSystemSelect = document.getElementById("payment-system");
             const provinceSelect = document.getElementById("province");
             const citySelect = document.getElementById("city");
             const districtSelect = document.getElementById("district");
@@ -473,6 +556,17 @@
             let activeSchool = null;
             let suggestTimer = null;
             let lastSchoolQuery = "";
+
+            const studyTimeOptions = {
+                Jakarta: [
+                    "Sesi 1 (09.00 - 13.00)",
+                    "Sesi 2 (14.00 - 18.00)",
+                ],
+                Bandung: [
+                    "Sesi 1 (10.00 - 12.00)",
+                    "Sesi 2 (13.00 - 15.00)",
+                ],
+            };
 
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
@@ -648,6 +742,59 @@
 
                 classSelect.disabled = false;
             };
+
+            const toggleShirtSizeOther = () => {
+                if (!shirtSizeSelect || !shirtSizeOtherWrap || !shirtSizeOtherInput) {
+                    return;
+                }
+                const isOther = shirtSizeSelect.value === "Lainnya";
+                shirtSizeOtherWrap.classList.toggle("is-hidden", !isOther);
+                if (!isOther) {
+                    shirtSizeOtherInput.value = "";
+                }
+            };
+
+            const resolveStudyLocation = (value) => {
+                if (!value) {
+                    return null;
+                }
+                return value === "Bandung" ? "Bandung" : "Jakarta";
+            };
+
+            const updateStudyTimes = () => {
+                if (!studyTimeSelect) {
+                    return;
+                }
+                studyTimeSelect.innerHTML = "";
+                const placeholder = document.createElement("option");
+                placeholder.value = "";
+                placeholder.textContent = "Pilih jam";
+                studyTimeSelect.appendChild(placeholder);
+
+                const locationKey = resolveStudyLocation(studyLocationSelect?.value);
+                if (!locationKey) {
+                    studyTimeSelect.disabled = true;
+                    return;
+                }
+                const options = studyTimeOptions[locationKey] || [];
+                options.forEach((label) => {
+                    const option = document.createElement("option");
+                    option.value = label;
+                    option.textContent = label;
+                    studyTimeSelect.appendChild(option);
+                });
+                studyTimeSelect.disabled = false;
+            };
+
+            if (shirtSizeSelect) {
+                shirtSizeSelect.addEventListener("change", toggleShirtSizeOther);
+                toggleShirtSizeOther();
+            }
+
+            if (studyLocationSelect) {
+                studyLocationSelect.addEventListener("change", updateStudyTimes);
+                updateStudyTimes();
+            }
 
             const resetPrograms = () => {
                 programSelect.innerHTML = "";
@@ -840,18 +987,31 @@
 
                 const payload = {
                     full_name: form.full_name.value.trim(),
+                    birth_place: form.birth_place.value.trim(),
+                    birth_date: form.birth_date.value,
                     school_id: schoolIdInput.value ? Number(schoolIdInput.value) : null,
                     school_name: schoolNameInput.value.trim(),
                     class_level: classSelect.value,
+                    major: form.major.value,
                     phone_number: phoneInput.value.trim(),
+                    shirt_size: form.shirt_size.value,
+                    shirt_size_other: form.shirt_size_other.value.trim(),
+                    social_media: form.social_media.value,
+                    parent_name: form.parent_name.value.trim(),
+                    parent_phone: form.parent_phone.value.trim(),
+                    parent_job: form.parent_job.value.trim(),
                     province: provinceSelect.selectedOptions[0]?.textContent ?? "",
                     city: citySelect.selectedOptions[0]?.textContent ?? "",
                     district: districtSelect.selectedOptions[0]?.textContent ?? "",
                     subdistrict: subdistrictSelect.selectedOptions[0]?.textContent ?? "",
                     postal_code: postalCodeInput.value.trim(),
                     address_detail: form.address_detail.value.trim(),
+                    referral_sources: form.referral_sources.value,
                     program_id: programSelect.value,
                     study_location: studyLocationSelect.value,
+                    study_day: studyDaySelect.value,
+                    study_time: studyTimeSelect.value,
+                    payment_system: paymentSystemSelect.value,
                 };
 
                 fetch(form.action, {

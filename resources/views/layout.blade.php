@@ -223,7 +223,8 @@
                 font-size: 13px;
                 color: #3f475d;
             }
-            .subnav a {
+            .subnav a,
+            .subnav span {
                 font-weight: 600;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
@@ -231,6 +232,11 @@
             }
             .subnav a.active {
                 color: var(--accent-dark);
+            }
+            .subnav .disabled {
+                color: rgba(63, 71, 93, 0.5);
+                cursor: default;
+                pointer-events: none;
             }
             .content {
                 padding: 26px;
@@ -514,6 +520,32 @@
                             </form>
                         </div>
                     </header>
+                    @php($role = auth()->user()->role)
+                    @if (in_array($role, ['superadmin', 'leader'], true))
+                        <nav class="subnav">
+                            @if ($role === 'superadmin')
+                                <span class="disabled">Dashboard</span>
+                                <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                    Buzzer Marketing
+                                </a>
+                                <a href="{{ route('produk.index') }}" class="{{ request()->routeIs('produk.*') ? 'active' : '' }}">
+                                    Produk
+                                </a>
+                                <a href="{{ route('data-siswa.index') }}" class="{{ request()->routeIs('data-siswa.*') ? 'active' : '' }}">
+                                    Data Siswa
+                                </a>
+                                <span class="disabled">Ads/Iklan</span>
+                                <span class="disabled">Media Sosial</span>
+                                <span class="disabled">Konten Marketing</span>
+                                <span class="disabled">Leads</span>
+                                <span class="disabled">Event</span>
+                            @else
+                                <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                    Buzzer Marketing
+                                </a>
+                            @endif
+                        </nav>
+                    @endif
                 @endauth
                 <main class="content">
                     @if (session('status'))

@@ -37,16 +37,21 @@ class PublicRegistrationController extends Controller
     {
         $data = $request->validate([
             'full_name' => 'required|string|min:3|max:255',
+            'birth_place' => 'required|string|max:120',
+            'birth_date' => 'required|date',
             'school_id' => 'nullable|integer',
             'school_name' => 'required|string|max:255',
             'class_level' => ['nullable', Rule::in(self::CLASS_LEVELS)],
+            'major' => ['required', Rule::in(['IPA', 'IPS', 'Lainnya'])],
+            'shirt_size' => ['required', Rule::in(['S', 'M', 'L', 'XL', 'Lainnya'])],
+            'shirt_size_other' => ['nullable', 'string', 'max:50'],
+            'social_media' => ['required', Rule::in(['Facebook', 'Instagram', 'Tiktok', 'X', 'Youtube', 'Lainnya'])],
             'study_location' => ['required', Rule::in(array_keys(self::STUDY_LOCATIONS))],
             'phone_number' => ['required', 'regex:/^62\\d{9,13}$/'],
             'parent_name' => ['required', 'string', 'max:255'],
             'parent_phone' => ['required', 'regex:/^62\\d{9,13}$/'],
             'parent_job' => ['nullable', 'string', 'max:120'],
-            'referral_sources' => ['nullable', 'array'],
-            'referral_sources.*' => ['string', Rule::in(['Website', 'Instagram', 'Tiktok', 'Facebook', 'X', 'Sekolah', 'Brosur', 'Teman', 'Keluarga', 'Lainnya'])],
+            'referral_sources' => ['nullable', 'string', Rule::in(['Website', 'Instagram', 'Tiktok', 'Facebook', 'X', 'Sekolah', 'Brosur', 'Teman', 'Keluarga', 'Lainnya'])],
             'province' => 'required|string|max:120',
             'city' => 'required|string|max:120',
             'district' => 'required|string|max:120',
@@ -54,6 +59,9 @@ class PublicRegistrationController extends Controller
             'postal_code' => 'required|string|max:10',
             'address_detail' => 'nullable|string|max:255',
             'program_id' => ['nullable', 'integer', 'exists:produk_items,id'],
+            'study_day' => ['required', Rule::in(['Sabtu', 'Minggu'])],
+            'study_time' => ['required', 'string', 'max:50'],
+            'payment_system' => ['required', Rule::in(['Lunas', 'Angsuran'])],
         ], [
             'phone_number.regex' => 'Nomor HP wajib diawali 62 dan terdiri dari 11-15 digit.',
         ]);
@@ -118,6 +126,14 @@ class PublicRegistrationController extends Controller
             );
         }
 
+        if (($data['shirt_size'] ?? '') === 'Lainnya' && empty($data['shirt_size_other'])) {
+            return $this->errorResponse(
+                $request,
+                ['shirt_size_other' => ['Isi ukuran kaos jika memilih Lainnya.']],
+                422
+            );
+        }
+
         if (! $isSpecialSchool && empty($data['program_id'])) {
             return $this->errorResponse(
                 $request,
@@ -150,7 +166,7 @@ class PublicRegistrationController extends Controller
         $data['phone'] = $data['phone_number'];
         $data['ip_address'] = $request->ip();
         $data['user_agent'] = $request->userAgent();
-        if (! empty($data['referral_sources'])) {
+        if (! empty($data['referral_sources']) && is_array($data['referral_sources'])) {
             $data['referral_sources'] = implode(', ', $data['referral_sources']);
         }
 
