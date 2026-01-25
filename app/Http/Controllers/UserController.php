@@ -42,12 +42,14 @@ class UserController extends Controller
             }
         }
 
+        $requiresTeam = in_array($data['role'], ['leader', 'staff'], true);
+
         $created = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'role' => $data['role'],
-            'team_id' => $data['role'] === 'superadmin' ? null : $data['team_id'],
+            'team_id' => $requiresTeam ? $data['team_id'] : null,
             'password' => Hash::make($data['password']),
         ]);
 
@@ -75,12 +77,14 @@ class UserController extends Controller
             }
         }
 
+        $requiresTeam = in_array($data['role'], ['leader', 'staff'], true);
+
         $update = [
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'role' => $data['role'],
-            'team_id' => $data['role'] === 'superadmin' ? null : $data['team_id'],
+            'team_id' => $requiresTeam ? $data['team_id'] : null,
         ];
 
         if (! empty($data['password'])) {
@@ -123,7 +127,7 @@ class UserController extends Controller
                 Rule::unique('users', 'email')->ignore($user?->id),
             ],
             'phone' => 'nullable|string|max:30',
-            'role' => 'required|in:superadmin,leader,staff,guest',
+            'role' => 'required|in:superadmin,admin,campaign_planner,ads_specialist,analyst,management,leader,staff,guest',
             'team_id' => [
                 Rule::requiredIf(fn () => in_array($request->input('role'), ['leader', 'staff'], true)),
                 'nullable',

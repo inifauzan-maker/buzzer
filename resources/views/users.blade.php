@@ -34,7 +34,7 @@
     </style>
 
     <h1>Manajemen User</h1>
-    <p class="muted">Kelola akun superadmin, leader, dan staff.</p>
+    <p class="muted">Kelola akun admin, tim, dan role ads.</p>
 
     <div class="card" style="margin-bottom: 20px;">
         <h3>Tambah User</h3>
@@ -60,6 +60,11 @@
                     <select id="role" name="role" required>
                         <option value="">Pilih peran</option>
                         <option value="superadmin" @selected(old('role') === 'superadmin')>Superadmin</option>
+                        <option value="admin" @selected(old('role') === 'admin')>Admin Ads</option>
+                        <option value="campaign_planner" @selected(old('role') === 'campaign_planner')>Campaign Planner</option>
+                        <option value="ads_specialist" @selected(old('role') === 'ads_specialist')>Ads Specialist</option>
+                        <option value="analyst" @selected(old('role') === 'analyst')>Analyst</option>
+                        <option value="management" @selected(old('role') === 'management')>Management</option>
                         <option value="leader" @selected(old('role') === 'leader')>Leader</option>
                         <option value="staff" @selected(old('role') === 'staff')>Staff</option>
                         <option value="guest" @selected(old('role') === 'guest')>Guest</option>
@@ -136,6 +141,11 @@
                                                 <label>Peran</label>
                                                 <select name="role" required>
                                                     <option value="superadmin" @selected(old('role', $user->role) === 'superadmin')>Superadmin</option>
+                                                    <option value="admin" @selected(old('role', $user->role) === 'admin')>Admin Ads</option>
+                                                    <option value="campaign_planner" @selected(old('role', $user->role) === 'campaign_planner')>Campaign Planner</option>
+                                                    <option value="ads_specialist" @selected(old('role', $user->role) === 'ads_specialist')>Ads Specialist</option>
+                                                    <option value="analyst" @selected(old('role', $user->role) === 'analyst')>Analyst</option>
+                                                    <option value="management" @selected(old('role', $user->role) === 'management')>Management</option>
                                                     <option value="leader" @selected(old('role', $user->role) === 'leader')>Leader</option>
                                                     <option value="staff" @selected(old('role', $user->role) === 'staff')>Staff</option>
                                                     <option value="guest" @selected(old('role', $user->role) === 'guest')>Guest</option>

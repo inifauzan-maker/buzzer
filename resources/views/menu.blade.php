@@ -219,6 +219,8 @@
                 @php
                     $userRole = auth()->user()->role ?? 'guest';
                     $isAdmin = $userRole === 'superadmin';
+                    $adsRoles = ['admin', 'campaign_planner', 'ads_specialist', 'analyst', 'management'];
+                    $isAdsUser = $isAdmin || in_array($userRole, $adsRoles, true);
                     $canProduk = in_array($userRole, ['superadmin', 'leader', 'staff'], true);
                     $canDataSiswa = $userRole === 'superadmin';
                 @endphp
@@ -277,7 +279,7 @@
                             </span>
                         </div>
                     @endif
-                    <div class="menu-card card-ads disabled" title="Segera hadir" aria-disabled="true">
+                    <a class="menu-card card-ads" href="{{ route('ads.index') }}">
                         <span class="card-content">
                             <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
                                 <path fill="white" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
@@ -285,7 +287,7 @@
                             <span class="card-label">Ads</span>
                             <span class="card-label">Iklan</span>
                         </span>
-                    </div>
+                    </a>
                     <div class="menu-card card-sosial disabled" title="Segera hadir" aria-disabled="true">
                         <span class="card-content">
                             <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -318,6 +320,16 @@
                             <span>Event</span>
                         </span>
                     </div>
+                @elseif ($isAdsUser)
+                    <a class="menu-card card-ads" href="{{ route('ads.index') }}">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
+                            </svg>
+                            <span class="card-label">Ads</span>
+                            <span class="card-label">Iklan</span>
+                        </span>
+                    </a>
                 @else
                     <a class="menu-card card-buzzer" href="{{ route('dashboard') }}">
                         <span class="card-content">

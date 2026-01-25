@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\AdsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ConversionController;
@@ -61,6 +62,14 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:superadmin,leader,staff')->group(function () {
         Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+    });
+
+    Route::middleware('role:superadmin,admin,campaign_planner,ads_specialist,analyst,management')->group(function () {
+        Route::get('/ads', [AdsController::class, 'index'])->name('ads.index');
+        Route::post('/ads/campaigns', [AdsController::class, 'storeCampaign'])->name('ads.campaigns.store');
+        Route::post('/ads/metrics', [AdsController::class, 'storeMetric'])->name('ads.metrics.store');
+        Route::get('/ads/export/csv', [AdsController::class, 'exportCsv'])->name('ads.export.csv');
+        Route::get('/ads/export/pdf', [AdsController::class, 'exportPrint'])->name('ads.export.pdf');
     });
 
     Route::middleware('role:superadmin')->group(function () {

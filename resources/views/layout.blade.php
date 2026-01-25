@@ -440,8 +440,8 @@
     </head>
     <body>
         <div class="app-shell">
-            @auth
-                <aside class="sidebar">
+                @auth
+                    <aside class="sidebar">
                     <div class="brand-block">
                         <div class="brand-title">SIVMI</div>
                         <div class="brand-sub">Buzzer Marketing</div>
@@ -453,6 +453,9 @@
                             <div class="badge">{{ strtoupper(auth()->user()->role) }}</div>
                         </div>
                     </div>
+                    @php
+                        $adsRoles = ['admin', 'campaign_planner', 'ads_specialist', 'analyst', 'management'];
+                    @endphp
                     <nav class="side-nav">
                         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <span class="nav-dot"></span> Dashboard
@@ -460,6 +463,11 @@
                         <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
                             <span class="nav-dot"></span> Leaderboard
                         </a>
+                        @if (in_array(auth()->user()->role, array_merge(['superadmin'], $adsRoles), true))
+                            <a href="{{ route('ads.index') }}" class="nav-link {{ request()->routeIs('ads.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Ads/Iklan
+                            </a>
+                        @endif
                         @if (auth()->user()->role === 'leader')
                             <a href="{{ route('targets.index') }}" class="nav-link {{ request()->routeIs('targets.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Target Tim
@@ -530,8 +538,11 @@
                             </form>
                         </div>
                     </header>
-                    @php($role = auth()->user()->role)
-                    @if (in_array($role, ['superadmin', 'leader'], true))
+                    @php
+                        $role = auth()->user()->role;
+                        $adsRoles = ['admin', 'campaign_planner', 'ads_specialist', 'analyst', 'management'];
+                    @endphp
+                    @if (in_array($role, array_merge(['superadmin', 'leader'], $adsRoles), true))
                         <nav class="subnav">
                             @if ($role === 'superadmin')
                                 <span class="disabled">Dashboard</span>
@@ -544,11 +555,17 @@
                                 <a href="{{ route('data-siswa.index') }}" class="{{ request()->routeIs('data-siswa.*') ? 'active' : '' }}">
                                     Data Siswa
                                 </a>
-                                <span class="disabled">Ads/Iklan</span>
+                                <a href="{{ route('ads.index') }}" class="{{ request()->routeIs('ads.*') ? 'active' : '' }}">
+                                    Ads/Iklan
+                                </a>
                                 <span class="disabled">Media Sosial</span>
                                 <span class="disabled">Konten Marketing</span>
                                 <span class="disabled">Leads</span>
                                 <span class="disabled">Event</span>
+                            @elseif (in_array($role, $adsRoles, true))
+                                <a href="{{ route('ads.index') }}" class="{{ request()->routeIs('ads.*') ? 'active' : '' }}">
+                                    Ads/Iklan
+                                </a>
                             @else
                                 <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
                                     Buzzer Marketing
