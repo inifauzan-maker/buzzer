@@ -13,8 +13,12 @@
                 --bg-2: #e3f1f0;
                 --ink: #1f2937;
                 --muted: #6b7280;
-                --accent: #12b5c9;
-                --accent-dark: #0e9aa8;
+                --primary: #0a0a5c;
+                --secondary: #c20f31;
+                --accent-yellow: #c6bb0c;
+                --accent-orange: #ff7e24;
+                --accent: var(--primary);
+                --accent-dark: var(--secondary);
                 --card: #ffffff;
                 --border: #e2e8f0;
                 --shadow: 0 14px 30px rgba(15, 23, 42, 0.12);

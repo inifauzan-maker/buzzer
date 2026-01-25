@@ -7,18 +7,22 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&display=swap');
             :root {
-                --bg-1: #0d0507;
-                --bg-2: #2a0b10;
+                --bg-1: #0a0a5c;
+                --bg-2: #1a0a2a;
                 --ink: #f8f5f1;
                 --muted: rgba(248, 245, 241, 0.65);
-                --glow: 0 18px 40px rgba(255, 91, 153, 0.25);
+                --glow: 0 18px 40px rgba(255, 126, 36, 0.25);
+                --primary: #0a0a5c;
+                --secondary: #c20f31;
+                --accent-yellow: #c6bb0c;
+                --accent-orange: #ff7e24;
             }
             * { box-sizing: border-box; }
             body {
                 margin: 0;
                 min-height: 100vh;
                 font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
-                background: radial-gradient(circle at top, #321014 0%, var(--bg-1) 45%, #050202 100%);
+                background: radial-gradient(circle at top, rgba(194, 15, 49, 0.35) 0%, var(--bg-1) 45%, #050202 100%);
                 color: var(--ink);
                 display: grid;
                 place-items: center;
@@ -51,14 +55,15 @@
                 animation-delay: -3s;
             }
             .menu-actions {
-                position: absolute;
-                top: 0;
-                right: 0;
+                position: relative;
+                width: 100%;
                 display: flex;
                 gap: 10px;
                 align-items: center;
                 font-size: 13px;
                 color: var(--muted);
+                justify-content: center;
+                margin-bottom: 18px;
             }
             .menu-actions form {
                 margin: 0;
@@ -147,19 +152,19 @@
                 filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
             }
             .card-buzzer {
-                background: linear-gradient(145deg, #ff6aa8, #ff7a57);
+                background: linear-gradient(145deg, var(--secondary), var(--accent-orange));
             }
             .card-konten {
-                background: linear-gradient(145deg, #5f6bff, #2ac7ff);
+                background: linear-gradient(145deg, var(--primary), var(--accent-yellow));
             }
             .card-ads {
-                background: linear-gradient(145deg, #f725ff, #6d5bff);
+                background: linear-gradient(145deg, var(--accent-yellow), var(--accent-orange));
             }
             .card-sosial {
-                background: linear-gradient(145deg, #ff6f6f, #ffd65a);
+                background: linear-gradient(145deg, var(--accent-orange), var(--secondary));
             }
             .card-ghost {
-                background: linear-gradient(145deg, #7b2cff, #36d1ff);
+                background: linear-gradient(145deg, var(--primary), var(--secondary));
                 opacity: 0.75;
             }
             .menu-card.disabled {
@@ -183,8 +188,6 @@
             }
             @media (max-width: 720px) {
                 .menu-actions {
-                    position: static;
-                    justify-content: center;
                     margin-bottom: 12px;
                 }
                 .menu-card {

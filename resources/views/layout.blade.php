@@ -9,8 +9,12 @@
                 --bg: #f1f1f1;
                 --ink: #1f2937;
                 --muted: #6b7280;
-                --accent: #12b5c9;
-                --accent-dark: #0e9aa8;
+                --primary: #0a0a5c;
+                --secondary: #c20f31;
+                --accent-yellow: #c6bb0c;
+                --accent-orange: #ff7e24;
+                --accent: var(--primary);
+                --accent-dark: var(--secondary);
                 --sidebar: #3f475d;
                 --sidebar-dark: #32394d;
                 --card: #ffffff;
@@ -80,9 +84,9 @@
                 padding: 4px 10px;
                 border-radius: 999px;
                 font-size: 11px;
-                background: rgba(18, 181, 201, 0.2);
-                color: #eafcfe;
-                border: 1px solid rgba(18, 181, 201, 0.4);
+                background: rgba(198, 187, 12, 0.25);
+                color: #fff6c3;
+                border: 1px solid rgba(198, 187, 12, 0.6);
             }
             .side-nav {
                 display: grid;
@@ -106,7 +110,7 @@
             }
             .nav-link.active,
             .nav-link:hover {
-                background: rgba(18, 181, 201, 0.2);
+                background: rgba(10, 10, 92, 0.25);
                 color: #ffffff;
             }
             .nav-link.active .nav-dot,
@@ -119,7 +123,7 @@
                 height: 18px;
                 padding: 0 5px;
                 border-radius: 999px;
-                background: #ef4444;
+                background: var(--secondary);
                 color: #fff;
                 font-size: 10px;
                 font-weight: 700;
@@ -206,7 +210,7 @@
                 height: 18px;
                 padding: 0 4px;
                 border-radius: 999px;
-                background: #ef4444;
+                background: var(--secondary);
                 color: #fff;
                 font-size: 10px;
                 font-weight: 700;
@@ -222,6 +226,8 @@
                 gap: 14px;
                 font-size: 13px;
                 color: #3f475d;
+                justify-content: center;
+                text-align: center;
             }
             .subnav a,
             .subnav span {
@@ -377,10 +383,10 @@
             .flash {
                 padding: 12px 16px;
                 border-radius: 12px;
-                background: #ecfeff;
-                color: #0f766e;
+                background: rgba(255, 126, 36, 0.12);
+                color: var(--secondary);
                 margin-bottom: 16px;
-                border: 1px solid rgba(15, 118, 110, 0.2);
+                border: 1px solid rgba(255, 126, 36, 0.35);
             }
             .actions {
                 display: flex;
@@ -400,7 +406,11 @@
                 .sidebar { position: sticky; top: 0; z-index: 10; }
                 .topbar { flex-direction: column; align-items: stretch; }
                 .search { max-width: 100%; }
-                .subnav { overflow-x: auto; }
+                .subnav {
+                    overflow-x: auto;
+                    justify-content: flex-start;
+                    text-align: left;
+                }
             }
             @media (max-width: 720px) {
                 .sidebar { padding: 14px; gap: 12px; }

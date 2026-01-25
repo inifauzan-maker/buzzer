@@ -9,7 +9,11 @@
                 --bg: #f4f1ea;
                 --ink: #1f2937;
                 --muted: #6b7280;
-                --accent: #0f766e;
+                --primary: #0a0a5c;
+                --secondary: #c20f31;
+                --accent-yellow: #c6bb0c;
+                --accent-orange: #ff7e24;
+                --accent: var(--primary);
                 --card: #fff8f0;
                 --border: #e2e8f0;
                 --shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
@@ -30,7 +34,7 @@
                 padding: 28px;
                 border-radius: 18px;
                 box-shadow: var(--shadow);
-                border: 1px solid rgba(15, 118, 110, 0.1);
+                border: 1px solid rgba(10, 10, 92, 0.18);
                 width: min(420px, 100%);
             }
             h1 {
