@@ -295,7 +295,7 @@
             <div class="container">
                 <header class="page-header">
                     <h1 class="page-title">PENDAFTARAN</h1>
-                    <p class="page-subtitle">Formulir pendaftaran bimbel marketing SIVMI.</p>
+                    <p class="page-subtitle">Formulir Pendaftaran Bimbel Gambar Villa Merah.</p>
                 </header>
 
                 <section class="card">
