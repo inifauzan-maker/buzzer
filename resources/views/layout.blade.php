@@ -455,67 +455,93 @@
                     </div>
                     @php
                         $adsRoles = ['admin', 'campaign_planner', 'ads_specialist', 'analyst', 'management'];
+                        $module = 'buzzer';
+
+                        if (request()->routeIs('produk.*')) {
+                            $module = 'produk';
+                        } elseif (request()->routeIs('data-siswa.*')) {
+                            $module = 'data-siswa';
+                        } elseif (request()->routeIs('akademik.*')) {
+                            $module = 'akademik';
+                        } elseif (request()->routeIs('keuangan.*')) {
+                            $module = 'keuangan';
+                        } elseif (request()->routeIs('ads.*')) {
+                            $module = 'ads';
+                        }
                     @endphp
                     <nav class="side-nav">
-                        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Dashboard
+                        <a href="{{ route('menu') }}" class="nav-link">
+                            <span class="nav-dot"></span> Kembali ke Menu Utama
                         </a>
-                        <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Leaderboard
-                        </a>
-                        @if (in_array(auth()->user()->role, array_merge(['superadmin'], $adsRoles), true))
+                        @if ($module === 'buzzer')
+                            <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Dashboard
+                            </a>
+                            <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Leaderboard
+                            </a>
+                            @if (in_array(auth()->user()->role, array_merge(['superadmin'], $adsRoles), true))
+                                <a href="{{ route('ads.index') }}" class="nav-link {{ request()->routeIs('ads.*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Ads/Iklan
+                                </a>
+                            @endif
+                            @if (auth()->user()->role === 'leader')
+                                <a href="{{ route('targets.index') }}" class="nav-link {{ request()->routeIs('targets.*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Target Tim
+                                </a>
+                            @endif
+                            @if (in_array(auth()->user()->role, ['leader', 'staff'], true))
+                                <a href="{{ route('chat.index') }}" class="nav-link {{ request()->routeIs('chat.*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Chat
+                                    @if (!empty($chatUnreadCount))
+                                        <span class="nav-badge">{{ $chatUnreadCount }}</span>
+                                    @endif
+                                </a>
+                            @endif
+                            @if (auth()->user()->role === 'superadmin')
+                                <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Tim
+                                </a>
+                                <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> User
+                                </a>
+                                <a href="{{ route('targets.admin') }}" class="nav-link {{ request()->routeIs('targets.admin') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Target Tim
+                                </a>
+                            @endif
+                            <a href="{{ route('activities.index') }}" class="nav-link {{ request()->routeIs('activities.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Aktivitas
+                            </a>
+                            <a href="{{ route('conversions.index') }}" class="nav-link {{ request()->routeIs('conversions.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Konversi
+                            </a>
+                            @if (auth()->user()->role === 'superadmin')
+                                <a href="{{ route('settings.points') }}" class="nav-link {{ request()->routeIs('settings.points*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Settings Poin
+                                </a>
+                                <a href="{{ route('activity-logs.index') }}" class="nav-link {{ request()->routeIs('activity-logs.*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Log Aktivitas
+                                </a>
+                            @endif
+                        @elseif ($module === 'produk')
+                            <a href="{{ route('produk.index') }}" class="nav-link {{ request()->routeIs('produk.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Produk
+                            </a>
+                        @elseif ($module === 'data-siswa')
+                            <a href="{{ route('data-siswa.index') }}" class="nav-link {{ request()->routeIs('data-siswa.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Data Siswa
+                            </a>
+                        @elseif ($module === 'akademik')
+                            <a href="{{ route('akademik.index') }}" class="nav-link {{ request()->routeIs('akademik.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Akademik
+                            </a>
+                        @elseif ($module === 'keuangan')
+                            <a href="{{ route('keuangan.index') }}" class="nav-link {{ request()->routeIs('keuangan.*') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Keuangan
+                            </a>
+                        @elseif ($module === 'ads')
                             <a href="{{ route('ads.index') }}" class="nav-link {{ request()->routeIs('ads.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Ads/Iklan
-                            </a>
-                        @endif
-                        @if (auth()->user()->role === 'leader')
-                            <a href="{{ route('targets.index') }}" class="nav-link {{ request()->routeIs('targets.*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Target Tim
-                            </a>
-                        @endif
-                        @if (in_array(auth()->user()->role, ['leader', 'staff'], true))
-                            <a href="{{ route('chat.index') }}" class="nav-link {{ request()->routeIs('chat.*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Chat
-                                @if (!empty($chatUnreadCount))
-                                    <span class="nav-badge">{{ $chatUnreadCount }}</span>
-                                @endif
-                            </a>
-                        @endif
-                    @if (in_array(auth()->user()->role, ['superadmin', 'akademik'], true))
-                        <a href="{{ route('akademik.index') }}" class="nav-link {{ request()->routeIs('akademik.*') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Akademik
-                        </a>
-                    @endif
-                    @if (in_array(auth()->user()->role, ['superadmin', 'keuangan'], true))
-                        <a href="{{ route('keuangan.index') }}" class="nav-link {{ request()->routeIs('keuangan.*') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Keuangan
-                        </a>
-                    @endif
-                    @if (auth()->user()->role === 'superadmin')
-                        <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Tim
-                        </a>
-                            <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> User
-                            </a>
-                            <a href="{{ route('targets.admin') }}" class="nav-link {{ request()->routeIs('targets.admin') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Target Tim
-                            </a>
-                        @endif
-                        <a href="{{ route('activities.index') }}" class="nav-link {{ request()->routeIs('activities.*') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Aktivitas
-                        </a>
-                        <a href="{{ route('conversions.index') }}" class="nav-link {{ request()->routeIs('conversions.*') ? 'active' : '' }}">
-                            <span class="nav-dot"></span> Konversi
-                        </a>
-                        @if (auth()->user()->role === 'superadmin')
-                            <a href="{{ route('settings.points') }}" class="nav-link {{ request()->routeIs('settings.points*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Settings Poin
-                            </a>
-                        @endif
-                        @if (auth()->user()->role === 'superadmin')
-                            <a href="{{ route('activity-logs.index') }}" class="nav-link {{ request()->routeIs('activity-logs.*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Log Aktivitas
                             </a>
                         @endif
                     </nav>
