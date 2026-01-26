@@ -13,10 +13,7 @@ class KeuanganController extends Controller
 {
     public function index(Request $request): View
     {
-        $user = $request->user();
-        if (! $user || $user->role !== 'superadmin') {
-            abort(403, 'Akses ditolak.');
-        }
+        $this->ensureRoles($request, ['superadmin', 'keuangan']);
 
         $registrations = PublicRegistration::query()
             ->with('programItem')
@@ -31,7 +28,7 @@ class KeuanganController extends Controller
 
     public function uploadProof(Request $request, PublicRegistration $registration): RedirectResponse
     {
-        $this->ensureSuperadmin($request);
+        $this->ensureRoles($request, ['superadmin', 'keuangan']);
 
         $data = $request->validate([
             'payment_proof' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:4096'],
@@ -52,7 +49,7 @@ class KeuanganController extends Controller
 
     public function verifyPayment(Request $request, PublicRegistration $registration): RedirectResponse
     {
-        $this->ensureSuperadmin($request);
+        $this->ensureRoles($request, ['superadmin', 'keuangan']);
 
         if (! $registration->payment_proof_path) {
             return back()->withErrors([
@@ -77,7 +74,7 @@ class KeuanganController extends Controller
 
     public function paymentInvoice(Request $request, PublicRegistration $registration)
     {
-        $this->ensureSuperadmin($request);
+        $this->ensureRoles($request, ['superadmin', 'keuangan']);
 
         $program = $registration->programItem;
         $invoiceNumber = $registration->payment_invoice_number ?? $this->makePaymentInvoiceNumber($registration);
@@ -104,10 +101,10 @@ class KeuanganController extends Controller
         return $pdf->download($filename);
     }
 
-    private function ensureSuperadmin(Request $request): void
+    private function ensureRoles(Request $request, array $roles): void
     {
         $user = $request->user();
-        if (! $user || $user->role !== 'superadmin') {
+        if (! $user || ! in_array($user->role, $roles, true)) {
             abort(403, 'Akses ditolak.');
         }
     }

@@ -481,10 +481,20 @@
                                 @endif
                             </a>
                         @endif
-                        @if (auth()->user()->role === 'superadmin')
-                            <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Tim
-                            </a>
+                    @if (in_array(auth()->user()->role, ['superadmin', 'akademik'], true))
+                        <a href="{{ route('akademik.index') }}" class="nav-link {{ request()->routeIs('akademik.*') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Akademik
+                        </a>
+                    @endif
+                    @if (in_array(auth()->user()->role, ['superadmin', 'keuangan'], true))
+                        <a href="{{ route('keuangan.index') }}" class="nav-link {{ request()->routeIs('keuangan.*') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Keuangan
+                        </a>
+                    @endif
+                    @if (auth()->user()->role === 'superadmin')
+                        <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
+                            <span class="nav-dot"></span> Tim
+                        </a>
                             <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> User
                             </a>
@@ -542,7 +552,7 @@
                         $role = auth()->user()->role;
                         $adsRoles = ['admin', 'campaign_planner', 'ads_specialist', 'analyst', 'management'];
                     @endphp
-                    @if (in_array($role, array_merge(['superadmin', 'leader'], $adsRoles), true))
+                    @if (in_array($role, array_merge(['superadmin', 'leader', 'akademik', 'keuangan'], $adsRoles), true))
                         <nav class="subnav">
                             @if ($role === 'superadmin')
                                 <span class="disabled">Dashboard</span>
@@ -568,6 +578,14 @@
                                 <span class="disabled">Konten Marketing</span>
                                 <span class="disabled">Leads</span>
                                 <span class="disabled">Event</span>
+                            @elseif ($role === 'akademik')
+                                <a href="{{ route('akademik.index') }}" class="{{ request()->routeIs('akademik.*') ? 'active' : '' }}">
+                                    Akademik
+                                </a>
+                            @elseif ($role === 'keuangan')
+                                <a href="{{ route('keuangan.index') }}" class="{{ request()->routeIs('keuangan.*') ? 'active' : '' }}">
+                                    Keuangan
+                                </a>
                             @elseif (in_array($role, $adsRoles, true))
                                 <a href="{{ route('ads.index') }}" class="{{ request()->routeIs('ads.*') ? 'active' : '' }}">
                                     Ads/Iklan

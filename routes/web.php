@@ -56,14 +56,6 @@ Route::middleware('auth')->group(function () {
             ->name('data-siswa.send-invoice');
         Route::get('/data-siswa/{registration}/invoice', [DataSiswaController::class, 'invoice'])
             ->name('data-siswa.invoice');
-        Route::get('/akademik', [AkademikController::class, 'index'])->name('akademik.index');
-        Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
-        Route::post('/keuangan/{registration}/proof', [KeuanganController::class, 'uploadProof'])
-            ->name('keuangan.proof');
-        Route::post('/keuangan/{registration}/verify', [KeuanganController::class, 'verifyPayment'])
-            ->name('keuangan.verify');
-        Route::get('/keuangan/{registration}/invoice', [KeuanganController::class, 'paymentInvoice'])
-            ->name('keuangan.invoice');
         Route::post('/teams/members', [TeamController::class, 'storeMember'])->name('teams.members.store');
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -74,6 +66,20 @@ Route::middleware('auth')->group(function () {
         Route::post('/activity-logs/clear', [SystemActivityLogController::class, 'clear'])->name('activity-logs.clear');
         Route::get('/settings/points', [PointSettingController::class, 'index'])->name('settings.points');
         Route::post('/settings/points', [PointSettingController::class, 'update'])->name('settings.points.update');
+    });
+
+    Route::middleware('role:superadmin,akademik')->group(function () {
+        Route::get('/akademik', [AkademikController::class, 'index'])->name('akademik.index');
+    });
+
+    Route::middleware('role:superadmin,keuangan')->group(function () {
+        Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
+        Route::post('/keuangan/{registration}/proof', [KeuanganController::class, 'uploadProof'])
+            ->name('keuangan.proof');
+        Route::post('/keuangan/{registration}/verify', [KeuanganController::class, 'verifyPayment'])
+            ->name('keuangan.verify');
+        Route::get('/keuangan/{registration}/invoice', [KeuanganController::class, 'paymentInvoice'])
+            ->name('keuangan.invoice');
     });
 
     Route::middleware('role:superadmin,leader,staff')->group(function () {

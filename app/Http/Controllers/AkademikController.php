@@ -11,7 +11,7 @@ class AkademikController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
-        if (! $user || $user->role !== 'superadmin') {
+        if (! $user || ! in_array($user->role, ['superadmin', 'akademik'], true)) {
             abort(403, 'Akses ditolak.');
         }
 

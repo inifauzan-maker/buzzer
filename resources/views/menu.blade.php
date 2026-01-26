@@ -227,6 +227,8 @@
                 @php
                     $userRole = auth()->user()->role ?? 'guest';
                     $isAdmin = $userRole === 'superadmin';
+                    $isAkademik = $userRole === 'akademik';
+                    $isKeuangan = $userRole === 'keuangan';
                     $adsRoles = ['admin', 'campaign_planner', 'ads_specialist', 'analyst', 'management'];
                     $isAdsUser = $isAdmin || in_array($userRole, $adsRoles, true);
                     $canProduk = in_array($userRole, ['superadmin', 'leader', 'staff'], true);
@@ -352,6 +354,24 @@
                             </svg>
                             <span class="card-label">Ads</span>
                             <span class="card-label">Iklan</span>
+                        </span>
+                    </a>
+                @elseif ($isAkademik)
+                    <a class="menu-card card-akademik" href="{{ route('akademik.index') }}">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M12 3 2 8l10 5 10-5-10-5Zm-6 7v6a8 8 0 0 0 12 0v-6l-6 3-6-3Z"/>
+                            </svg>
+                            <span>Akademik</span>
+                        </span>
+                    </a>
+                @elseif ($isKeuangan)
+                    <a class="menu-card card-keuangan" href="{{ route('keuangan.index') }}">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2v8h16V8H4Zm10 2h4v4h-4v-4Z"/>
+                            </svg>
+                            <span>Keuangan</span>
                         </span>
                     </a>
                 @else
