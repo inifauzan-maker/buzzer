@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PublicRegistration;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,14 @@ class AkademikController extends Controller
             abort(403, 'Akses ditolak.');
         }
 
-        return view('akademik.index');
+        $students = PublicRegistration::query()
+            ->with('academicForwardedBy')
+            ->where('validation_status', 'validated')
+            ->orderByDesc('created_at')
+            ->paginate(20);
+
+        return view('akademik.index', [
+            'students' => $students,
+        ]);
     }
 }

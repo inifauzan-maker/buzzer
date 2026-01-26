@@ -96,6 +96,223 @@ Ringkas fitur:
 - Monitoring kampanye (tayangan, jangkauan, klik, leads, closing, engagement).
 - Pelaporan & evaluasi (ringkasan per platform, grafik tren, target vs realisasi).
 
+## Modul Akademik & Keuangan
+### Alur Proses
+1. Siswa
+   - Mengisi biodata siswa (pendaftaran publik).
+   - Biodata siswa masuk ke Bagian Administrasi (Data Siswa).
+   - Siswa menerima jadwal KBM.
+   - Siswa menerima laporan kemajuan siswa.
+2. Bagian Administrasi
+   - Menerima biodata siswa.
+   - Memvalidasi biodata siswa.
+   - Mencatat biodata siswa -> menghasilkan daftar siswa.
+   - Mengirim invoice sesuai program bimbel via WhatsApp ke nomor orang tua/wali.
+   - Membuat daftar kelas.
+   - Daftar kelas dikirim ke Bagian Akademik.
+   - Daftar kelas juga mendukung pembuatan jadwal KBM.
+3. Bagian Akademik
+   - Mengolah daftar kelas, data pelajaran, dan data pengajar.
+   - Mencatat data pelajaran dan data pengajar -> menghasilkan daftar pelajaran & daftar pengajar.
+   - Membuat jadwal KBM.
+   - Membuat daftar absensi dan nilai siswa.
+   - Menghasilkan laporan kemajuan siswa.
+4. Pengajar
+   - Menyediakan data pengajar.
+   - Menerima jadwal KBM.
+   - Mencatat absensi & nilai siswa.
+   - Mengirim kembali daftar absensi dan nilai siswa ke Bagian Akademik.
+
+### Output Utama
+- Jadwal KBM (untuk siswa & pengajar).
+- Laporan kemajuan siswa (untuk siswa).
+
+### Matriks Proses (Ringkas)
+| Pelaku | Kegiatan / Data yang Diolah | Hasil / Output | Diteruskan ke |
+| --- | --- | --- | --- |
+| Siswa | Mengisi biodata siswa | Biodata siswa | Bagian Administrasi |
+| Siswa | Menerima jadwal KBM | Jadwal KBM | - |
+| Siswa | Menerima laporan kemajuan siswa | Laporan Kemajuan Siswa | - |
+| Bagian Administrasi | Menerima dan memvalidasi biodata siswa | Status validasi | - |
+| Bagian Administrasi | Mencatat biodata siswa | Daftar Siswa | - |
+| Bagian Administrasi | Mengirim invoice sesuai program bimbel | Invoice via WA | Orang Tua/Wali |
+| Bagian Administrasi | Membuat daftar kelas | Daftar Kelas | Bagian Akademik |
+| Bagian Akademik | Mengolah daftar kelas, data pelajaran, data pengajar | Daftar Pelajaran & Daftar Pengajar | - |
+| Bagian Akademik | Membuat jadwal KBM | Jadwal KBM | Siswa & Pengajar |
+| Bagian Akademik | Membuat daftar absensi & nilai siswa | Data Absensi dan Nilai | Pengajar & Administrasi |
+| Bagian Akademik | Membuat laporan kemajuan siswa | Laporan Kemajuan Siswa | Siswa |
+| Pengajar | Menyediakan data pengajar | Data Pengajar | Bagian Akademik |
+| Pengajar | Menerima jadwal KBM | Jadwal KBM | - |
+| Pengajar | Mencatat absensi & nilai siswa | Daftar Absensi dan Nilai Siswa | Bagian Akademik |
+
+### Tabel Database (Akademik & Keuangan)
+#### TSiswa (data siswa)
+- Primary key: No_Regs
+- Foreign key: Kd_Bimbel, Periode, Kd_Kelas
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | No_Regs | Varchar | 11 |
+| 2 | Tgl_Daftar | Datetime | 8 |
+| 3 | No_Urut | Varchar | 8 |
+| 4 | Nama | Varchar | 25 |
+| 5 | Jenis kelamin | Varchar | 5 |
+| 6 | Tmpt_Lahir | Varchar | 20 |
+| 7 | Tgl_Lahir | Datetime | 8 |
+| 8 | No_WA | Varchar | 25 |
+| 9 | Asal_Sekolah | Varchar | 25 |
+| 10 | Nama_Ortu | Varchar | 25 |
+| 11 | Alamat_Ortu | Varchar | 35 |
+| 12 | No_WA_Ortu | Varchar | 25 |
+| 13 | Pekerjaan_Ortu | Varchar | 25 |
+| 14 | Informasi_VM | Varchar | 10 |
+| 15 | Program_Bimbel | Varchar | 3 |
+| 16 | Tahun_Ajaran | Varchar | 5 |
+| 17 | Photo | Image | 16 |
+| 18 | Status | Varchar | 10 |
+| 19 | Status_Byr | Varchar | 5 |
+| 20 | Tgl_Regs | Datetime | 8 |
+| 21 | Tgl_Batal | Datetime | 8 |
+
+#### TBimbel (program bimbel)
+- Primary key: Kd_Bimbel
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Kd_Bimbel | Varchar | 3 |
+| 2 | Program_Bimbel | Varchar | 35 |
+| 3 | Biaya_Bimbel | Money | 8 |
+| 4 | Jml_Pertemuan | Int | 4 |
+
+#### TKelas (kelas)
+- Primary key: Kd_Kelas
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Kd_Kelas | Varchar | 3 |
+| 2 | Kelas | Varchar | 20 |
+
+#### TPelajaran (pelajaran)
+- Primary key: Kd_Pel
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Kd_Pel | Varchar | 6 |
+| 2 | Mata_Pelajaran | Varchar | 35 |
+
+#### TPengajar (pengajar)
+- Primary key: Kd_Pengajar
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Kd_Pengajar | Varchar | 3 |
+| 2 | Nama_Pengajar | Varchar | 30 |
+| 3 | Alamat_Pengajar | Varchar | 35 |
+| 4 | Telp | Varchar | 25 |
+| 5 | Pendidikan | Varchar | 30 |
+
+#### TThn_Ajaran (tahun ajaran)
+- Primary key: Kd_Periode
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Id_tahun | - | - |
+| 2 | Periode | Varchar | 5 |
+| 3 | Thn_Ajaran | Varchar | 9 |
+
+#### TTo (try out)
+- Primary key: Try_Out
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Try_Out | Varchar | 5 |
+| 2 | Tanggal | Datetime | 8 |
+
+#### TRuang (ruang)
+- Primary key: Ruang
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Ruang | Varchar | 1 |
+
+#### TPetugas (petugas)
+- Primary key: Id_Petugas
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Id_Petugas | Varchar | 5 |
+| 2 | Nama | Varchar | 35 |
+| 3 | Password | Varchar | 3 |
+| 4 | Divisi | Varchar | 5 |
+
+#### TAbsen (akumulasi absensi per bulan)
+- Primary key: No_Regs, Bulan, Kd_Bimbel
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | No_Regs | Varchar | 11 |
+| 2 | Bulan | Smallint | 2 |
+| 3 | Program_Bimbel | Varchar | 3 |
+| 4 | Total_Hadir | Int | 4 |
+
+#### TAbsen_Siswa (absensi per pertemuan)
+- Primary key: No_Regs, Bulan, Pertemuan
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | No_Regs | Varchar | 11 |
+| 2 | Bulan | Smallint | 2 |
+| 3 | Pertemuan | Int | 4 |
+| 4 | Absensi | Int | 4 |
+
+#### TBayar (akumulasi pembayaran)
+- Primary key: No_Regs, Bulan, Kd_Bimbel
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | No_Regs | Varchar | 11 |
+| 2 | Kd_Bimbel | Varchar | 2 |
+| 3 | Biaya_Bimbel | Money | 8 |
+| 4 | Total_Terbayar | Money | 8 |
+| 5 | Discount | Float | 8 |
+| 6 | Ket_Disc | Varchar | 20 |
+
+#### TItemBayar (pembayaran angsuran)
+- Primary key: No_Regs, Kd_Bimbel, Angsuran_Ke
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | No_Regs | Varchar | 11 |
+| 2 | Kd_Bimbel | Varchar | 3 |
+| 3 | Angsuran_Ke | Smallint | 2 |
+| 4 | No_Kwit | Int | 4 |
+| 5 | Besar_Bayar | Money | 8 |
+| 6 | Jenis_Trans | Varchar | 10 |
+| 7 | Tgl_Trans | Datetime | 8 |
+| 8 | Id_Petugas | Varchar | 3 |
+
+#### TJadwal (jadwal KBM)
+- Primary key: Kd_Pel, Tanggal, Hari, Ruang, Jam
+- Foreign key: Kd_Kelas, Kd_Pengajar
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Kd_Pel | Varchar | 6 |
+| 2 | Tanggal | Datetime | 8 |
+| 3 | Hari | Varchar | 8 |
+| 4 | Ruang | Varchar | 8 |
+| 5 | Jam | Varchar | 8 |
+| 6 | Kd_Kelas | Varchar | 8 |
+| 7 | Kd_Pengajar | Varchar | 20 |
+
+#### TLokasi_Belajar (lokasi belajar)
+- Primary key: Id_Lokasi
+
+| No | Field | Type | Length |
+| --- | --- | --- | --- |
+| 1 | Id_Lokasi | Varchar | 6 |
+| 2 | Lokasi_Belajar | Varchar | 18 |
+
 ## Halaman Utama
 - Dashboard: `/`
 - Aktivitas: `/activities`
@@ -103,6 +320,8 @@ Ringkas fitur:
 - Leaderboard: `/leaderboard`
 - Tim (superadmin): `/teams`
 - User (superadmin): `/users`
+- Akademik (superadmin): `/akademik`
+- Keuangan (superadmin): `/keuangan`
 - Ads/Iklan (role ads & superadmin): `/ads`
 - Profil: `/profile`
 - Notifikasi: `/notifications`
@@ -118,6 +337,7 @@ Ringkas fitur:
 - Verifikasi akhir Aktivitas/Konversi (status `Reviewed` → `Verified`).
 - Atur bobot poin di **Settings Poin**.
 - Lihat **Data Siswa** dari form publik `/pendaftaran`.
+- Kelola modul **Akademik** dan **Keuangan**.
 
 ### Leader
 - Review Aktivitas & Konversi anggota tim (status `Pending` → `Reviewed`).
@@ -157,6 +377,8 @@ Ringkas fitur:
 ### Pendaftaran Publik
 - Form publik di `/pendaftaran`.
 - Data yang masuk akan tampil di **Data Siswa** (khusus superadmin).
+- Bagian Administrasi melakukan validasi data siswa.
+- Setelah valid, Bagian Administrasi mengirim invoice sesuai program bimbel via WhatsApp ke nomor orang tua/wali.
 
 ## ERD & Kardinalitas (Ringkas)
 Diagram relasi utama (1 = satu, N = banyak):
@@ -181,6 +403,21 @@ schools (1) ───< public_registrations (N)
 ads_campaigns (1) ───< ads_metrics (N)
 users (1) ───< ads_campaigns (N)
 users (1) ───< ads_metrics (N)
+
+TSiswa (1) ───< TAbsen (N)
+TSiswa (1) ───< TAbsen_Siswa (N)
+TSiswa (1) ───< TBayar (N)
+TSiswa (1) ───< TItemBayar (N)
+TBimbel (1) ───< TSiswa (N)
+TBimbel (1) ───< TBayar (N)
+TBimbel (1) ───< TItemBayar (N)
+TKelas (1) ───< TSiswa (N)
+TKelas (1) ───< TJadwal (N)
+TPengajar (1) ───< TJadwal (N)
+TPelajaran (1) ───< TJadwal (N)
+TRuang (1) ───< TJadwal (N)
+TThn_Ajaran (1) ───< TSiswa (N)
+TLokasi_Belajar (1) ───< TSiswa (N)
 ```
 
 Kardinalitas & catatan:
