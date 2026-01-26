@@ -5,6 +5,11 @@ Aplikasi dashboard untuk manajemen performa tim buzzer marketing dengan input ak
 
 ## Role dan Akses
 - Superadmin: kelola tim, user, settings poin, approve final.
+- Admin Ads: akses penuh modul Ads/Iklan.
+- Campaign Planner: membuat dan mengelola rencana kampanye ads.
+- Ads Specialist: input monitoring dan optimasi performa ads.
+- Analyst: analisa & evaluasi performa ads.
+- Management: melihat laporan ads.
 - Leader: review aktivitas/konversi anggota timnya.
 - Staff: input aktivitas/konversi, lihat poin pribadi.
 - Guest: hanya lihat data (read-only).
@@ -85,6 +90,12 @@ Menampilkan:
 - Jumlah closing dan jumlah leads terverifikasi.
 - Top Closing (User) dan Top Aktivitas (User).
 
+## Modul Ads/Iklan (Manual Input)
+Ringkas fitur:
+- Perencanaan kampanye (brief, objective, target audiens, budget, jadwal, KPI per platform).
+- Monitoring kampanye (tayangan, jangkauan, klik, leads, closing, engagement).
+- Pelaporan & evaluasi (ringkasan per platform, grafik tren, target vs realisasi).
+
 ## Halaman Utama
 - Dashboard: `/`
 - Aktivitas: `/activities`
@@ -92,8 +103,44 @@ Menampilkan:
 - Leaderboard: `/leaderboard`
 - Tim (superadmin): `/teams`
 - User (superadmin): `/users`
+- Ads/Iklan (role ads & superadmin): `/ads`
 - Profil: `/profile`
 - Notifikasi: `/notifications`
+
+## ERD & Kardinalitas (Ringkas)
+Diagram relasi utama (1 = satu, N = banyak):
+```
+teams (1) ───< users (N)
+users (1) ───< activities_log (N)
+teams (1) ───< activities_log (N)
+users (1) ───< conversions (N)
+teams (1) ───< conversions (N)
+users (1) ───< notifications (N)
+users (1) ───< social_accounts (N)
+
+users (1) ───< chat_threads (N) >─── (1) users
+chat_threads (1) ───< chat_messages (N) >─── (1) users
+
+teams (1) ───< team_targets (N)
+teams (1) ───< team_member_targets (N) >─── (1) users
+
+produk_items (1) ───< public_registrations (N)
+schools (1) ───< public_registrations (N)
+
+ads_campaigns (1) ───< ads_metrics (N)
+users (1) ───< ads_campaigns (N)
+users (1) ───< ads_metrics (N)
+```
+
+Kardinalitas & catatan:
+- `teams (1) -> users (N)`: `users.team_id` nullable untuk superadmin/role ads.
+- `users (1) -> activities_log (N)` dan `users (1) -> conversions (N)` via `user_id`.
+- `teams (1) -> activities_log (N)` dan `teams (1) -> conversions (N)` via `team_id`.
+- `chat_threads` menyimpan relasi dua user (`user_one_id`, `user_two_id`) dan unik per pasangan.
+- `public_registrations.program_id` opsional -> `produk_items`.
+- `public_registrations.school_id` opsional -> `schools`.
+- `ads_campaigns.pic_id` & `created_by` mengarah ke `users` (opsional).
+- `ads_metrics.pic_id` opsional mengarah ke `users`.
 
 ## Screenshot (Placeholder)
 Simpan screenshot di folder berikut:
@@ -143,6 +190,12 @@ Semua endpoint berbasis web route (Laravel). Ringkasan:
 - Notifikasi:
   - `GET /notifications` (List)
   - `POST /notifications/read-all` (Tandai dibaca)
+- Ads/Iklan:
+  - `GET /ads` (Dashboard ads)
+  - `POST /ads/campaigns` (Simpan kampanye)
+  - `POST /ads/metrics` (Simpan monitoring)
+  - `GET /ads/export/csv` (Export CSV)
+  - `GET /ads/export/pdf` (Export PDF)
 
 ## Scheduler (Reminder)
 Aktifkan scheduler agar reminder berjalan:
