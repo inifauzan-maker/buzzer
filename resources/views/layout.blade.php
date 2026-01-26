@@ -24,7 +24,7 @@
             * { box-sizing: border-box; }
             body {
                 margin: 0;
-                font-family: "Georgia", "Times New Roman", serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
                 color: var(--ink);
                 background: linear-gradient(140deg, #f6f2ea, #e3f1f0);
                 min-height: 100vh;
@@ -46,7 +46,7 @@
             .brand-block {
                 text-transform: uppercase;
                 letter-spacing: 0.2em;
-                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
             }
             .brand-title {
                 font-weight: 700;
@@ -75,7 +75,7 @@
                 font-weight: 700;
                 color: #fff;
                 font-size: 22px;
-                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
             }
             .badge {
                 display: inline-flex;
@@ -264,14 +264,14 @@
             }
             .card h3 {
                 margin: 0 0 6px;
-                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
             }
             .card p {
                 margin: 0;
                 color: var(--muted);
             }
             h1, h2 {
-                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
             }
             h1 { margin-top: 0; }
             table {
@@ -554,6 +554,12 @@
                                 </a>
                                 <a href="{{ route('data-siswa.index') }}" class="{{ request()->routeIs('data-siswa.*') ? 'active' : '' }}">
                                     Data Siswa
+                                </a>
+                                <a href="{{ route('akademik.index') }}" class="{{ request()->routeIs('akademik.*') ? 'active' : '' }}">
+                                    Akademik
+                                </a>
+                                <a href="{{ route('keuangan.index') }}" class="{{ request()->routeIs('keuangan.*') ? 'active' : '' }}">
+                                    Keuangan
                                 </a>
                                 <a href="{{ route('ads.index') }}" class="{{ request()->routeIs('ads.*') ? 'active' : '' }}">
                                     Ads/Iklan

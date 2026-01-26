@@ -6,7 +6,7 @@
         <title>Ads Report</title>
         <style>
             body {
-                font-family: "Georgia", "Times New Roman", serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
                 color: #1f2937;
                 margin: 24px;
             }

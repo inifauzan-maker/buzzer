@@ -5,8 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Pendaftaran Publik - SIVMI</title>
-        <link rel="preconnect" href="https://fonts.bunny.net" />
-        <link href="https://fonts.bunny.net/css?family=bebas-neue:400|sora:400,600,700" rel="stylesheet" />
         <style>
             :root {
                 --bg-1: #f6f2ea;
@@ -29,7 +27,7 @@
             body {
                 margin: 0;
                 min-height: 100vh;
-                font-family: "Sora", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
                 color: var(--ink);
                 background: linear-gradient(140deg, var(--bg-1), var(--bg-2));
             }
@@ -62,7 +60,7 @@
 
             .page-title {
                 margin: 0;
-                font-family: "Bebas Neue", "Impact", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
                 font-size: clamp(34px, 6vw, 52px);
                 letter-spacing: 0.18em;
             }

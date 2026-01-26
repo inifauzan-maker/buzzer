@@ -21,7 +21,7 @@
             * { box-sizing: border-box; }
             body {
                 margin: 0;
-                font-family: "Georgia", "Times New Roman", serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
                 background: radial-gradient(circle at top, #f9f2e6, #d7efe8);
                 color: var(--ink);
                 min-height: 100vh;
@@ -39,7 +39,7 @@
             }
             h1 {
                 margin-top: 0;
-                font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
             }
             .muted { color: var(--muted); font-size: 14px; }
             label { font-size: 13px; color: var(--muted); }

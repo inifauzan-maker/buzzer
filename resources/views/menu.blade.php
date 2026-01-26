@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Menu SIVMI Marketing</title>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&display=swap');
             :root {
                 --bg-1: #0a0a5c;
                 --bg-2: #1a0a2a;
@@ -21,7 +20,7 @@
             body {
                 margin: 0;
                 min-height: 100vh;
-                font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
                 background: radial-gradient(circle at top, rgba(194, 15, 49, 0.35) 0%, var(--bg-1) 45%, #050202 100%);
                 color: var(--ink);
                 display: grid;
@@ -79,7 +78,7 @@
                 font-size: 12px;
             }
             .menu-title {
-                font-family: "Bebas Neue", "Impact", sans-serif;
+                font-family: "Aptos", "Segoe UI", Arial, sans-serif;
                 font-size: clamp(36px, 5vw, 56px);
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
@@ -136,6 +135,9 @@
             .menu-card:nth-child(6) { animation-delay: 0.6s; }
             .menu-card:nth-child(7) { animation-delay: 0.67s; }
             .menu-card:nth-child(8) { animation-delay: 0.74s; }
+            .menu-card:nth-child(9) { animation-delay: 0.81s; }
+            .menu-card:nth-child(10) { animation-delay: 0.88s; }
+            .menu-card:nth-child(11) { animation-delay: 0.95s; }
             .card-content {
                 display: grid;
                 gap: 8px;
@@ -162,6 +164,12 @@
             }
             .card-sosial {
                 background: linear-gradient(145deg, var(--accent-orange), var(--secondary));
+            }
+            .card-akademik {
+                background: linear-gradient(145deg, var(--primary), var(--accent-orange));
+            }
+            .card-keuangan {
+                background: linear-gradient(145deg, var(--secondary), var(--accent-yellow));
             }
             .card-ghost {
                 background: linear-gradient(145deg, var(--primary), var(--secondary));
@@ -279,6 +287,22 @@
                             </span>
                         </div>
                     @endif
+                    <a class="menu-card card-akademik" href="{{ route('akademik.index') }}">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M12 3 2 8l10 5 10-5-10-5Zm-6 7v6a8 8 0 0 0 12 0v-6l-6 3-6-3Z"/>
+                            </svg>
+                            <span>Akademik</span>
+                        </span>
+                    </a>
+                    <a class="menu-card card-keuangan" href="{{ route('keuangan.index') }}">
+                        <span class="card-content">
+                            <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill="white" d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2v8h16V8H4Zm10 2h4v4h-4v-4Z"/>
+                            </svg>
+                            <span>Keuangan</span>
+                        </span>
+                    </a>
                     <a class="menu-card card-ads" href="{{ route('ads.index') }}">
                         <span class="card-content">
                             <svg class="card-icon" viewBox="0 0 24 24" aria-hidden="true">

@@ -19,7 +19,7 @@
             gap: 18px;
         }
         .card-title {
-            font-family: "Trebuchet MS", "Lucida Grande", sans-serif;
+            font-family: "Aptos", "Segoe UI", Arial, sans-serif;
             font-weight: 700;
             margin-bottom: 12px;
             text-align: center;

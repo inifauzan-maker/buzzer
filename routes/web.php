@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkademikController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\AuthController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\PointSettingController;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\SystemActivityLogController;
 use App\Http\Controllers\TeamTargetController;
 use App\Http\Controllers\TeamController;
@@ -48,6 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::patch('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');
         Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
         Route::get('/data-siswa', [DataSiswaController::class, 'index'])->name('data-siswa.index');
+        Route::get('/akademik', [AkademikController::class, 'index'])->name('akademik.index');
+        Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
         Route::post('/teams/members', [TeamController::class, 'storeMember'])->name('teams.members.store');
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
