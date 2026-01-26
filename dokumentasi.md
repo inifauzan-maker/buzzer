@@ -107,6 +107,57 @@ Ringkas fitur:
 - Profil: `/profile`
 - Notifikasi: `/notifications`
 
+## Panduan Penggunaan
+### Login & Navigasi
+1. Buka `/login` lalu masuk dengan akun yang sesuai peran.
+2. Setelah login, gunakan menu utama (`/menu`) atau sidebar untuk berpindah modul.
+3. Topbar menampilkan email, tombol profil, notifikasi, dan logout.
+
+### Superadmin
+- Kelola Tim & User di menu **Tim** dan **User**.
+- Verifikasi akhir Aktivitas/Konversi (status `Reviewed` → `Verified`).
+- Atur bobot poin di **Settings Poin**.
+- Lihat **Data Siswa** dari form publik `/pendaftaran`.
+
+### Leader
+- Review Aktivitas & Konversi anggota tim (status `Pending` → `Reviewed`).
+- Lihat target tim dan pencapaiannya di **Target Tim**.
+- Bisa chat dengan anggota di **Chat**.
+
+### Staff
+- Input Aktivitas di **Aktivitas** (link, tanggal, engagement, bukti).
+- Input Konversi di **Konversi** (lead/closing + bukti).
+- Pantau poin dan target pribadi di dashboard.
+
+### Guest
+- Hanya melihat data yang diizinkan (read-only).
+
+### Modul Buzzer Marketing (Aktivitas & Konversi)
+1. Staff input data → status `Pending`.
+2. Leader review → status `Reviewed`.
+3. Superadmin verifikasi akhir → status `Verified` dan poin dihitung.
+4. Notifikasi akan muncul di topbar dan halaman **Notifikasi**.
+
+### Modul Ads/Iklan
+#### Perencanaan Kampanye
+- Isi **Nama**, **Platform**, **Objective**, **Brief**, **Target audiens**, **Budget**, **KPI**, dan **PIC**.
+- Role yang bisa membuat: **Superadmin, Admin Ads, Campaign Planner**.
+
+#### Monitoring
+- Input metrik harian: tayangan, jangkauan, klik, leads, closing, engagement.
+- Tambahkan demografi (gender & usia) dan **Top 5 lokasi** (persentase).
+- Role yang bisa input: **Superadmin, Admin Ads, Ads Specialist**.
+
+#### Pelaporan
+- Gunakan filter platform/kampanye/PIC/periode.
+- Lihat ringkasan per platform + grafik tren.
+- Export **CSV** (Excel) atau **PDF** (print-friendly).
+- Role yang bisa melihat laporan: **Superadmin, Admin Ads, Analyst, Management**.
+
+### Pendaftaran Publik
+- Form publik di `/pendaftaran`.
+- Data yang masuk akan tampil di **Data Siswa** (khusus superadmin).
+
 ## ERD & Kardinalitas (Ringkas)
 Diagram relasi utama (1 = satu, N = banyak):
 ```
