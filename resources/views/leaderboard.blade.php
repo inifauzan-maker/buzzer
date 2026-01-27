@@ -34,9 +34,13 @@
         .legend-conversion { background: var(--secondary); }
         .staff-chart-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 18px;
             align-items: end;
+            padding: 14px 16px 18px;
+            border-radius: 18px;
+            background: #f6f8fb;
+            border: 1px solid var(--border);
         }
         .staff-group {
             display: grid;
@@ -44,19 +48,16 @@
             justify-items: center;
         }
         .bar-wrap {
-            height: 180px;
+            height: 200px;
             width: 100%;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            gap: 8px;
-            padding: 6px 8px 0;
-            border-radius: 16px;
-            background: #f6f8fb;
-            border: 1px solid var(--border);
+            gap: 10px;
+            padding: 6px 4px 0;
         }
         .bar {
-            width: 44%;
+            width: 46%;
             border-radius: 12px 12px 8px 8px;
             position: relative;
             min-height: 8px;
