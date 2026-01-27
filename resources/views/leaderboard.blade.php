@@ -19,7 +19,7 @@
         }
         .staff-chart {
             display: grid;
-            gap: 14px;
+            gap: 16px;
         }
         .staff-chart-legend {
             display: flex;
@@ -27,66 +27,60 @@
             align-items: center;
             font-size: 12px;
             color: var(--muted);
+            justify-content: center;
         }
         .legend-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
-        .legend-activity { background: #2563eb; }
-        .legend-conversion { background: #f97316; }
-        .staff-bar-group {
+        .legend-activity { background: var(--primary); }
+        .legend-conversion { background: var(--secondary); }
+        .staff-chart-grid {
             display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 18px;
             align-items: end;
         }
-        .staff-bar-name {
-            font-size: 13px;
-            color: var(--muted);
-        }
-        .staff-bar-name strong { display: block; color: var(--ink); }
-        .staff-bar-columns {
-            display: flex;
-            align-items: flex-end;
-            gap: 16px;
-            padding: 12px 12px 6px;
-            border-radius: 14px;
-            background: #f6f8fb;
-        }
-        .bar-stack {
-            flex: 1;
+        .staff-group {
             display: grid;
-            gap: 6px;
+            gap: 8px;
+            justify-items: center;
         }
         .bar-wrap {
-            height: 140px;
+            height: 180px;
+            width: 100%;
             display: flex;
             align-items: flex-end;
+            justify-content: center;
             gap: 8px;
+            padding: 6px 8px 0;
+            border-radius: 16px;
+            background: #f6f8fb;
+            border: 1px solid var(--border);
         }
         .bar {
-            flex: 1;
-            border-radius: 10px 10px 6px 6px;
-            background: #e2e8f0;
+            width: 44%;
+            border-radius: 12px 12px 8px 8px;
             position: relative;
-            min-width: 30px;
+            min-height: 8px;
         }
-        .bar.activity { background: #2563eb; }
-        .bar.conversion { background: #f97316; }
+        .bar.activity { background: var(--primary); }
+        .bar.conversion { background: var(--secondary); }
         .bar-value {
             position: absolute;
-            top: -20px;
+            top: -22px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 13px;
             font-weight: 600;
-            color: #3f475d;
+            color: var(--ink);
             white-space: nowrap;
         }
-        .bar-label {
+        .bar-name {
             text-align: center;
-            font-size: 11px;
-            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
         }
         @media (max-width: 820px) {
-            .staff-bar-group { grid-template-columns: 1fr; }
+            .staff-chart-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
         }
     </style>
 
@@ -118,41 +112,36 @@
             );
         @endphp
 
-        <div class="staff-chart-legend" style="margin-bottom: 8px;">
+        <div class="staff-chart-legend" style="margin-bottom: 12px;">
             <span><span class="legend-dot legend-activity"></span> Aktivitas</span>
             <span><span class="legend-dot legend-conversion"></span> Konversi</span>
         </div>
 
         <div class="staff-chart">
-            @forelse ($leaderboardStaff as $user)
-                @php
-                    $activity = (float) $user->activity_points;
-                    $conversion = (float) $user->conversion_points;
-                    $activityHeight = $maxStaffPoint > 0 ? ($activity / $maxStaffPoint) * 100 : 0;
-                    $conversionHeight = $maxStaffPoint > 0 ? ($conversion / $maxStaffPoint) * 100 : 0;
-                @endphp
-                <div class="staff-bar-group">
-                    <div class="staff-bar-name">
-                        <strong>{{ $user->name }}</strong>
-                        <span>{{ $user->team_name ?? '-' }}</span>
-                    </div>
-                    <div class="staff-bar-columns">
-                        <div class="bar-stack">
-                            <div class="bar-wrap">
-                                <div class="bar activity" style="height: {{ $activityHeight }}%;">
-                                    <span class="bar-value">{{ number_format($activity, 2) }}</span>
-                                </div>
-                                <div class="bar conversion" style="height: {{ $conversionHeight }}%;">
-                                    <span class="bar-value">{{ number_format($conversion, 2) }}</span>
-                                </div>
+            <div class="staff-chart-grid">
+                @forelse ($leaderboardStaff as $user)
+                    @php
+                        $activity = (float) $user->activity_points;
+                        $conversion = (float) $user->conversion_points;
+                        $activityHeight = $maxStaffPoint > 0 ? ($activity / $maxStaffPoint) * 100 : 0;
+                        $conversionHeight = $maxStaffPoint > 0 ? ($conversion / $maxStaffPoint) * 100 : 0;
+                    @endphp
+                    <div class="staff-group">
+                        <div class="bar-wrap">
+                            <div class="bar activity" style="height: {{ $activityHeight }}%;">
+                                <span class="bar-value">{{ number_format($activity, 2) }}</span>
                             </div>
-                            <div class="bar-label">Aktivitas vs Konversi</div>
+                            <div class="bar conversion" style="height: {{ $conversionHeight }}%;">
+                                <span class="bar-value">{{ number_format($conversion, 2) }}</span>
+                            </div>
                         </div>
+                        <div class="bar-name">{{ $user->name }}</div>
+                        <div class="muted" style="font-size: 11px;">{{ $user->team_name ?? '-' }}</div>
                     </div>
-                </div>
-            @empty
-                <div class="muted">Belum ada data staff.</div>
-            @endforelse
+                @empty
+                    <div class="muted">Belum ada data staff.</div>
+                @endforelse
+            </div>
         </div>
     </div>
 @endsection
