@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
 use App\Models\Conversion;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -35,19 +36,26 @@ class LeaderboardController extends Controller
             ->selectRaw('COALESCE(conversion_points.conversion_points, 0) as conversion_points')
             ->selectRaw('(COALESCE(activity_points.activity_points, 0) + COALESCE(conversion_points.conversion_points, 0)) as total_points');
 
-        $leaderboardLeaders = (clone $baseQuery)
-            ->where('users.role', 'leader')
-            ->orderByDesc(DB::raw('total_points'))
-            ->get();
+        $teams = Team::query()
+            ->orderBy('team_name')
+            ->get(['id', 'team_name']);
+
+        $teamId = request()->query('team_id');
+        $sort = request()->query('sort', 'total');
 
         $leaderboardStaff = (clone $baseQuery)
             ->where('users.role', 'staff')
-            ->orderByDesc(DB::raw('total_points'))
+            ->when($teamId, fn ($query) => $query->where('users.team_id', $teamId))
+            ->when($sort === 'activity', fn ($query) => $query->orderByDesc(DB::raw('activity_points')))
+            ->when($sort === 'conversion', fn ($query) => $query->orderByDesc(DB::raw('conversion_points')))
+            ->when($sort === 'total', fn ($query) => $query->orderByDesc(DB::raw('total_points')))
             ->get();
 
         return view('leaderboard', [
-            'leaderboardLeaders' => $leaderboardLeaders,
             'leaderboardStaff' => $leaderboardStaff,
+            'teams' => $teams,
+            'selectedTeamId' => $teamId,
+            'selectedSort' => $sort,
         ]);
     }
 }
