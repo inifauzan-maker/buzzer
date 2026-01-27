@@ -468,6 +468,8 @@
                             $module = 'keuangan';
                         } elseif (request()->routeIs('ads.*')) {
                             $module = 'ads';
+                        } elseif (request()->routeIs('leads.*')) {
+                            $module = 'leads';
                         }
                     @endphp
                     <nav class="side-nav">
@@ -574,6 +576,19 @@
                             <a href="{{ route('ads.index') }}" class="nav-link {{ request()->routeIs('ads.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Ads/Iklan
                             </a>
+                        @elseif ($module === 'leads')
+                            <a href="{{ route('leads.index') }}" class="nav-link {{ request()->routeIs('leads.index') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Pipeline Leads
+                            </a>
+                            <a href="{{ route('leads.followups') }}" class="nav-link {{ request()->routeIs('leads.followups') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Follow Up
+                            </a>
+                            <a href="{{ route('leads.analytics') }}" class="nav-link {{ request()->routeIs('leads.analytics') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Analitik
+                            </a>
+                            <a href="{{ route('leads.whatsapp') }}" class="nav-link {{ request()->routeIs('leads.whatsapp') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> WhatsApp (Stub)
+                            </a>
                         @endif
                     </nav>
                     <div class="sidebar-footer">SIVMI panel v1.0</div>
@@ -633,7 +648,9 @@
                                 </a>
                                 <span class="disabled">Media Sosial</span>
                                 <span class="disabled">Konten Marketing</span>
-                                <span class="disabled">Leads</span>
+                                <a href="{{ route('leads.index') }}" class="{{ request()->routeIs('leads.*') ? 'active' : '' }}">
+                                    Leads
+                                </a>
                                 <span class="disabled">Event</span>
                             @elseif ($role === 'akademik')
                                 <a href="{{ route('akademik.index') }}" class="{{ request()->routeIs('akademik.*') ? 'active' : '' }}">

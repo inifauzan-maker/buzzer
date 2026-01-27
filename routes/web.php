@@ -8,6 +8,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ConversionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PointSettingController;
@@ -114,6 +115,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:superadmin,leader,staff')->group(function () {
+        Route::get('/leads', [LeadController::class, 'index'])->name('leads.index');
+        Route::post('/leads', [LeadController::class, 'store'])->name('leads.store');
+        Route::patch('/leads/{lead}/status', [LeadController::class, 'updateStatus'])->name('leads.status');
+        Route::get('/leads/followups', [LeadController::class, 'followups'])->name('leads.followups');
+        Route::post('/leads/{lead}/followups', [LeadController::class, 'storeFollowup'])->name('leads.followups.store');
+        Route::get('/leads/analytics', [LeadController::class, 'analytics'])->name('leads.analytics');
+        Route::get('/leads/whatsapp', [LeadController::class, 'whatsapp'])->name('leads.whatsapp');
+
         Route::get('/activities/create', [ActivityLogController::class, 'create'])->name('activities.create');
         Route::post('/activities', [ActivityLogController::class, 'store'])->name('activities.store');
         Route::get('/activities/{activity}/edit', [ActivityLogController::class, 'edit'])->name('activities.edit');
@@ -143,3 +152,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/targets/members', [TeamTargetController::class, 'storeMembers'])->name('targets.members.store');
     });
 });
+
+Route::match(['get', 'post'], '/leads/whatsapp/webhook', [LeadController::class, 'webhook'])
+    ->name('leads.whatsapp.webhook');

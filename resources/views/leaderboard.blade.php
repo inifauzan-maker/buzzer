@@ -39,7 +39,15 @@
             align-items: end;
             padding: 14px 16px 18px;
             border-radius: 18px;
-            background: #f6f8fb;
+            background:
+                linear-gradient(#f6f8fb, #f6f8fb),
+                repeating-linear-gradient(
+                    to top,
+                    rgba(15, 23, 42, 0.08) 0px,
+                    rgba(15, 23, 42, 0.08) 1px,
+                    transparent 1px,
+                    transparent 28px
+                );
             border: 1px solid var(--border);
         }
         .staff-group {
@@ -61,6 +69,7 @@
             border-radius: 12px 12px 8px 8px;
             position: relative;
             min-height: 8px;
+            box-shadow: 0 10px 18px rgba(15, 23, 42, 0.12);
         }
         .bar.activity { background: var(--primary); }
         .bar.conversion { background: var(--secondary); }
@@ -136,7 +145,11 @@
                                 <span class="bar-value">{{ number_format($conversion, 2) }}</span>
                             </div>
                         </div>
-                        <div class="bar-name">{{ $user->name }}</div>
+                        <div class="bar-name">
+                            <a href="{{ route('profile.view', $user->id) }}" title="Lihat profil {{ $user->name }}">
+                                {{ $user->name }}
+                            </a>
+                        </div>
                         <div class="muted" style="font-size: 11px;">{{ $user->team_name ?? '-' }}</div>
                     </div>
                 @empty
