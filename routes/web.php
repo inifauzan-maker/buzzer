@@ -49,7 +49,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
         Route::patch('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');
         Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+        Route::get('/data-siswa/dashboard', [DataSiswaController::class, 'dashboard'])->name('data-siswa.dashboard');
         Route::get('/data-siswa', [DataSiswaController::class, 'index'])->name('data-siswa.index');
+        Route::get('/data-siswa/export/csv', [DataSiswaController::class, 'exportCsv'])
+            ->name('data-siswa.export.csv');
+        Route::get('/data-siswa/template/csv', [DataSiswaController::class, 'templateCsv'])
+            ->name('data-siswa.template.csv');
+        Route::post('/data-siswa/import', [DataSiswaController::class, 'importCsv'])
+            ->name('data-siswa.import');
         Route::post('/data-siswa/{registration}/validate', [DataSiswaController::class, 'validateRegistration'])
             ->name('data-siswa.validate');
         Route::post('/data-siswa/{registration}/send-invoice', [DataSiswaController::class, 'sendInvoice'])

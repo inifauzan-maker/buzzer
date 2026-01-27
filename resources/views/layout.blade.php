@@ -455,6 +455,7 @@
                     </div>
                     @php
                         $adsRoles = ['admin', 'campaign_planner', 'ads_specialist', 'analyst', 'management'];
+                        $role = strtolower(auth()->user()->role ?? '');
                         $module = 'buzzer';
 
                         if (request()->routeIs('produk.*')) {
@@ -480,17 +481,17 @@
                             <a href="{{ route('leaderboard') }}" class="nav-link {{ request()->routeIs('leaderboard') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Leaderboard
                             </a>
-                            @if (in_array(auth()->user()->role, array_merge(['superadmin'], $adsRoles), true))
+                            @if (in_array($role, array_merge(['superadmin'], $adsRoles), true))
                                 <a href="{{ route('ads.index') }}" class="nav-link {{ request()->routeIs('ads.*') ? 'active' : '' }}">
                                     <span class="nav-dot"></span> Ads/Iklan
                                 </a>
                             @endif
-                            @if (auth()->user()->role === 'leader')
+                            @if ($role === 'leader')
                                 <a href="{{ route('targets.index') }}" class="nav-link {{ request()->routeIs('targets.*') ? 'active' : '' }}">
                                     <span class="nav-dot"></span> Target Tim
                                 </a>
                             @endif
-                            @if (in_array(auth()->user()->role, ['leader', 'staff'], true))
+                            @if (in_array($role, ['leader', 'staff'], true))
                                 <a href="{{ route('chat.index') }}" class="nav-link {{ request()->routeIs('chat.*') ? 'active' : '' }}">
                                     <span class="nav-dot"></span> Chat
                                     @if (!empty($chatUnreadCount))
@@ -498,7 +499,7 @@
                                     @endif
                                 </a>
                             @endif
-                            @if (auth()->user()->role === 'superadmin')
+                            @if ($role === 'superadmin')
                                 <a href="{{ route('teams.index') }}" class="nav-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
                                     <span class="nav-dot"></span> Tim
                                 </a>
@@ -515,7 +516,7 @@
                             <a href="{{ route('conversions.index') }}" class="nav-link {{ request()->routeIs('conversions.*') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Konversi
                             </a>
-                            @if (auth()->user()->role === 'superadmin')
+                            @if ($role === 'superadmin')
                                 <a href="{{ route('settings.points') }}" class="nav-link {{ request()->routeIs('settings.points*') ? 'active' : '' }}">
                                     <span class="nav-dot"></span> Settings Poin
                                 </a>
@@ -528,12 +529,42 @@
                                 <span class="nav-dot"></span> Produk
                             </a>
                         @elseif ($module === 'data-siswa')
-                            <a href="{{ route('data-siswa.index') }}" class="nav-link {{ request()->routeIs('data-siswa.*') ? 'active' : '' }}">
+                            <a href="{{ route('data-siswa.dashboard') }}" class="nav-link {{ request()->routeIs('data-siswa.dashboard') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Dashboard
+                            </a>
+                            <a href="{{ route('data-siswa.index') }}" class="nav-link {{ request()->routeIs('data-siswa.index') ? 'active' : '' }}">
                                 <span class="nav-dot"></span> Data Siswa
                             </a>
+                            <a href="{{ route('data-siswa.index') }}#data-siswa-tools" class="nav-link">
+                                <span class="nav-dot"></span> Import CSV
+                            </a>
+                            <a href="{{ route('data-siswa.export.csv') }}" class="nav-link">
+                                <span class="nav-dot"></span> Export CSV
+                            </a>
                         @elseif ($module === 'akademik')
-                            <a href="{{ route('akademik.index') }}" class="nav-link {{ request()->routeIs('akademik.*') ? 'active' : '' }}">
-                                <span class="nav-dot"></span> Akademik
+                            <a href="{{ route('akademik.index', ['section' => 'komposisi']) }}" class="nav-link {{ request('section') === 'komposisi' ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Komposisi Kelas
+                            </a>
+                            <a href="{{ route('akademik.index', ['section' => 'kalender']) }}" class="nav-link {{ request('section') === 'kalender' ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Kalender Akademik
+                            </a>
+                            <a href="{{ route('akademik.index', ['section' => 'silabus']) }}" class="nav-link {{ request('section') === 'silabus' ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Silabus
+                            </a>
+                            <a href="{{ route('akademik.index') }}" class="nav-link {{ request()->routeIs('akademik.index') && ! request('section') ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Ringkasan Akademik
+                            </a>
+                            <a href="{{ route('akademik.index', ['section' => 'pelajaran']) }}" class="nav-link {{ request('section') === 'pelajaran' ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Daftar Pelajaran &amp; Pengajar
+                            </a>
+                            <a href="{{ route('akademik.index', ['section' => 'jadwal']) }}" class="nav-link {{ request('section') === 'jadwal' ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Jadwal KBM
+                            </a>
+                            <a href="{{ route('akademik.index', ['section' => 'absensi']) }}" class="nav-link {{ request('section') === 'absensi' ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Data Absensi &amp; Nilai
+                            </a>
+                            <a href="{{ route('akademik.index', ['section' => 'laporan']) }}" class="nav-link {{ request('section') === 'laporan' ? 'active' : '' }}">
+                                <span class="nav-dot"></span> Laporan Kemajuan Siswa
                             </a>
                         @elseif ($module === 'keuangan')
                             <a href="{{ route('keuangan.index') }}" class="nav-link {{ request()->routeIs('keuangan.*') ? 'active' : '' }}">

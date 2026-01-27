@@ -17,7 +17,9 @@ class ProdukController extends Controller
             $request->has('tahun_ajaran')
         );
         $selectedProgram = $this->selectedProgram($request->query('program'));
-        $items = $this->queryItems($selectedTahun, $selectedProgram)->get();
+        $selectedKode = $this->selectedKode($request->query('kode'));
+        $items = $this->queryItems($selectedTahun, $selectedProgram, $selectedKode)->get();
+        $kodeOptions = $this->kodeOptions();
 
         return view('produk.index', [
             'items' => $items,
@@ -26,6 +28,8 @@ class ProdukController extends Controller
             'tahunOptions' => ProdukItem::tahunAjaranOptions(),
             'selectedTahun' => $selectedTahun,
             'selectedProgram' => $selectedProgram,
+            'selectedKode' => $selectedKode,
+            'kodeOptions' => $kodeOptions,
             'editItem' => null,
         ]);
     }
@@ -46,7 +50,8 @@ class ProdukController extends Controller
         return redirect()
             ->route('produk.index', $this->filterQuery(
                 $request->input('filter_tahun'),
-                $request->input('filter_program')
+                $request->input('filter_program'),
+                $request->input('filter_kode')
             ))
             ->with('status', 'Data produk berhasil ditambahkan.');
     }
@@ -60,7 +65,9 @@ class ProdukController extends Controller
             $request->has('tahun_ajaran')
         );
         $selectedProgram = $this->selectedProgram($request->query('program'));
-        $items = $this->queryItems($selectedTahun, $selectedProgram)->get();
+        $selectedKode = $this->selectedKode($request->query('kode'));
+        $items = $this->queryItems($selectedTahun, $selectedProgram, $selectedKode)->get();
+        $kodeOptions = $this->kodeOptions();
 
         return view('produk.index', [
             'items' => $items,
@@ -69,6 +76,8 @@ class ProdukController extends Controller
             'tahunOptions' => ProdukItem::tahunAjaranOptions(),
             'selectedTahun' => $selectedTahun,
             'selectedProgram' => $selectedProgram,
+            'selectedKode' => $selectedKode,
+            'kodeOptions' => $kodeOptions,
             'editItem' => $produk,
         ]);
     }
@@ -89,7 +98,8 @@ class ProdukController extends Controller
         return redirect()
             ->route('produk.index', $this->filterQuery(
                 $request->input('filter_tahun'),
-                $request->input('filter_program')
+                $request->input('filter_program'),
+                $request->input('filter_kode')
             ))
             ->with('status', 'Data produk berhasil diperbarui.');
     }
@@ -103,7 +113,8 @@ class ProdukController extends Controller
         return redirect()
             ->route('produk.index', $this->filterQuery(
                 $request->input('filter_tahun'),
-                $request->input('filter_program')
+                $request->input('filter_program'),
+                $request->input('filter_kode')
             ))
             ->with('status', 'Data produk berhasil dihapus.');
     }
@@ -176,11 +187,19 @@ class ProdukController extends Controller
         return in_array($value, $options, true) ? $value : null;
     }
 
-    private function filterQuery(?string $tahun, ?string $program): array
+    private function selectedKode(?string $value): ?string
+    {
+        $value = trim((string) $value);
+
+        return $value !== '' ? $value : null;
+    }
+
+    private function filterQuery(?string $tahun, ?string $program, ?string $kode = null): array
     {
         $query = [];
         $selectedTahun = $this->normalizeTahun($tahun);
         $selectedProgram = $this->selectedProgram($program);
+        $selectedKode = $this->selectedKode($kode);
 
         if ($selectedTahun) {
             $query['tahun_ajaran'] = $selectedTahun;
@@ -190,10 +209,14 @@ class ProdukController extends Controller
             $query['program'] = $selectedProgram;
         }
 
+        if ($selectedKode) {
+            $query['kode'] = $selectedKode;
+        }
+
         return $query;
     }
 
-    private function queryItems(?string $tahun, ?string $program)
+    private function queryItems(?string $tahun, ?string $program, ?string $kode = null)
     {
         $query = ProdukItem::orderBy('program')->orderBy('id');
 
@@ -205,6 +228,33 @@ class ProdukController extends Controller
             $query->where('program', $program);
         }
 
+        if ($kode) {
+            $query->where(function ($builder) use ($kode) {
+                $builder->where('kode_1', 'like', '%'.$kode.'%')
+                    ->orWhere('kode_2', 'like', '%'.$kode.'%')
+                    ->orWhere('kode_3', 'like', '%'.$kode.'%')
+                    ->orWhere('kode_4', 'like', '%'.$kode.'%');
+            });
+        }
+
         return $query;
+    }
+
+    private function kodeOptions()
+    {
+        $lists = [
+            ProdukItem::query()->select('kode_1')->whereNotNull('kode_1')->where('kode_1', '!=', '')->distinct()->pluck('kode_1'),
+            ProdukItem::query()->select('kode_2')->whereNotNull('kode_2')->where('kode_2', '!=', '')->distinct()->pluck('kode_2'),
+            ProdukItem::query()->select('kode_3')->whereNotNull('kode_3')->where('kode_3', '!=', '')->distinct()->pluck('kode_3'),
+            ProdukItem::query()->select('kode_4')->whereNotNull('kode_4')->where('kode_4', '!=', '')->distinct()->pluck('kode_4'),
+        ];
+
+        return collect($lists)
+            ->flatten()
+            ->map(fn ($value) => trim((string) $value))
+            ->filter()
+            ->unique()
+            ->sort()
+            ->values();
     }
 }

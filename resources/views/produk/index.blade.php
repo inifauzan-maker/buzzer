@@ -33,7 +33,8 @@
             color: var(--muted);
         }
 
-        .filter-row select {
+        .filter-row select,
+        .filter-row input {
             width: 100%;
             padding: 8px 10px;
             border-radius: 12px;
@@ -234,7 +235,7 @@
             }
 
             .filter-row {
-                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) auto auto;
                 align-items: end;
             }
         }
@@ -293,8 +294,19 @@
                         @endforeach
                     </select>
                 </label>
+                <label>
+                    Filter Kode
+                    <select name="kode">
+                        <option value="">Semua Kode</option>
+                        @foreach ($kodeOptions as $kode)
+                            <option value="{{ $kode }}" @selected($selectedKode === $kode)>
+                                {{ $kode }}
+                            </option>
+                        @endforeach
+                    </select>
+                </label>
                 <button class="btn btn-primary" type="submit">Terapkan</button>
-                @if ($selectedTahun || $selectedProgram)
+                @if ($selectedTahun || $selectedProgram || $selectedKode)
                     <a class="btn btn-ghost" href="{{ route('produk.index') }}">Reset</a>
                 @endif
             </form>
@@ -318,6 +330,9 @@
                     @endif
                     @if ($selectedProgram)
                         <input type="hidden" name="filter_program" value="{{ $selectedProgram }}" />
+                    @endif
+                    @if ($selectedKode)
+                        <input type="hidden" name="filter_kode" value="{{ $selectedKode }}" />
                     @endif
                     @php
                         $selectedProgramValue = old('program', $editItem?->program ?? $selectedProgram);
@@ -378,7 +393,7 @@
                             <input type="text" name="kode_4" value="{{ old('kode_4', $editItem?->kode_4) }}" required />
                         </label>
                         <label>
-                            Nama Program
+                            Program Kelas
                             <input type="text" name="nama" value="{{ old('nama', $editItem?->nama) }}" required />
                         </label>
                         <label>
@@ -394,7 +409,7 @@
                             <input type="number" name="discount" value="{{ old('discount', $editItem?->discount ?? 0) }}" required />
                         </label>
                         <label>
-                            Jumlah Siswa
+                            Target Siswa
                             <input type="number" name="siswa" value="{{ old('siswa', $editItem?->siswa ?? 0) }}" required />
                         </label>
                     </div>
@@ -429,11 +444,11 @@
                                     <th>Kode 2</th>
                                     <th>Kode 3</th>
                                     <th>Kode 4</th>
-                                    <th>Nama Program</th>
+                                    <th>Program Kelas</th>
                                     <th>Biaya Daftar</th>
                                     <th>Biaya Pendidikan</th>
                                     <th>Discount</th>
-                                    <th>Siswa</th>
+                                    <th>Target Siswa</th>
                                     <th>Omzet</th>
                                     @if ($canUpdate || $canDelete)
                                         <th>Aksi</th>
@@ -466,6 +481,9 @@
                                                             }
                                                             if ($selectedProgram) {
                                                                 $editParams['program'] = $selectedProgram;
+                                                            }
+                                                            if ($selectedKode) {
+                                                                $editParams['kode'] = $selectedKode;
                                                             }
                                                         @endphp
                                                         <a href="{{ route('produk.edit', $editParams) }}">Edit</a>

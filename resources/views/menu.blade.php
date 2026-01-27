@@ -225,7 +225,7 @@
 
             <div class="menu-grid">
                 @php
-                    $userRole = auth()->user()->role ?? 'guest';
+                    $userRole = strtolower(auth()->user()->role ?? 'guest');
                     $isAdmin = $userRole === 'superadmin';
                     $isAkademik = $userRole === 'akademik';
                     $isKeuangan = $userRole === 'keuangan';
