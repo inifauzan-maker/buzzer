@@ -13,7 +13,7 @@ class KeuanganController extends Controller
 {
     public function index(Request $request): View
     {
-        $this->ensureRoles($request, ['superadmin', 'keuangan']);
+        $this->ensureRoles($request, ['superadmin', 'leader', 'keuangan']);
 
         $registrations = PublicRegistration::query()
             ->with('programItem')
@@ -28,7 +28,7 @@ class KeuanganController extends Controller
 
     public function uploadProof(Request $request, PublicRegistration $registration): RedirectResponse
     {
-        $this->ensureRoles($request, ['superadmin', 'keuangan']);
+        $this->ensureRoles($request, ['superadmin', 'leader', 'keuangan']);
 
         $data = $request->validate([
             'payment_proof' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:4096'],
@@ -49,7 +49,7 @@ class KeuanganController extends Controller
 
     public function verifyPayment(Request $request, PublicRegistration $registration): RedirectResponse
     {
-        $this->ensureRoles($request, ['superadmin', 'keuangan']);
+        $this->ensureRoles($request, ['superadmin', 'leader', 'keuangan']);
 
         if (! $registration->payment_proof_path) {
             return back()->withErrors([
@@ -74,7 +74,7 @@ class KeuanganController extends Controller
 
     public function paymentInvoice(Request $request, PublicRegistration $registration)
     {
-        $this->ensureRoles($request, ['superadmin', 'keuangan']);
+        $this->ensureRoles($request, ['superadmin', 'leader', 'keuangan']);
 
         $program = $registration->programItem;
         $invoiceNumber = $registration->payment_invoice_number ?? $this->makePaymentInvoiceNumber($registration);

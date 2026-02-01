@@ -36,6 +36,7 @@ class AdsController extends Controller
 
     private const PIC_ROLES = [
         'superadmin',
+        'leader',
         'admin',
         'campaign_planner',
         'ads_specialist',
@@ -43,9 +44,9 @@ class AdsController extends Controller
         'management',
     ];
 
-    private const PLAN_ROLES = ['superadmin', 'admin', 'campaign_planner'];
-    private const MONITOR_ROLES = ['superadmin', 'admin', 'ads_specialist'];
-    private const REPORT_ROLES = ['superadmin', 'admin', 'analyst', 'management'];
+    private const PLAN_ROLES = ['superadmin', 'leader', 'admin', 'campaign_planner'];
+    private const MONITOR_ROLES = ['superadmin', 'leader', 'admin', 'ads_specialist'];
+    private const REPORT_ROLES = ['superadmin', 'leader', 'admin', 'analyst', 'management'];
 
     public function index(Request $request)
     {

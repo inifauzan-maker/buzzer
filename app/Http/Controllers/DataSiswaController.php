@@ -626,7 +626,7 @@ class DataSiswaController extends Controller
     private function ensureSuperadmin(Request $request): void
     {
         $user = $request->user();
-        if (! $user || $user->role !== 'superadmin') {
+        if (! $user || ! in_array($user->role, ['superadmin', 'leader'], true)) {
             abort(403, 'Akses ditolak.');
         }
     }

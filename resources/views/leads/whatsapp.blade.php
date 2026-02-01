@@ -5,23 +5,23 @@
 @section('content')
     <div class="page-header">
         <div>
-            <h1>Integrasi WhatsApp (Stub)</h1>
-            <p class="muted">Endpoint webhook sudah disiapkan. Tinggal hubungkan provider WhatsApp API.</p>
+            <h1>Integrasi WhatsApp (WHAPI)</h1>
+            <p class="muted">Mode inbound saja. Semua pesan masuk akan membuat/menambah lead.</p>
         </div>
     </div>
 
     <div class="card">
         <h3>Webhook URL</h3>
-        <div class="muted">Gunakan URL berikut di provider WhatsApp:</div>
+        <div class="muted">Gunakan URL berikut di provider WHAPI:</div>
         <div style="margin-top: 8px; font-weight: 600;">{{ $webhookUrl }}</div>
     </div>
 
     <div class="card" style="margin-top: 16px;">
         <h3>Catatan</h3>
         <ul>
-            <li>Mode stub: saat ini tidak menyimpan data otomatis.</li>
-            <li>Setelah provider dipilih, kita akan parsing payload dan membuat leads otomatis.</li>
-            <li>Gunakan token/verifikasi sesuai provider (nanti ditambahkan).</li>
+            <li>Gunakan token WHAPI pada header <strong>Authorization: Bearer &lt;WHAPI_TOKEN&gt;</strong>.</li>
+            <li>Jika token diatur di <code>.env</code> (WHAPI_TOKEN), webhook akan memvalidasi.</li>
+            <li>Inbound masuk akan dibuat sebagai lead (channel: WhatsApp, source: WHAPI).</li>
         </ul>
     </div>
 @endsection

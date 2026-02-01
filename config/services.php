@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'whapi' => [
+        'token' => env('WHAPI_TOKEN'),
+    ],
+
 ];

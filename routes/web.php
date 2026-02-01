@@ -50,6 +50,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
         Route::patch('/teams/{team}', [TeamController::class, 'update'])->name('teams.update');
         Route::delete('/teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
+        Route::post('/teams/members', [TeamController::class, 'storeMember'])->name('teams.members.store');
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/targets/admin', [TeamTargetController::class, 'adminIndex'])->name('targets.admin');
+        Route::get('/activity-logs', [SystemActivityLogController::class, 'index'])->name('activity-logs.index');
+        Route::post('/activity-logs/clear', [SystemActivityLogController::class, 'clear'])->name('activity-logs.clear');
+        Route::get('/settings/points', [PointSettingController::class, 'index'])->name('settings.points');
+        Route::post('/settings/points', [PointSettingController::class, 'update'])->name('settings.points.update');
+    });
+
+    Route::middleware('role:superadmin,leader')->group(function () {
         Route::get('/data-siswa/dashboard', [DataSiswaController::class, 'dashboard'])->name('data-siswa.dashboard');
         Route::get('/data-siswa', [DataSiswaController::class, 'index'])->name('data-siswa.index');
         Route::get('/data-siswa/export/csv', [DataSiswaController::class, 'exportCsv'])
@@ -64,23 +77,13 @@ Route::middleware('auth')->group(function () {
             ->name('data-siswa.send-invoice');
         Route::get('/data-siswa/{registration}/invoice', [DataSiswaController::class, 'invoice'])
             ->name('data-siswa.invoice');
-        Route::post('/teams/members', [TeamController::class, 'storeMember'])->name('teams.members.store');
-        Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::post('/users', [UserController::class, 'store'])->name('users.store');
-        Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
-        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-        Route::get('/targets/admin', [TeamTargetController::class, 'adminIndex'])->name('targets.admin');
-        Route::get('/activity-logs', [SystemActivityLogController::class, 'index'])->name('activity-logs.index');
-        Route::post('/activity-logs/clear', [SystemActivityLogController::class, 'clear'])->name('activity-logs.clear');
-        Route::get('/settings/points', [PointSettingController::class, 'index'])->name('settings.points');
-        Route::post('/settings/points', [PointSettingController::class, 'update'])->name('settings.points.update');
     });
 
-    Route::middleware('role:superadmin,akademik')->group(function () {
+    Route::middleware('role:superadmin,leader,akademik')->group(function () {
         Route::get('/akademik', [AkademikController::class, 'index'])->name('akademik.index');
     });
 
-    Route::middleware('role:superadmin,keuangan')->group(function () {
+    Route::middleware('role:superadmin,leader,keuangan')->group(function () {
         Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
         Route::post('/keuangan/{registration}/proof', [KeuanganController::class, 'uploadProof'])
             ->name('keuangan.proof');
@@ -94,12 +97,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
     });
 
-    Route::middleware('role:superadmin,admin,campaign_planner,ads_specialist,analyst,management')->group(function () {
+    Route::middleware('role:superadmin,leader,admin,campaign_planner,ads_specialist,analyst,management')->group(function () {
         Route::get('/ads', [AdsController::class, 'index'])->name('ads.index');
         Route::post('/ads/campaigns', [AdsController::class, 'storeCampaign'])->name('ads.campaigns.store');
         Route::post('/ads/metrics', [AdsController::class, 'storeMetric'])->name('ads.metrics.store');
         Route::get('/ads/export/csv', [AdsController::class, 'exportCsv'])->name('ads.export.csv');
         Route::get('/ads/export/pdf', [AdsController::class, 'exportPrint'])->name('ads.export.pdf');
+    });
+
+    Route::middleware('role:superadmin,leader')->group(function () {
+        Route::view('/media-sosial', 'media-sosial.index')->name('media-sosial.index');
+        Route::view('/konten-marketing', 'konten-marketing.index')->name('konten-marketing.index');
+        Route::view('/event', 'event.index')->name('event.index');
     });
 
     Route::middleware('role:superadmin')->group(function () {

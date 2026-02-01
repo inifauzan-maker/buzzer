@@ -202,43 +202,39 @@
             font-size: 13px;
             font-weight: 700;
         }
-        .target-bar-chart {
-            position: relative;
-            height: 110px;
-            padding: 10px 8px 14px 12px;
+        .target-pie {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             display: grid;
-            grid-template-rows: 1fr auto;
-            gap: 6px;
-            background: repeating-linear-gradient(
-                to top,
-                rgba(148, 163, 184, 0.25) 0,
-                rgba(148, 163, 184, 0.25) 1px,
-                transparent 1px,
-                transparent 28px
-            );
-            border-left: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            border-radius: 8px;
+            place-items: center;
+            margin: 0 auto;
+            position: relative;
         }
-        .target-bar-stack {
-            display: flex;
-            align-items: flex-end;
-            gap: 10px;
-            height: 70px;
-            justify-content: center;
+        .target-pie::after {
+            content: "";
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: #f8fafc;
+            box-shadow: inset 0 0 0 1px var(--border);
         }
-        .target-bar {
-            width: 22px;
-            border-radius: 6px 6px 4px 4px;
-            background: #94a3b8;
+        .target-pie-center {
+            position: absolute;
+            text-align: center;
+            font-size: 12px;
+            color: var(--muted);
+            display: grid;
+            gap: 2px;
         }
-        .target-bar.achieved { background: #12b5c9; }
-        .target-bar.target { background: #93c5fd; }
-        .target-bar.leads { background: #f97316; }
-        .target-bar-values {
+        .target-pie-center strong {
+            font-size: 16px;
+            color: var(--ink);
+        }
+        .target-values {
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
             font-size: 11px;
             color: var(--muted);
         }
@@ -278,7 +274,11 @@
                         @foreach ($heatmap['weeks'] as $week)
                             <div class="heatmap-week">
                                 @foreach ($week as $day)
-                                    @php($title = $day['in_range'] ? $day['date'].': '.$day['count'].' aktivitas' : '')
+                                    @php
+                                        $title = $day['in_range']
+                                            ? $day['date'].': '.$day['count'].' aktivitas'
+                                            : '';
+                                    @endphp
                                     <span class="heatmap-day level-{{ $day['level'] }} {{ $day['in_range'] ? '' : 'empty' }}"
                                           title="{{ $title }}"></span>
                                 @endforeach
@@ -337,15 +337,21 @@
                 <div class="card-title">Target Closing {{ $targetYear }}</div>
                 <div class="target-mini">
                     <div class="target-mini-title">{{ $targetLabel }}</div>
-                    <div class="target-bar-chart">
-                        <div class="target-bar-stack">
-                            <div class="target-bar target" style="height: {{ $closingTargetHeight }}%;"></div>
-                            <div class="target-bar achieved" style="height: {{ $closingAchievedHeight }}%;"></div>
+                    @php
+                        $closingPercent = $targetClosing > 0
+                            ? min(100, (int) round(($targetClosingAchieved / $targetClosing) * 100))
+                            : 0;
+                        $closingPie = "conic-gradient(#12b5c9 0 {$closingPercent}%, #e2e8f0 {$closingPercent}% 100%)";
+                    @endphp
+                    <div class="target-pie" style="background: {{ $closingPie }};">
+                        <div class="target-pie-center">
+                            <strong>{{ $closingPercent }}%</strong>
+                            <span>Tercapai</span>
                         </div>
-                        <div class="target-bar-values">
-                            <span>Target {{ number_format($targetClosing, 0, ',', '.') }}</span>
-                            <span>Pencapaian {{ number_format($targetClosingAchieved, 0, ',', '.') }}</span>
-                        </div>
+                    </div>
+                    <div class="target-values">
+                        <span>Target {{ number_format($targetClosing, 0, ',', '.') }}</span>
+                        <span>Pencapaian {{ number_format($targetClosingAchieved, 0, ',', '.') }}</span>
                     </div>
                     <div class="muted">{{ $targetClosingPercent }}% tercapai</div>
                 </div>
@@ -354,15 +360,21 @@
                 <div class="card-title">Target Leads {{ $targetYear }}</div>
                 <div class="target-mini">
                     <div class="target-mini-title">{{ $targetLabel }}</div>
-                    <div class="target-bar-chart">
-                        <div class="target-bar-stack">
-                            <div class="target-bar target" style="height: {{ $leadsTargetHeight }}%;"></div>
-                            <div class="target-bar leads" style="height: {{ $leadsAchievedHeight }}%;"></div>
+                    @php
+                        $leadsPercent = $targetLeads > 0
+                            ? min(100, (int) round(($targetLeadsAchieved / $targetLeads) * 100))
+                            : 0;
+                        $leadsPie = "conic-gradient(#f97316 0 {$leadsPercent}%, #e2e8f0 {$leadsPercent}% 100%)";
+                    @endphp
+                    <div class="target-pie" style="background: {{ $leadsPie }};">
+                        <div class="target-pie-center">
+                            <strong>{{ $leadsPercent }}%</strong>
+                            <span>Tercapai</span>
                         </div>
-                        <div class="target-bar-values">
-                            <span>Target {{ number_format($targetLeads, 0, ',', '.') }}</span>
-                            <span>Pencapaian {{ number_format($targetLeadsAchieved, 0, ',', '.') }}</span>
-                        </div>
+                    </div>
+                    <div class="target-values">
+                        <span>Target {{ number_format($targetLeads, 0, ',', '.') }}</span>
+                        <span>Pencapaian {{ number_format($targetLeadsAchieved, 0, ',', '.') }}</span>
                     </div>
                     <div class="muted">{{ $targetLeadsPercent }}% tercapai</div>
                 </div>

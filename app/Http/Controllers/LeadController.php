@@ -205,11 +205,62 @@ class LeadController extends Controller
 
     public function webhook(Request $request): Response
     {
+        $expectedToken = config('services.whapi.token');
+        if ($expectedToken) {
+            $incomingToken = $this->readWhapiToken($request);
+            if ($incomingToken !== $expectedToken) {
+                return response('Unauthorized', 401);
+            }
+        }
+
         if ($request->isMethod('get')) {
             return response('OK', 200);
         }
 
-        return response()->noContent();
+        $payload = $request->all();
+        $parsed = $this->parseWhapiPayload($payload);
+
+        if (! $parsed['phone']) {
+            return response()->json(['status' => 'ignored'], 202);
+        }
+
+        $lead = Lead::query()
+            ->where('phone_number', $parsed['phone'])
+            ->first();
+
+        if (! $lead) {
+            $lead = Lead::create([
+                'team_id' => null,
+                'created_by' => null,
+                'assigned_to' => null,
+                'student_name' => $parsed['name'] ?: 'WhatsApp Lead',
+                'school_name' => null,
+                'phone_number' => $parsed['phone'],
+                'channel' => 'WhatsApp',
+                'source' => 'WHAPI',
+                'status' => 'prospect',
+                'last_contact_at' => $parsed['received_at'] ?? now(),
+            ]);
+        } else {
+            $lead->forceFill([
+                'student_name' => $lead->student_name ?: ($parsed['name'] ?: $lead->student_name),
+                'last_contact_at' => $parsed['received_at'] ?? now(),
+            ])->save();
+        }
+
+        LeadFollowUp::create([
+            'lead_id' => $lead->id,
+            'user_id' => null,
+            'note' => $parsed['text'] ? "Inbound WhatsApp: {$parsed['text']}" : 'Inbound WhatsApp (non-text).',
+            'follow_up_at' => $parsed['received_at'],
+            'status' => 'completed',
+        ]);
+
+        if ($lead->status === 'prospect') {
+            $lead->forceFill(['status' => 'follow_up'])->save();
+        }
+
+        return response()->json(['status' => 'ok']);
     }
 
     private function baseQuery(?string $teamId, ?string $status, ?string $channel)
@@ -311,5 +362,71 @@ class LeadController extends Controller
         if (! $user || ! in_array($user->role, ['superadmin', 'leader', 'staff'], true)) {
             abort(403, 'Akses ditolak.');
         }
+    }
+
+    private function readWhapiToken(Request $request): ?string
+    {
+        $authHeader = $request->header('Authorization');
+        if ($authHeader) {
+            $authHeader = trim(str_replace('Bearer', '', $authHeader));
+        }
+
+        return $authHeader
+            ?: $request->header('X-Api-Key')
+            ?: $request->header('X-Whapi-Token')
+            ?: $request->query('token');
+    }
+
+    private function parseWhapiPayload(array $payload): array
+    {
+        $message = data_get($payload, 'message')
+            ?? data_get($payload, 'messages.0')
+            ?? $payload;
+
+        $phone = data_get($message, 'from')
+            ?? data_get($message, 'chatId')
+            ?? data_get($payload, 'from')
+            ?? data_get($payload, 'sender')
+            ?? data_get($payload, 'contacts.0.wa_id');
+
+        $name = data_get($payload, 'senderName')
+            ?? data_get($payload, 'pushName')
+            ?? data_get($payload, 'contacts.0.profile.name')
+            ?? data_get($payload, 'contacts.0.name');
+
+        $text = data_get($message, 'text')
+            ?? data_get($message, 'text.body')
+            ?? data_get($message, 'body')
+            ?? data_get($message, 'message')
+            ?? data_get($payload, 'text');
+
+        $timestamp = data_get($message, 'timestamp')
+            ?? data_get($payload, 'timestamp');
+
+        $receivedAt = null;
+        if ($timestamp) {
+            $timestamp = (int) $timestamp;
+            $receivedAt = $timestamp > 9999999999
+                ? Carbon::createFromTimestampMs($timestamp)
+                : Carbon::createFromTimestamp($timestamp);
+        }
+
+        return [
+            'phone' => $this->normalizePhone($phone),
+            'name' => is_string($name) ? trim($name) : null,
+            'text' => is_string($text) ? trim($text) : null,
+            'received_at' => $receivedAt,
+        ];
+    }
+
+    private function normalizePhone(?string $phone): ?string
+    {
+        if (! $phone) {
+            return null;
+        }
+
+        $digits = preg_replace('/\D+/', '', $phone);
+
+        return $digits !== '' ? $digits : null;
     }
 }

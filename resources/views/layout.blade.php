@@ -646,12 +646,50 @@
                                 <a href="{{ route('ads.index') }}" class="{{ request()->routeIs('ads.*') ? 'active' : '' }}">
                                     Ads/Iklan
                                 </a>
-                                <span class="disabled">Media Sosial</span>
-                                <span class="disabled">Konten Marketing</span>
+                                <a href="{{ route('media-sosial.index') }}" class="{{ request()->routeIs('media-sosial.*') ? 'active' : '' }}">
+                                    Media Sosial
+                                </a>
+                                <a href="{{ route('konten-marketing.index') }}" class="{{ request()->routeIs('konten-marketing.*') ? 'active' : '' }}">
+                                    Konten Marketing
+                                </a>
                                 <a href="{{ route('leads.index') }}" class="{{ request()->routeIs('leads.*') ? 'active' : '' }}">
                                     Leads
                                 </a>
-                                <span class="disabled">Event</span>
+                                <a href="{{ route('event.index') }}" class="{{ request()->routeIs('event.*') ? 'active' : '' }}">
+                                    Event
+                                </a>
+                            @elseif ($role === 'leader')
+                                <span class="disabled">Dashboard</span>
+                                <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                    Buzzer Marketing
+                                </a>
+                                <a href="{{ route('produk.index') }}" class="{{ request()->routeIs('produk.*') ? 'active' : '' }}">
+                                    Produk
+                                </a>
+                                <a href="{{ route('data-siswa.index') }}" class="{{ request()->routeIs('data-siswa.*') ? 'active' : '' }}">
+                                    Data Siswa
+                                </a>
+                                <a href="{{ route('akademik.index') }}" class="{{ request()->routeIs('akademik.*') ? 'active' : '' }}">
+                                    Akademik
+                                </a>
+                                <a href="{{ route('keuangan.index') }}" class="{{ request()->routeIs('keuangan.*') ? 'active' : '' }}">
+                                    Keuangan
+                                </a>
+                                <a href="{{ route('ads.index') }}" class="{{ request()->routeIs('ads.*') ? 'active' : '' }}">
+                                    Ads/Iklan
+                                </a>
+                                <a href="{{ route('media-sosial.index') }}" class="{{ request()->routeIs('media-sosial.*') ? 'active' : '' }}">
+                                    Media Sosial
+                                </a>
+                                <a href="{{ route('konten-marketing.index') }}" class="{{ request()->routeIs('konten-marketing.*') ? 'active' : '' }}">
+                                    Konten Marketing
+                                </a>
+                                <a href="{{ route('leads.index') }}" class="{{ request()->routeIs('leads.*') ? 'active' : '' }}">
+                                    Leads
+                                </a>
+                                <a href="{{ route('event.index') }}" class="{{ request()->routeIs('event.*') ? 'active' : '' }}">
+                                    Event
+                                </a>
                             @elseif ($role === 'akademik')
                                 <a href="{{ route('akademik.index') }}" class="{{ request()->routeIs('akademik.*') ? 'active' : '' }}">
                                     Akademik
