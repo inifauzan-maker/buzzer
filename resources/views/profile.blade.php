@@ -144,6 +144,41 @@
             display: grid;
             gap: 8px;
         }
+        .profile-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .profile-menu a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .task-list {
+            display: grid;
+            gap: 10px;
+            font-size: 13px;
+        }
+        .task-item {
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fff;
+            display: grid;
+            gap: 4px;
+        }
+        .task-meta {
+            font-size: 12px;
+            color: var(--muted);
+        }
     </style>
 
     <h1>Profil User</h1>

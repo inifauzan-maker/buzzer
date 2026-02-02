@@ -522,6 +522,9 @@
                                 <a href="{{ route('settings.points') }}" class="nav-link {{ request()->routeIs('settings.points*') ? 'active' : '' }}">
                                     <span class="nav-dot"></span> Settings Poin
                                 </a>
+                                <a href="{{ route('settings.maintenance') }}" class="nav-link {{ request()->routeIs('settings.maintenance*') ? 'active' : '' }}">
+                                    <span class="nav-dot"></span> Maintenance
+                                </a>
                                 <a href="{{ route('activity-logs.index') }}" class="nav-link {{ request()->routeIs('activity-logs.*') ? 'active' : '' }}">
                                     <span class="nav-dot"></span> Log Aktivitas
                                 </a>
@@ -600,9 +603,27 @@
                         <div class="search">
                             <input type="text" placeholder="Cari tim, aktivitas, atau user">
                         </div>
-                        <div class="top-actions">
-                            <span>{{ auth()->user()->email }}</span>
-                            <a class="profile-link" href="{{ route('profile.show') }}">My Profil</a>
+                    <div class="top-actions">
+                        @php
+                            $maintenanceEnabled = false;
+                            $maintenanceMessage = '';
+                            if (auth()->user()->role === 'superadmin') {
+                                $maintenanceEnabled = filter_var(\App\Models\AppSetting::getValue('maintenance_enabled', '0'), FILTER_VALIDATE_BOOLEAN);
+                                $maintenanceMessage = \App\Models\AppSetting::getValue('maintenance_message', '');
+                            }
+                        @endphp
+                        @if (auth()->user()->role === 'superadmin')
+                            <form method="POST" action="{{ route('settings.maintenance.update') }}" style="display: inline-flex;">
+                                @csrf
+                                <input type="hidden" name="enabled" value="{{ $maintenanceEnabled ? 0 : 1 }}">
+                                <input type="hidden" name="message" value="{{ $maintenanceMessage }}">
+                                <button class="button-outline" type="submit">
+                                    {{ $maintenanceEnabled ? 'Nonaktifkan Maintenance' : 'Aktifkan Maintenance' }}
+                                </button>
+                            </form>
+                        @endif
+                        <span>{{ auth()->user()->email }}</span>
+                        <a class="profile-link" href="{{ route('profile.show') }}">My Profil</a>
                             <a class="notif-btn" title="Notifikasi" href="{{ route('notifications.index') }}">
                                 @if (!empty($notifCount))
                                     <span class="notif-count">{{ $notifCount }}</span>

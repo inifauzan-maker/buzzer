@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
         ]);
+        $middleware->appendToGroup('web', \App\Http\Middleware\MaintenanceMode::class);
     })
     ->withSchedule(function (Schedule $schedule): void {
         $schedule->command('reminders:teams')->dailyAt('09:00');

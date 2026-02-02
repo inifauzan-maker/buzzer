@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
+  <defs>
+    <style>
+      .box{fill:#f8fafc;stroke:#0a0a5c;stroke-width:2;rx:10;}
+      .title{font:700 16px Aptos,Segoe UI,Arial;fill:#0a0a5c;}
+      .text{font:12px Aptos,Segoe UI,Arial;fill:#222;}
+      .rel{font:12px Aptos,Segoe UI,Arial;fill:#c20f31;}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#0a0a5c" />
+    </marker>
+  </defs>
+
+  <rect x="40" y="40" width="260" height="120" class="box" />
+  <text x="60" y="70" class="title">teams</text>
+  <text x="60" y="95" class="text">id, team_name</text>
+
+  <rect x="360" y="40" width="260" height="120" class="box" />
+  <text x="380" y="70" class="title">users</text>
+  <text x="380" y="95" class="text">id, team_id, role, name</text>
+
+  <rect x="40" y="220" width="260" height="140" class="box" />
+  <text x="60" y="250" class="title">activities_log</text>
+  <text x="60" y="275" class="text">user_id, team_id, platform,</text>
+  <text x="60" y="295" class="text">post_date, computed_points</text>
+
+  <rect x="360" y="220" width="260" height="140" class="box" />
+  <text x="380" y="250" class="title">conversions</text>
+  <text x="380" y="275" class="text">user_id, team_id, type, amount</text>
+
+  <rect x="700" y="40" width="260" height="120" class="box" />
+  <text x="720" y="70" class="title">leads</text>
+  <text x="720" y="95" class="text">student_name, phone, status</text>
+
+  <rect x="700" y="220" width="260" height="140" class="box" />
+  <text x="720" y="250" class="title">lead_followups</text>
+  <text x="720" y="275" class="text">lead_id, user_id, note,</text>
+  <text x="720" y="295" class="text">follow_up_at</text>
+
+  <rect x="40" y="430" width="300" height="160" class="box" />
+  <text x="60" y="460" class="title">public_registrations</text>
+  <text x="60" y="485" class="text">student_name, school,</text>
+  <text x="60" y="505" class="text">program_item_id, payment_*</text>
+
+  <rect x="380" y="430" width="260" height="140" class="box" />
+  <text x="400" y="460" class="title">produk_items</text>
+  <text x="400" y="485" class="text">nama, biaya_daftar,</text>
+  <text x="400" y="505" class="text">biaya_pendidikan</text>
+
+  <line x1="300" y1="90" x2="360" y2="90" stroke="#0a0a5c" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="310" y="75" class="rel">1..*</text>
+
+  <line x1="170" y1="160" x2="170" y2="220" stroke="#0a0a5c" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="150" y="200" class="rel">1..*</text>
+
+  <line x1="490" y1="160" x2="490" y2="220" stroke="#0a0a5c" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="470" y="200" class="rel">1..*</text>
+
+  <line x1="830" y1="160" x2="830" y2="220" stroke="#0a0a5c" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="810" y="200" class="rel">1..*</text>
+
+  <line x1="340" y1="510" x2="380" y2="510" stroke="#0a0a5c" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="345" y="495" class="rel">0..1</text>
+
+  <text x="60" y="650" class="text">Kardinalitas utama:</text>
+  <text x="60" y="670" class="text">Team 1..* User, User 1..* Activities/Conversions,</text>
+  <text x="60" y="690" class="text">Lead 1..* FollowUp, Registration 0..1 Program.</text>
+</svg>

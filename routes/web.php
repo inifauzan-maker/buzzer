@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PointSettingController;
 use App\Http\Controllers\DataSiswaController;
@@ -39,6 +40,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profiles/{user}', [ProfileController::class, 'showUser'])->name('profile.view');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profiles/{user}/tasks', [ProfileController::class, 'storeTask'])
+        ->name('profile.tasks.store')
+        ->middleware('role:superadmin,leader');
+    Route::patch('/staff-tasks/{task}', [ProfileController::class, 'updateTask'])
+        ->name('profile.tasks.update')
+        ->middleware('role:superadmin,leader');
+    Route::delete('/staff-tasks/{task}', [ProfileController::class, 'destroyTask'])
+        ->name('profile.tasks.destroy')
+        ->middleware('role:superadmin,leader');
+    Route::patch('/staff-tasks/{task}/status', [ProfileController::class, 'updateTaskStatus'])
+        ->name('profile.tasks.status')
+        ->middleware('role:superadmin,leader,staff');
     Route::post('/profile/social-accounts', [ProfileController::class, 'storeSocialAccount'])->name('profile.social.store');
     Route::patch('/profile/social-accounts/{socialAccount}', [ProfileController::class, 'updateSocialAccount'])->name('profile.social.update');
     Route::delete('/profile/social-accounts/{socialAccount}', [ProfileController::class, 'destroySocialAccount'])->name('profile.social.destroy');
@@ -60,6 +73,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/activity-logs/clear', [SystemActivityLogController::class, 'clear'])->name('activity-logs.clear');
         Route::get('/settings/points', [PointSettingController::class, 'index'])->name('settings.points');
         Route::post('/settings/points', [PointSettingController::class, 'update'])->name('settings.points.update');
+        Route::get('/settings/maintenance', [MaintenanceController::class, 'index'])->name('settings.maintenance');
+        Route::post('/settings/maintenance', [MaintenanceController::class, 'update'])->name('settings.maintenance.update');
     });
 
     Route::middleware('role:superadmin,leader')->group(function () {
